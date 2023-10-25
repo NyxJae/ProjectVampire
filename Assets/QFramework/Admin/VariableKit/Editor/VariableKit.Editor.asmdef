@@ -1,0 +1,7 @@
+﻿{
+  "name": "VariableKit.Editor",
+  "references": [
+    "VariableKit",
+    "QFramework.CoreKit"
+  ]
+}

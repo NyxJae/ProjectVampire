@@ -1,0 +1,22 @@
+{
+    "name": "ActionKitPro.Editor",
+    "references": [
+        "EditorKit",
+        "ActionKitPro",
+        "ActionKit",
+        "PackageKit",
+        "QFramework",
+        "QFramework.CoreKit"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,12 @@
+{
+  "AssemblyName": "VariableKit.Editor",
+  "DisplayName": "VariableKit 设置/编辑器",
+  "DisplayNameCN": "VariableKit 设置/编辑器",
+  "DisplayNameEN": "VariableKit Editor(OnlyCN)",
+  "TypeName": "QFramework.VariableKitEditor",
+  "InitFunc": "Init",
+  "OnGUIFunc": "OnGUI",
+  "DisposeFunc": "OnDestroy",
+  "GroupName": "QFramework.Admin",
+  "RenderOrder": "2"
+}

@@ -1,0 +1,14 @@
+{
+  "Language": "lua",
+  "LuaFileName": "AdminView",
+  "DisplayName": "Admin",
+  "DisplayNameCN": "Admin",
+  "DisplayNameEN": "Admin",
+  "InitFunc": "Init",
+  "OnShowFunc": "OnShow",
+  "OnGUIFunc": "OnGUI",
+  "OnHideFunc": "OnHide",
+  "DisposeFunc": "OnDestroy",
+  "GroupName": "QFramework.Admin",
+  "RenderOrder": "1"
+}

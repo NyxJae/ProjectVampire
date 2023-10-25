@@ -1,0 +1,19 @@
+{
+    "Id": "",
+    "Version": "v0.0.23",
+    "Type": 3,
+    "AccessRight": 1,
+    "DownloadUrl": "",
+    "InstallPath": "Assets/QFramework/Admin/",
+    "IncludeFileOrFolders": [
+        "Assets/QFramework/Admin"
+    ],
+    "DocUrl": "https://liangxiegame.com",
+    "Readme": {
+        "version": "v0.0.23",
+        "content": "兼容新的  GraphKit",
+        "author": "liangxie",
+        "date": "2023 年 09 月 01 日 19:01",
+        "PackageId": ""
+    }
+}
