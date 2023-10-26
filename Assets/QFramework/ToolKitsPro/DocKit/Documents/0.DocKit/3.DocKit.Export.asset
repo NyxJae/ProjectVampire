@@ -15,7 +15,7 @@ MonoBehaviour:
   CNName: "3.DocKit.\u5BFC\u51FA"
   serializedNodes: []
   nodes:
-  - id: 0
+  - rid: 0
   edges: []
   groups: []
   stackNodes: []
@@ -24,12 +24,13 @@ MonoBehaviour:
   serializedParameterList: []
   stickyNotes: []
   nodeInspectorReference: {fileID: 0}
-  position: {x: -69, y: 308, z: 0}
-  scale: {x: 0.7561437, y: 0.7561437, z: 1}
+  position: {x: -302, y: -208, z: 0}
+  scale: {x: 2, y: 2, z: 1}
   mGraphCurrentID2Generate: 0
   references:
-    version: 1
-    00000000:
+    version: 2
+    RefIds:
+    - rid: 0
       type: {class: DocumentTextNode, ns: QFramework, asm: DocKit.Editor}
       data:
         nodeCustomName: 

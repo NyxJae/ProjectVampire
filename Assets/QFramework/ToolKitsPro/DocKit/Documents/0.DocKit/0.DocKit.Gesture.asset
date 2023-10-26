@@ -15,19 +15,19 @@ MonoBehaviour:
   CNName: "0.DocKit.\u624B\u52BF"
   serializedNodes: []
   nodes:
-  - id: 0
-  - id: 1
-  - id: 2
-  - id: 3
-  - id: 4
-  - id: 5
-  - id: 6
-  - id: 7
-  - id: 8
-  - id: 9
-  - id: 10
-  - id: 11
-  - id: 12
+  - rid: 0
+  - rid: 1
+  - rid: 2
+  - rid: 3
+  - rid: 4
+  - rid: 5
+  - rid: 6
+  - rid: 7
+  - rid: 8
+  - rid: 9
+  - rid: 10
+  - rid: 11
+  - rid: 12
   edges: []
   groups: []
   stackNodes: []
@@ -36,12 +36,13 @@ MonoBehaviour:
   serializedParameterList: []
   stickyNotes: []
   nodeInspectorReference: {fileID: 0}
-  position: {x: -195, y: -436, z: 0}
-  scale: {x: 0.65751624, y: 0.65751624, z: 1}
+  position: {x: -350, y: -373, z: 0}
+  scale: {x: 1.15, y: 1.15, z: 1}
   mGraphCurrentID2Generate: 0
   references:
-    version: 1
-    00000000:
+    version: 2
+    RefIds:
+    - rid: 0
       type: {class: DocumentTitleNode, ns: QFramework, asm: DocKit.Editor}
       data:
         nodeCustomName: 
@@ -59,7 +60,7 @@ MonoBehaviour:
         CNText: "DocKit \u57FA\u672C\u4F7F\u7528"
         ENText: DocKit Basic Usage
         Size: 1
-    00000001:
+    - rid: 1
       type: {class: DocumentTextNode, ns: QFramework, asm: DocKit.Editor}
       data:
         nodeCustomName: 
@@ -80,7 +81,7 @@ MonoBehaviour:
 
           All
           QF Pro modules provide documentation in this way'
-    00000002:
+    - rid: 2
       type: {class: DocumentTitleNode, ns: QFramework, asm: DocKit.Editor}
       data:
         nodeCustomName: 
@@ -98,7 +99,7 @@ MonoBehaviour:
         CNText: "0. \u9F20\u6807\u6EDA\u8F6E\u53EF\u4EE5\u653E\u5927\u7F29\u5C0F"
         ENText: 0. The mouse wheel can zoom in and out of the editor
         Size: 2
-    00000003:
+    - rid: 3
       type: {class: DocumentTitleNode, ns: QFramework, asm: DocKit.Editor}
       data:
         nodeCustomName: 
@@ -116,7 +117,7 @@ MonoBehaviour:
         CNText: "1. \u53CC\u51FB\u7F16\u8F91\u5668\u4EFB\u610F\u4F4D\u7F6E\u53EF\u4EE5\u5207\u6362\u5168\u5C4F/\u7A97\u53E3"
         ENText: 1. Double-click anywhere in the editor to switch between full screen/window
         Size: 2
-    00000004:
+    - rid: 4
       type: {class: DocumentTitleNode, ns: QFramework, asm: DocKit.Editor}
       data:
         nodeCustomName: 
@@ -135,7 +136,7 @@ MonoBehaviour:
           \u53EF\u8FDB\u884C\u79FB\u52A8"
         ENText: 2. Alt + left mouse button / press the wheel button to move
         Size: 2
-    00000005:
+    - rid: 5
       type: {class: DocumentTitleNode, ns: QFramework, asm: DocKit.Editor}
       data:
         nodeCustomName: 
@@ -154,7 +155,7 @@ MonoBehaviour:
           \u5982\u4E0B"
         ENText: 3. Double-click the DocKit file to open this editor as follows
         Size: 2
-    00000006:
+    - rid: 6
       type: {class: DocumentImageNode, ns: QFramework, asm: DocKit.Editor}
       data:
         nodeCustomName: 
@@ -162,16 +163,16 @@ MonoBehaviour:
         computeOrder: 6
         position:
           serializedVersion: 2
-          x: 456
-          y: 704.22504
-          width: 482.00003
+          x: 455
+          y: 704
+          width: 482
           height: 320
         expanded: 0
         debug: 0
         nodeLock: 0
         CNTexture: {fileID: 2800000, guid: de8906497c6804d8887d120915467d67, type: 3}
         ENTexture: {fileID: 2800000, guid: de8906497c6804d8887d120915467d67, type: 3}
-    00000007:
+    - rid: 7
       type: {class: DocumentTitleNode, ns: QFramework, asm: DocKit.Editor}
       data:
         nodeCustomName: 
@@ -190,7 +191,7 @@ MonoBehaviour:
           \u7A97\u53E3\u6253\u5F00 \u5982\u4E0B"
         ENText: 4. Also can open by inspector as follows
         Size: 2
-    00000008:
+    - rid: 8
       type: {class: DocumentImageNode, ns: QFramework, asm: DocKit.Editor}
       data:
         nodeCustomName: 
@@ -207,7 +208,7 @@ MonoBehaviour:
         nodeLock: 0
         CNTexture: {fileID: 2800000, guid: 5579def3fcf694baca10ffe1bd851b09, type: 3}
         ENTexture: {fileID: 2800000, guid: e89b0a184a4db49a9a1a0ef205d91213, type: 3}
-    00000009:
+    - rid: 9
       type: {class: DocumentTitleNode, ns: QFramework, asm: DocKit.Editor}
       data:
         nodeCustomName: 
@@ -225,7 +226,7 @@ MonoBehaviour:
         CNText: "5. \u5F00\u59CB\u4EAB\u53D7\u5DE5\u4F5C\u5427\uFF01"
         ENText: 5. Enjoy!
         Size: 2
-    0000000A:
+    - rid: 10
       type: {class: DocumentTitleNode, ns: QFramework, asm: DocKit.Editor}
       data:
         nodeCustomName: 
@@ -245,7 +246,7 @@ MonoBehaviour:
         ENText: 6. Ctrl / CMD + e or menu qframework / packagekit can open the main
           window of qframework Pro just now
         Size: 2
-    0000000B:
+    - rid: 11
       type: {class: DocumentTitleNode, ns: QFramework, asm: DocKit.Editor}
       data:
         nodeCustomName: 
@@ -267,7 +268,7 @@ MonoBehaviour:
           please try to right-click anywhere in the DocKit editor and select Reload
           to reload this diagram
         Size: 2
-    0000000C:
+    - rid: 12
       type: {class: DocumentTitleNode, ns: QFramework, asm: DocKit.Editor}
       data:
         nodeCustomName: 
