@@ -1,4 +1,4 @@
-// Generate Id:d2c6bc0d-2f29-4405-a22f-4f3681023859
+// Generate Id:c88b55f7-014a-4ac4-a344-ffd47f17752d
 using UnityEngine;
 
 namespace ProjectVampire
@@ -7,6 +7,8 @@ namespace ProjectVampire
 	{
 
 		public SpriteRenderer Triangle;
+
+		public CircleCollider2D HitBox;
 
 	}
 }

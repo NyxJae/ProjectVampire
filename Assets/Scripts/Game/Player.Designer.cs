@@ -1,4 +1,4 @@
-// Generate Id:0877e1ab-535c-4092-9f00-37397d5194b6
+// Generate Id:1e080abd-8bf9-4975-873a-59628d03113a
 using UnityEngine;
 
 namespace ProjectVampire
@@ -10,6 +10,8 @@ namespace ProjectVampire
 		/// 外观
 		/// </summary>
 		public SpriteRenderer Square;
+
+		public BoxCollider2D HurtBox;
 
 	}
 }
