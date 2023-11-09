@@ -2,6 +2,7 @@ using UnityEngine;
 using QFramework;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem;
+using QFramework.Example;
 
 namespace ProjectVampire
 {
@@ -31,7 +32,7 @@ namespace ProjectVampire
         private void Start()
         {
             // 给HurtBox被触碰时, 触发的事件添加回调函数,并设置自动销毁
-            HurtBox.OnTriggerEnter2DEvent(Collider2D => OnDamage(10)).UnRegisterWhenGameObjectDestroyed(gameObject);
+            HurtBox.OnTriggerEnter2DEvent(Collider2D => OnDamage(100)).UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 
 
@@ -88,6 +89,8 @@ namespace ProjectVampire
             {
                 // 角色死亡
                 this.DestroyGameObjGracefully();
+                // 打开结束界面
+                UIKit.OpenPanel<endPanel>();
             }
         }
 
