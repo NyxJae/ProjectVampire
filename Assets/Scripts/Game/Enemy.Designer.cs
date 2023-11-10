@@ -1,4 +1,4 @@
-// Generate Id:c88b55f7-014a-4ac4-a344-ffd47f17752d
+// Generate Id:e05c123d-5e09-4f83-9a2a-59a0bd53d3ed
 using UnityEngine;
 
 namespace ProjectVampire
@@ -6,7 +6,7 @@ namespace ProjectVampire
 	public partial class Enemy
 	{
 
-		public SpriteRenderer Triangle;
+		public SpriteRenderer Sprite;
 
 		public CircleCollider2D HitBox;
 

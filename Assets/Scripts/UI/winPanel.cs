@@ -5,14 +5,14 @@ using UnityEngine.SceneManagement;
 
 namespace ProjectVampire
 {
-    public class endPanelData : UIPanelData
+    public class winPanelData : UIPanelData
     {
     }
-    public partial class endPanel : UIPanel
+    public partial class winPanel : UIPanel
     {
         protected override void OnInit(IUIData uiData = null)
         {
-            mData = uiData as endPanelData ?? new endPanelData();
+            mData = uiData as winPanelData ?? new winPanelData();
             // please add init code here
             BtnReplay.onClick.AddListener(() =>
             {
@@ -22,7 +22,6 @@ namespace ProjectVampire
                 SceneManager.LoadScene("SampleScene");
 
             });
-
         }
 
         protected override void OnOpen(IUIData uiData = null)

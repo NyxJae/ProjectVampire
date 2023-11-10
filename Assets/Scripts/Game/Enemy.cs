@@ -2,6 +2,7 @@ using UnityEngine;
 using QFramework;
 using Unity.VisualScripting;
 
+
 namespace ProjectVampire
 {
     public partial class Enemy : ViewController
@@ -22,6 +23,10 @@ namespace ProjectVampire
         /// </summary>
         private GameObject player = null;
 
+        // 公开的 血量 属性
+        [SerializeField]
+        public int Health = 3;
+
         private void Start()
         {
             // 获取 player 角色,通过名字查找
@@ -38,6 +43,9 @@ namespace ProjectVampire
             }
             // 追逐 player
             ChasingPlayrt();
+            // 检测血量
+            CheckHealth();
+
         }
 
 
@@ -61,6 +69,19 @@ namespace ProjectVampire
                 var moveDistance = direction * (mSpeed * Time.deltaTime);
                 // 移动
                 transform.Translate(moveDistance);
+            }
+        }
+
+        // 检测血量
+        private void CheckHealth()
+        {
+            // 如果血量小于等于 0
+            if (Health <= 0)
+            {
+                // 销毁自身
+                this.DestroyGameObjGracefully();
+                // 显示结束界面
+                UIKit.OpenPanel<winPanel>();
             }
         }
     }

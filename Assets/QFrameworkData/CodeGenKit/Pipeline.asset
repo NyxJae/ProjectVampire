@@ -18,20 +18,12 @@ MonoBehaviour:
     GameObject: {fileID: 0}
     From: 0
     NameToFullName: []
-    BindInfos:
-    - TypeName: SpriteRenderer
-      PathToRoot: Square
-      MemberName: Square
-    - TypeName: BoxCollider2D
-      PathToRoot: HurtBox
-      MemberName: HurtBox
+    BindInfos: []
     ScriptsFolder: Assets/Scripts/Game
-    ClassName: Player
+    ClassName: UIController
     Namespace: ProjectVampire
     MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace ProjectVampire\r\n{\r\n\tpublic
-      partial class Player : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
+      partial class UIController : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:1e080abd-8bf9-4975-873a-59628d03113a\r\nusing UnityEngine;\r\n\r\nnamespace
-      ProjectVampire\r\n{\r\n\tpublic partial class Player\r\n\t{\r\n\r\n\t\t///
-      <summary>\r\n\t\t/// \u5916\u89C2\r\n\t\t/// </summary>\r\n\t\tpublic SpriteRenderer
-      Square;\r\n\r\n\t\tpublic BoxCollider2D HurtBox;\r\n\r\n\t}\r\n}\r\n"
+    DesignerCode: "// Generate Id:d3f32ddf-222f-498e-a557-ab3645e85e10\r\nusing UnityEngine;\r\n\r\nnamespace
+      ProjectVampire\r\n{\r\n\tpublic partial class UIController\r\n\t{\r\n\r\n\t}\r\n}\r\n"

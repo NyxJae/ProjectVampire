@@ -2,7 +2,7 @@ using UnityEngine;
 using QFramework;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem;
-using QFramework.Example;
+
 
 namespace ProjectVampire
 {
@@ -25,14 +25,19 @@ namespace ProjectVampire
         [SerializeField]
         private int mHealth = 100;
 
+        /// <summary>
+        /// 私有的 被击扣血值 属性
+        /// </summary>
+        private int mDamage = 1;
+
 
         /// <summary>
         /// 角色开始时的回调函数
         /// </summary>
         private void Start()
         {
-            // 给HurtBox被触碰时, 触发的事件添加回调函数,并设置自动销毁
-            HurtBox.OnTriggerEnter2DEvent(Collider2D => OnDamage(100)).UnRegisterWhenGameObjectDestroyed(gameObject);
+            // 给HurtBox被触碰时, 触发的事件添加回调函数(受伤),并设置自动销毁
+            HurtBox.OnTriggerEnter2DEvent(Collider2D => OnDamage(mDamage)).UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 
 

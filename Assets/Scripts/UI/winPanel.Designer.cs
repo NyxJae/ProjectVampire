@@ -5,15 +5,15 @@ using QFramework;
 
 namespace ProjectVampire
 {
-    // Generate Id:8f668017-7dd3-4f44-8497-0ab3a5fb4260
-    public partial class endPanel
+    // Generate Id:34086b5c-7cf7-4d95-aea6-b8388b9ccefe
+    public partial class winPanel
     {
-        public const string Name = "endPanel";
+        public const string Name = "winPanel";
 
         [SerializeField]
         public UnityEngine.UI.Button BtnReplay;
 
-        private endPanelData mPrivateData = null;
+        private winPanelData mPrivateData = null;
 
         protected override void ClearUIComponents()
         {
@@ -22,7 +22,7 @@ namespace ProjectVampire
             mData = null;
         }
 
-        public endPanelData Data
+        public winPanelData Data
         {
             get
             {
@@ -30,11 +30,11 @@ namespace ProjectVampire
             }
         }
 
-        endPanelData mData
+        winPanelData mData
         {
             get
             {
-                return mPrivateData ?? (mPrivateData = new endPanelData());
+                return mPrivateData ?? (mPrivateData = new winPanelData());
             }
             set
             {
