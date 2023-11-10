@@ -53,6 +53,7 @@ namespace ProjectVampire
                         ActionKit.Delay(0.1f, () => { if (enemy != null) enemy.Sprite.color = Color.white; }).StartGlobal();
 
                     }
+
                 }
 
             }
