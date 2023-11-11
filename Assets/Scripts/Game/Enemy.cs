@@ -82,8 +82,6 @@ namespace ProjectVampire
                 this.DestroyGameObjGracefully();
                 // 增加经验值
                 Global.Exp.Value += 1;
-                // 显示结束界面
-                UIKit.OpenPanel<winPanel>();
             }
         }
     }

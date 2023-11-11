@@ -25,6 +25,6 @@ MonoBehaviour:
     MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace ProjectVampire\r\n{\r\n\tpublic
       partial class EnemyGenerater : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:79fe8de7-a567-4988-b470-2658fbd721fc\r\nusing UnityEngine;\r\n\r\nnamespace
+    DesignerCode: "// Generate Id:0de839fc-9217-4ab8-8d8b-bc110a770230\r\nusing UnityEngine;\r\n\r\nnamespace
       ProjectVampire\r\n{\r\n\tpublic partial class EnemyGenerater\r\n\t{\r\n\r\n\t\tpublic
       UnityEngine.GameObject Enemy;\r\n\r\n\t}\r\n}\r\n"

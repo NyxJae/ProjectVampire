@@ -12,11 +12,17 @@ namespace ProjectVampire
         protected override void OnInit(IUIData uiData = null)
         {
             mData = uiData as gamePanelData ?? new gamePanelData();
-            // 给经验值增加事件添加回调函数
+            // 给经验值增加事件添加显示回调函数
             Global.Exp.RegisterWithInitValue(newVlaue =>
             {
                 TextExp.text = "经验值:" + newVlaue.ToString();
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            // 给等级增加事件添加显示回调函数
+            Global.Level.RegisterWithInitValue(newVlaue =>
+            {
+                TextLevel.text = "等级:" + newVlaue.ToString();
+            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            // 
         }
 
         protected override void OnOpen(IUIData uiData = null)
@@ -25,6 +31,8 @@ namespace ProjectVampire
 
         protected override void OnShow()
         {
+            // 显示血量
+            // TODO: 优化性能
             TextHP.text = "血量:" + Player.Instance.Health.ToString();
         }
 

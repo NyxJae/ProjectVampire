@@ -6,10 +6,10 @@ namespace ProjectVampire
     public partial class EnemyGenerater : ViewController
     {
         /// <summary>
-        /// 私有 敌人生成时间最短间隔 属性
+        /// 私有 生成敌人的时间最短间隔 属性
         /// </summary>
         [SerializeField]
-        [Tooltip("敌人生成时间间隔")]
+        [Tooltip("生成敌人的时间最短间隔")]
         private float mGenerateInterval = 1f;
 
         /// <summary>
@@ -24,26 +24,20 @@ namespace ProjectVampire
         /// </summary>
         private float mGenerateTimer = 0f;
 
-        /// <summary>
-        /// 私有的 敌人生成距离系数 属性
-        /// </summary>
-        [SerializeField]
-        [Tooltip("敌人生成距离系数")]
-        private float mGenerateDistance = 10f;
 
         /// <summary>
         /// 私有的 敌人生成最近距离 属性
         /// </summary>
         [SerializeField]
         [Tooltip("敌人生成最近距离")]
-        private float mGenerateDistanceMin = 5f;
+        private float mGenerateDistanceMin = 1f;
 
         /// <summary>
         /// 私有的 敌人生成最远距离 属性
         /// </summary>
         [SerializeField]
         [Tooltip("敌人生成最远距离")]
-        private float mGenerateDistanceMax = 15f;
+        private float mGenerateDistanceMax = 5f;
 
         /// <summary>
         /// 私有的 Player 角色
@@ -84,9 +78,9 @@ namespace ProjectVampire
             // 随机方向
             var randomDirection = Random.insideUnitCircle.normalized;
             // 随机距离
-            var randomDistance = Random.Range(mGenerateDistanceMin, mGenerateDistanceMax) * mGenerateDistance;
+            var randomDistance = Random.Range(mGenerateDistanceMin, mGenerateDistanceMax);
             // 计算生成位置
-            var randomPosition = playerPosition + new Vector3(randomDirection.x, 0, randomDirection.y) * randomDistance;
+            var randomPosition = playerPosition + new Vector3(randomDirection.x, randomDirection.y, 0) * randomDistance;
 
             // 生成敌人
             Enemy.Instantiate().Position(randomPosition).Show();

@@ -38,6 +38,21 @@ namespace ProjectVampire
         /// </summary>
         private int mDamage = 1;
 
+        /// <summary>
+        /// 私有的 当前经验值上限 属性
+        /// </summary>
+        [SerializeField]
+        private int mExpValueMax = 2;
+
+        /// <summary>
+        /// 公开的 当前经验值上限 属性
+        /// </summary>
+        public int ExpValueMax
+        {
+            get { return mExpValueMax; }
+            set { mExpValueMax = value; }
+        }
+
 
         // 公开的 静态 实例 属性
         public static Player Instance
@@ -54,6 +69,16 @@ namespace ProjectVampire
         {
             // 给HurtBox被触碰时, 触发的事件添加回调函数(受伤),并设置自动销毁
             HurtBox.OnTriggerEnter2DEvent(Collider2D => OnDamage(mDamage)).UnRegisterWhenGameObjectDestroyed(gameObject);
+            // 给经验值增加事件添加升级回调函数
+            Global.Exp.RegisterWithInitValue(newVlaue =>
+            {
+                // 升级
+                if (newVlaue >= mExpValueMax)
+                {
+                    Global.Level.Value += 1;
+                    Global.Exp.Value = 0;
+                }
+            }).UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 
 
