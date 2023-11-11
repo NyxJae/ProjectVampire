@@ -2,11 +2,11 @@ using UnityEngine;
 using QFramework;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem;
-
+using ISingleton = QFramework.ISingleton;
 
 namespace ProjectVampire
 {
-    public partial class Player : ViewController
+    public partial class Player : ViewController, ISingleton
     {
         /// <summary>
         /// 私有的 移动速度系数 属性 在 Inspector 中显示
@@ -24,11 +24,27 @@ namespace ProjectVampire
         /// </summary>
         [SerializeField]
         private int mHealth = 100;
+        /// <summary>
+        /// 公开的 血量 属性
+        /// </summary>
+        public int Health
+        {
+            get { return mHealth; }
+            set { mHealth = value; }
+        }
 
         /// <summary>
         /// 私有的 被击扣血值 属性
         /// </summary>
         private int mDamage = 1;
+
+
+        // 公开的 静态 实例 属性
+        public static Player Instance
+        {
+            get { return MonoSingletonProperty<Player>.Instance; }
+        }
+
 
 
         /// <summary>
@@ -51,14 +67,6 @@ namespace ProjectVampire
 
         }
 
-        /// <summary>
-        /// 绘制GUI的回调函数
-        /// </summary>
-        private void OnGUI()
-        {
-            // 显示血量
-            GUI.Label(new Rect(0, 0, 100, 100), "Health:" + mHealth);
-        }
 
 
         /// <summary>
@@ -99,5 +107,9 @@ namespace ProjectVampire
             }
         }
 
+        public void OnSingletonInit()
+        {
+
+        }
     }
 }

@@ -40,6 +40,7 @@ namespace ProjectVampire
                 // 遍历所有的敌人
                 foreach (var enemy in enemies)
                 {
+
                     // 计算敌人与自己的距离
                     var distance = Vector3.Distance(transform.position, enemy.transform.position);
                     // 如果距离小于 攻击距离

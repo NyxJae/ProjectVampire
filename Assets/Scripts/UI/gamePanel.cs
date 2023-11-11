@@ -25,6 +25,7 @@ namespace ProjectVampire
 
         protected override void OnShow()
         {
+            TextHP.text = "血量:" + Player.Instance.Health.ToString();
         }
 
         protected override void OnHide()

@@ -29,8 +29,8 @@ namespace ProjectVampire
 
         private void Start()
         {
-            // 获取 player 角色,通过名字查找
-            player = GameObject.Find("Player");
+            // 获取 player 角色
+            player = Player.Instance.gameObject;
 
         }
 
