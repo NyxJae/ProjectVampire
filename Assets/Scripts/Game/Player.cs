@@ -70,11 +70,12 @@ namespace ProjectVampire
             // 给HurtBox被触碰时, 触发的事件添加回调函数(受伤),并设置自动销毁
             HurtBox.OnTriggerEnter2DEvent(Collider2D => OnDamage(mDamage)).UnRegisterWhenGameObjectDestroyed(gameObject);
             // 给经验值增加事件添加升级回调函数
-            Global.Exp.RegisterWithInitValue(newVlaue =>
+            Global.Exp.Register(newVlaue =>
             {
-                // 升级
                 if (newVlaue >= mExpValueMax)
                 {
+                    // 日志
+                    Debug.Log("升级");
                     Global.Level.Value += 1;
                     Global.Exp.Value = 0;
                 }

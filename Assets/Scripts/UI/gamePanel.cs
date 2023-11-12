@@ -24,6 +24,13 @@ namespace ProjectVampire
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
             // 
         }
+        private void Update()
+        {
+            // 显示血量
+            // TODO: 优化性能
+            TextHP.text = "血量:" + Player.Instance.Health.ToString();
+        }
+
 
         protected override void OnOpen(IUIData uiData = null)
         {
@@ -31,9 +38,7 @@ namespace ProjectVampire
 
         protected override void OnShow()
         {
-            // 显示血量
-            // TODO: 优化性能
-            TextHP.text = "血量:" + Player.Instance.Health.ToString();
+
         }
 
         protected override void OnHide()
