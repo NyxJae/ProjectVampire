@@ -74,10 +74,10 @@ namespace ProjectVampire
             {
                 if (newVlaue >= mExpValueMax)
                 {
-                    // 日志
-                    Debug.Log("升级");
                     Global.Level.Value += 1;
                     Global.Exp.Value = 0;
+                    // 时间暂停
+                    Time.timeScale = 0;
                 }
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
         }

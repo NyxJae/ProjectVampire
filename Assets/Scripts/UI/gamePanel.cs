@@ -18,17 +18,44 @@ namespace ProjectVampire
                 TextExp.text = "经验值:" + newVlaue.ToString();
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
             // 给等级增加事件添加显示回调函数
-            Global.Level.RegisterWithInitValue(newVlaue =>
+            Global.Level.Register(newVlaue =>
             {
                 TextLevel.text = "等级:" + newVlaue.ToString();
+                // 显示升级按钮
+                BtnUpdate.Show();
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
-            // 
-        }
-        private void Update()
-        {
-            // 显示血量
-            // TODO: 优化性能
-            TextHP.text = "血量:" + Player.Instance.Health.ToString();
+
+            // 给时间增加事件添加显示回调函数
+            Global.Time.Register(newVlaue =>
+            {
+                // 时间格式转换 从浮点数转换为 00:00
+                // 分钟
+                int minute = (int)newVlaue / 60;
+                // 秒
+                int second = (int)newVlaue % 60;
+                // 显示时间
+                TextTime.text = "时间:" + minute.ToString("00") + ":" + second.ToString("00");
+
+            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+
+            // 给升级按钮增加点击事件
+            BtnUpdate.onClick.AddListener(() =>
+            {
+                // 隐藏升级按钮
+                BtnUpdate.Hide();
+                // 时间恢复
+                Time.timeScale = 1;
+            });
+
+            ActionKit.OnUpdate.Register(() =>
+            {
+                // 显示血量
+                TextHP.text = "血量:" + Player.Instance.Health.ToString();
+                // 时间
+                Global.Time.Value += Time.deltaTime;
+
+            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+
         }
 
 

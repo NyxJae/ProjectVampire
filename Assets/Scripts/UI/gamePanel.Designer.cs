@@ -5,7 +5,7 @@ using QFramework;
 
 namespace ProjectVampire
 {
-	// Generate Id:22e05649-c499-42a0-aee6-8e05512f6f40
+	// Generate Id:6441d8fa-07c4-4fc4-89aa-e66d9a9a30d8
 	public partial class gamePanel
 	{
 		public const string Name = "gamePanel";
@@ -16,6 +16,10 @@ namespace ProjectVampire
 		public UnityEngine.UI.Text TextHP;
 		[SerializeField]
 		public UnityEngine.UI.Text TextLevel;
+		[SerializeField]
+		public UnityEngine.UI.Text TextTime;
+		[SerializeField]
+		public UnityEngine.UI.Button BtnUpdate;
 		
 		private gamePanelData mPrivateData = null;
 		
@@ -24,6 +28,8 @@ namespace ProjectVampire
 			TextExp = null;
 			TextHP = null;
 			TextLevel = null;
+			TextTime = null;
+			BtnUpdate = null;
 			
 			mData = null;
 		}
