@@ -18,13 +18,24 @@ MonoBehaviour:
     GameObject: {fileID: 0}
     From: 0
     NameToFullName: []
-    BindInfos: []
+    BindInfos:
+    - TypeName: SpriteRenderer
+      PathToRoot: Sprite
+      MemberName: Sprite
+    - TypeName: BoxCollider2D
+      PathToRoot: HurtBox
+      MemberName: HurtBox
+    - TypeName: ProjectVampire.Abilities
+      PathToRoot: Abilities
+      MemberName: Abilities
     ScriptsFolder: Assets/Scripts/Game
-    ClassName: EnemyGenerater
+    ClassName: Player
     Namespace: ProjectVampire
     MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace ProjectVampire\r\n{\r\n\tpublic
-      partial class EnemyGenerater : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
+      partial class Player : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:0de839fc-9217-4ab8-8d8b-bc110a770230\r\nusing UnityEngine;\r\n\r\nnamespace
-      ProjectVampire\r\n{\r\n\tpublic partial class EnemyGenerater\r\n\t{\r\n\r\n\t\tpublic
-      UnityEngine.GameObject Enemy;\r\n\r\n\t}\r\n}\r\n"
+    DesignerCode: "// Generate Id:600add2e-4c02-4b7e-be66-f9db34c38289\r\nusing UnityEngine;\r\n\r\nnamespace
+      ProjectVampire\r\n{\r\n\tpublic partial class Player\r\n\t{\r\n\r\n\t\t///
+      <summary>\r\n\t\t/// \u5916\u89C2\r\n\t\t/// </summary>\r\n\t\tpublic SpriteRenderer
+      Sprite;\r\n\r\n\t\tpublic BoxCollider2D HurtBox;\r\n\r\n\t\tpublic ProjectVampire.Abilities
+      Abilities;\r\n\r\n\t}\r\n}\r\n"

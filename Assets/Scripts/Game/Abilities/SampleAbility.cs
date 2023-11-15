@@ -3,7 +3,7 @@ using QFramework;
 
 namespace ProjectVampire
 {
-    public partial class SampleAbilities : ViewController
+    public partial class SampleAbility : ViewController
     {
         /// <summary>
         /// 私有 事件间隔 属性
@@ -19,6 +19,20 @@ namespace ProjectVampire
         // 私有 攻击距离 属性
         [SerializeField]
         private float mAttackDistance = 5f;
+
+        /// <summary>
+        /// 私有 攻击力 属性
+        /// </summary>
+        [SerializeField]
+        private int mAttack = 1;
+        /// <summary>
+        /// 公开 攻击力 属性
+        /// </summary>
+        public int Attack
+        {
+            get { return mAttack; }
+            set { mAttack = value; }
+        }
 
 
         void Start()
@@ -49,7 +63,7 @@ namespace ProjectVampire
                         // 修改敌人为红色
                         enemy.Sprite.color = Color.red;
                         // 扣血
-                        enemy.Health -= 1;
+                        enemy.Health -= mAttack;
                         // 延迟 0.1s,如果敌人角色不为空则改回白色
                         ActionKit.Delay(0.1f, () => { if (enemy != null) enemy.Sprite.color = Color.white; }).StartGlobal();
 

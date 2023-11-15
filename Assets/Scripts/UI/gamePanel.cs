@@ -28,19 +28,29 @@ namespace ProjectVampire
             // 给时间增加事件添加显示回调函数
             Global.Time.Register(newVlaue =>
             {
-                // 时间格式转换 从浮点数转换为 00:00
-                // 分钟
-                int minute = (int)newVlaue / 60;
-                // 秒
-                int second = (int)newVlaue % 60;
-                // 显示时间
-                TextTime.text = "时间:" + minute.ToString("00") + ":" + second.ToString("00");
+                // 每30帧执行一次显示时间
+                if (Time.frameCount % 30 == 0)
+                {
+                    // 时间格式转换 从浮点数转换为 00:00
+                    // 分钟
+                    int minute = (int)newVlaue / 60;
+                    // 秒
+                    int second = (int)newVlaue % 60;
+                    // 显示时间
+                    TextTime.text = "时间:" + minute.ToString("00") + ":" + second.ToString("00");
+                }
 
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
+
+
 
             // 给升级按钮增加点击事件
             BtnUpdate.onClick.AddListener(() =>
             {
+                // 取得玩家实例.以获取技能脚本
+                var sampleAbility = Player.Instance.Abilities.SampleAbility;
+                // sampleAbility 提升攻击力
+                sampleAbility.Attack += 1;
                 // 隐藏升级按钮
                 BtnUpdate.Hide();
                 // 时间恢复

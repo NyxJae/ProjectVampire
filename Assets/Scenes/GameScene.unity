@@ -578,8 +578,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1130510953}
   - component: {fileID: 1130510954}
+  - component: {fileID: 1130510955}
   m_Layer: 0
-  m_Name: SampleAbilities
+  m_Name: SampleAbility
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -613,12 +614,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Namespace: ProjectVampire
-  ScriptName: SampleAbilities
+  ScriptName: SampleAbility
   ScriptsFolder: Assets/Scripts/Game/Abilities
   GeneratePrefab: 0
   PrefabFolder: Assets/Art/Prefab
   mInterval: 1.5
   mAttackDistance: 5
+  mAttack: 1
+--- !u!114 &1130510955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130510952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarkType: 0
+  CustomComponentName: SampleAbility
+  CustomComment: 
+  mComponentName: ProjectVampire.SampleAbility
 --- !u!1 &1418043866
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,6 +799,7 @@ MonoBehaviour:
   mExpValueMax: 10
   Sprite: {fileID: 158436712}
   HurtBox: {fileID: 1418043867}
+  SampleAbility: {fileID: 1130510954}
 --- !u!4 &1665748293
 Transform:
   m_ObjectHideFlags: 0
@@ -979,6 +998,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1902256381}
+  - component: {fileID: 1902256382}
   m_Layer: 0
   m_Name: Abilities
   m_TagString: Untagged
@@ -1002,6 +1022,24 @@ Transform:
   m_Father: {fileID: 1665748293}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1902256382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902256380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7fea1255a580744a76cb4146390355, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Namespace: ProjectVampire
+  ScriptName: Abilities
+  ScriptsFolder: Assets/Scripts/Game
+  GeneratePrefab: 0
+  PrefabFolder: Assets/Art/Prefab
+  SampleAbility: {fileID: 1130510954}
 --- !u!1001 &4799462670042486033
 PrefabInstance:
   m_ObjectHideFlags: 0
