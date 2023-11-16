@@ -60,7 +60,11 @@ namespace ProjectVampire
             get { return MonoSingletonProperty<Player>.Instance; }
         }
 
-
+        private void Awake()
+        {
+            // 回复恢复
+            Time.timeScale = 1;
+        }
 
         /// <summary>
         /// 角色开始时的回调函数

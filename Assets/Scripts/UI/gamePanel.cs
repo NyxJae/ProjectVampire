@@ -34,6 +34,15 @@ namespace ProjectVampire
                     // 时间格式转换 从浮点数转换为 00:00
                     // 分钟
                     int minute = (int)newVlaue / 60;
+                    if (minute >= 1)
+                    {
+                        // 时间暂停
+                        Time.timeScale = 0;
+                        // 打开胜利界面
+                        UIKit.OpenPanel<winPanel>();
+                        // 日志
+                        Debug.Log("胜利");
+                    }
                     // 秒
                     int second = (int)newVlaue % 60;
                     // 显示时间

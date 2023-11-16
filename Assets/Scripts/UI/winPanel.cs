@@ -18,8 +18,10 @@ namespace ProjectVampire
             {
                 // 关闭当前界面
                 UIKit.ClosePanel<endPanel>();
+                // 重置各项属性
+                Global.ResetProperties();
                 // 重新加载场景
-                SceneManager.LoadScene("SampleScene");
+                SceneManager.LoadScene("GameScene");
 
             });
         }

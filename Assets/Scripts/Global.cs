@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 namespace ProjectVampire
 {
     public class Global
@@ -14,6 +13,14 @@ namespace ProjectVampire
         public static BindableProperty<int> Level = new BindableProperty<int>(1);
         // 公开的 时间 属性
         public static BindableProperty<float> Time = new BindableProperty<float>(0);
-    }
 
+        // 当场景加载时,重置各项属性
+        public static void ResetProperties()
+        {
+            Exp.Value = 0;
+            Level.Value = 1;
+            Time.Value = 0;
+        }
+    }
 }
+
