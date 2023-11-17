@@ -13,42 +13,39 @@ namespace ProjectVampire
         {
             mData = uiData as gamePanelData ?? new gamePanelData();
             // 给经验值增加事件添加显示回调函数
-            Global.Exp.RegisterWithInitValue(newVlaue =>
+            Global.Exp.RegisterWithInitValue(newValue =>
             {
-                TextExp.text = "经验值:" + newVlaue.ToString();
+                TextExp.text = "经验值:" + newValue.ToString();
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
             // 给等级增加事件添加显示回调函数
-            Global.Level.Register(newVlaue =>
+            Global.Level.Register(newValue =>
             {
-                TextLevel.text = "等级:" + newVlaue.ToString();
+                TextLevel.text = "等级:" + newValue.ToString();
                 // 显示升级按钮
                 BtnUpdate.Show();
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
 
             // 给时间增加事件添加显示回调函数
-            Global.Time.Register(newVlaue =>
+            Global.Time.Register(newValue =>
             {
                 // 每30帧执行一次显示时间
                 if (Time.frameCount % 30 == 0)
                 {
                     // 时间格式转换 从浮点数转换为 00:00
                     // 分钟
-                    int minute = (int)newVlaue / 60;
-                    if (minute >= 1)
-                    {
-                        // 时间暂停
-                        Time.timeScale = 0;
-                        // 打开胜利界面
-                        UIKit.OpenPanel<winPanel>();
-                        // 日志
-                        Debug.Log("胜利");
-                    }
+                    int minute = (int)newValue / 60;
                     // 秒
-                    int second = (int)newVlaue % 60;
+                    int second = (int)newValue % 60;
                     // 显示时间
                     TextTime.text = "时间:" + minute.ToString("00") + ":" + second.ToString("00");
                 }
 
+            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            // 血量显示
+            Player.Instance.Health.RegisterWithInitValue(newValue =>
+            {
+                // 显示血量
+                TextHP.text = "血量:" + newValue.ToString();
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
 
 
@@ -68,8 +65,7 @@ namespace ProjectVampire
 
             ActionKit.OnUpdate.Register(() =>
             {
-                // 显示血量
-                TextHP.text = "血量:" + Player.Instance.Health.ToString();
+
                 // 时间
                 Global.Time.Value += Time.deltaTime;
 

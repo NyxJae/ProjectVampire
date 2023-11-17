@@ -20,18 +20,17 @@ namespace ProjectVampire
         private Vector2 mMoveInput = Vector2.zero;
 
         /// <summary>
-        /// 私有的 血量 属性
+        /// 公开的 初始血量 属性
         /// </summary>
         [SerializeField]
         private int mHealth = 100;
+
+
         /// <summary>
-        /// 公开的 血量 属性
+        /// 私有的 血量 属性
         /// </summary>
-        public int Health
-        {
-            get { return mHealth; }
-            set { mHealth = value; }
-        }
+        public BindableProperty<int> Health = new BindableProperty<int>(100);
+
 
         /// <summary>
         /// 私有的 被击扣血值 属性
@@ -62,7 +61,7 @@ namespace ProjectVampire
 
         private void Awake()
         {
-            // 回复恢复
+            // 时间恢复
             Time.timeScale = 1;
         }
 
@@ -72,11 +71,26 @@ namespace ProjectVampire
         private void Start()
         {
             // 给HurtBox被触碰时, 触发的事件添加回调函数(受伤),并设置自动销毁
-            HurtBox.OnTriggerEnter2DEvent(Collider2D => OnDamage(mDamage)).UnRegisterWhenGameObjectDestroyed(gameObject);
-            // 给经验值增加事件添加升级回调函数
-            Global.Exp.Register(newVlaue =>
+            HurtBox.OnTriggerEnter2DEvent(Collider2D => Health.Value -= mDamage).UnRegisterWhenGameObjectDestroyed(gameObject);
+            // 血量初始化
+            Health.Value = mHealth;
+            // 给血量增加事件添加死亡回调函数
+            Health.Register(newValue =>
             {
-                if (newVlaue >= mExpValueMax)
+                if (newValue <= 0)
+                {
+                    // 销毁自身
+                    Destroy(gameObject);
+                    // 显示死亡面板
+                    UIKit.OpenPanel<endPanel>();
+                    // 时间暂停
+                    Time.timeScale = 0;
+                }
+            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            // 给经验值增加事件添加升级回调函数
+            Global.Exp.Register(newValue =>
+            {
+                if (newValue >= mExpValueMax)
                 {
                     Global.Level.Value += 1;
                     Global.Exp.Value = 0;
@@ -84,8 +98,15 @@ namespace ProjectVampire
                     Time.timeScale = 0;
                 }
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
-        }
 
+
+        }
+        // 销毁
+        public void Dispose()
+        {
+            // 销毁
+            MonoSingletonProperty<Player>.Dispose();
+        }
 
         /// <summary>
         /// 逐帧更新的回调函数
@@ -122,20 +143,7 @@ namespace ProjectVampire
             mMoveInput = context.ReadValue<Vector2>();
         }
 
-        // 私有 主角受伤 方法
-        private void OnDamage(int damage)
-        {
-            // 血量减少
-            mHealth -= damage;
-            // 如果血量小于等于0
-            if (mHealth <= 0)
-            {
-                // 角色死亡
-                this.DestroyGameObjGracefully();
-                // 打开结束界面
-                UIKit.OpenPanel<endPanel>();
-            }
-        }
+
 
         public void OnSingletonInit()
         {

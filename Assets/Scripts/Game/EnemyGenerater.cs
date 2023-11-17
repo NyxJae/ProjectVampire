@@ -3,88 +3,102 @@ using QFramework;
 
 namespace ProjectVampire
 {
-    public partial class EnemyGenerater : ViewController
+    public partial class EnemyWaveGenerator : ViewController
     {
-        /// <summary>
-        /// 私有 生成敌人的时间最短间隔 属性
-        /// </summary>
+        // 每个波次的配置
+        [System.Serializable]
+        public class WaveConfig
+        {
+            [Tooltip("敌人预制体")]
+            public GameObject enemyPrefab; // 敌人预制体
+            [Tooltip("持续时间")]
+            public float duration;         // 每个波次的持续时间
+            [Tooltip("生成间隔时间")]
+            public float spawnInterval;    // 每个波次的敌人生成间隔时间
+        }
+
+        [Tooltip("敌人生成最小距离")]
+        public float minSpawnDistance; // 敌人生成的最小距离
+        [Tooltip("敌人生成最大距离")]
+        public float maxSpawnDistance; // 敌人生成的最大距离
         [SerializeField]
-        [Tooltip("生成敌人的时间最短间隔")]
-        private float mGenerateInterval = 1f;
+        [Tooltip("波次配置列表")]
+        private WaveConfig[] waveConfigs; // 波次配置数组
 
-        /// <summary>
-        /// 私有 生成敌人的时间最长间隔 属性
-        /// </summary>
-        [SerializeField]
-        [Tooltip("生成敌人的时间最长间隔")]
-        private float mGenerateIntervalMax = 3f;
+        private int currentWaveIndex = 0; // 当前波次的索引
+        private float waveTimer = 0f;     // 波次的计时器
+        private float spawnTimer = 0f;    // 敌人生成的计时器
 
-        /// <summary>
-        /// 私有 敌人生成时间间隔 计时器
-        /// </summary>
-        private float mGenerateTimer = 0f;
-
-
-        /// <summary>
-        /// 私有的 敌人生成最近距离 属性
-        /// </summary>
-        [SerializeField]
-        [Tooltip("敌人生成最近距离")]
-        private float mGenerateDistanceMin = 1f;
-
-        /// <summary>
-        /// 私有的 敌人生成最远距离 属性
-        /// </summary>
-        [SerializeField]
-        [Tooltip("敌人生成最远距离")]
-        private float mGenerateDistanceMax = 5f;
-
-        /// <summary>
-        /// 私有的 Player 角色
-        /// </summary>
-        private GameObject player = null;
+        private GameObject player;        // 玩家角色
 
         void Start()
         {
-            // 获取 Player
+            // 获取玩家角色实例
             player = Player.Instance.gameObject;
-
         }
 
         private void Update()
         {
-            // 计时器逐帧更新
-            mGenerateTimer += Time.deltaTime;
-            // 如果计时器大于等于生成时间间隔
-            if (mGenerateTimer >= mGenerateInterval)
+            // 如果还有未完成的波次
+            if (currentWaveIndex < waveConfigs.Length)
             {
-                // 重置计时器
-                mGenerateTimer = 0f;
-                // 生成敌人
-                GenerateEnemy();
+                UpdateWave();
             }
-
         }
 
+        /// <summary>
+        /// 更新波次
+        /// </summary>
+        private void UpdateWave()
+        {
+            // 更新波次的计时器
+            waveTimer += Time.deltaTime;
+            // 获取当前波次的配置
+            var currentWave = waveConfigs[currentWaveIndex];
+
+            // 如果当前波次的时间未结束
+            if (waveTimer < currentWave.duration)
+            {
+                // 更新敌人生成的计时器
+                spawnTimer += Time.deltaTime;
+
+                // 如果到达生成间隔时间
+                if (spawnTimer >= currentWave.spawnInterval)
+                {
+                    // 重置生成计时器
+                    spawnTimer = 0f;
+                    // 生成敌人
+                    GenerateEnemy(currentWave);
+                }
+            }
+            else
+            {
+                // 波次结束，切换到下一波次
+                currentWaveIndex++;
+                waveTimer = 0f;
+                spawnTimer = 0f;
+            }
+        }
 
         /// <summary>
         /// 生成敌人
         /// </summary>
-        private void GenerateEnemy()
+        /// <param name="waveConfig">波次配置</param>
+        private void GenerateEnemy(WaveConfig waveConfig)
         {
-            // 获取 Player 的位置
+            // 获取玩家位置
             var playerPosition = player.transform.position;
-
             // 随机方向
             var randomDirection = Random.insideUnitCircle.normalized;
-            // 随机距离
-            var randomDistance = Random.Range(mGenerateDistanceMin, mGenerateDistanceMax);
+            // 随机距离，根据波次配置的最小和最大生成距离
+            var randomDistance = Random.Range(minSpawnDistance, maxSpawnDistance);
             // 计算生成位置
             var randomPosition = playerPosition + new Vector3(randomDirection.x, randomDirection.y, 0) * randomDistance;
-
             // 生成敌人
-            Enemy.Instantiate().Position(randomPosition).Show();
+            waveConfig.enemyPrefab.Instantiate()
+                .Position(randomPosition)
+                .Rotation(Quaternion.identity)
+                .Show();
         }
-
     }
 }

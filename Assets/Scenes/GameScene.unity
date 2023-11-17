@@ -396,11 +396,18 @@ MonoBehaviour:
   ScriptsFolder: Assets/Scripts/Game
   GeneratePrefab: 0
   PrefabFolder: Assets/Art/Prefab
-  mGenerateInterval: 1
-  mGenerateIntervalMax: 3
-  mGenerateDistanceMin: 1
-  mGenerateDistanceMax: 5
-  Enemy: {fileID: 1651630702174578907, guid: 0a8c85d19aa5f6f49b08bc1e73681ca9, type: 3}
+  minSpawnDistance: 3
+  maxSpawnDistance: 15
+  waveConfigs:
+  - enemyPrefab: {fileID: 1651630702174578907, guid: 0a8c85d19aa5f6f49b08bc1e73681ca9, type: 3}
+    duration: 3
+    spawnInterval: 1
+  - enemyPrefab: {fileID: 1651630702174578907, guid: 6b43158f5c4366649acbbf14ee60ab72, type: 3}
+    duration: 3
+    spawnInterval: 0.8
+  - enemyPrefab: {fileID: 1651630702174578907, guid: e74345e1a4e466b44aeb8d43512fcf13, type: 3}
+    duration: 3
+    spawnInterval: 0.6
 --- !u!4 &567124737
 Transform:
   m_ObjectHideFlags: 0
@@ -412,8 +419,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 845313062}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -429,9 +435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 411e729afed24c62a04e2b99d9122e78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Binds:
-  - MemberName: Enemy
-    Object: {fileID: 1651630702174578907, guid: 0a8c85d19aa5f6f49b08bc1e73681ca9, type: 3}
+  Binds: []
 --- !u!1 &596156402
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,11 +567,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &845313062 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 135584629486683125, guid: 0a8c85d19aa5f6f49b08bc1e73681ca9, type: 3}
-  m_PrefabInstance: {fileID: 4799462670042486033}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1130510952
 GameObject:
   m_ObjectHideFlags: 0
@@ -795,11 +794,11 @@ MonoBehaviour:
   GeneratePrefab: 0
   PrefabFolder: Assets/Art/Prefab
   mSpeed: 10
-  mHealth: 100
+  mHealth: 1
   mExpValueMax: 10
   Sprite: {fileID: 158436712}
   HurtBox: {fileID: 1418043867}
-  SampleAbility: {fileID: 1130510954}
+  Abilities: {fileID: 1902256382}
 --- !u!4 &1665748293
 Transform:
   m_ObjectHideFlags: 0
@@ -999,6 +998,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1902256381}
   - component: {fileID: 1902256382}
+  - component: {fileID: 1902256383}
   m_Layer: 0
   m_Name: Abilities
   m_TagString: Untagged
@@ -1040,64 +1040,19 @@ MonoBehaviour:
   GeneratePrefab: 0
   PrefabFolder: Assets/Art/Prefab
   SampleAbility: {fileID: 1130510954}
---- !u!1001 &4799462670042486033
-PrefabInstance:
+--- !u!114 &1902256383
+MonoBehaviour:
   m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 567124737}
-    m_Modifications:
-    - target: {fileID: 135584629486683125, guid: 0a8c85d19aa5f6f49b08bc1e73681ca9, type: 3}
-      propertyPath: m_RootOrder
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 135584629486683125, guid: 0a8c85d19aa5f6f49b08bc1e73681ca9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.37
-      objectReference: {fileID: 0}
-    - target: {fileID: 135584629486683125, guid: 0a8c85d19aa5f6f49b08bc1e73681ca9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.53
-      objectReference: {fileID: 0}
-    - target: {fileID: 135584629486683125, guid: 0a8c85d19aa5f6f49b08bc1e73681ca9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 135584629486683125, guid: 0a8c85d19aa5f6f49b08bc1e73681ca9, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 135584629486683125, guid: 0a8c85d19aa5f6f49b08bc1e73681ca9, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 135584629486683125, guid: 0a8c85d19aa5f6f49b08bc1e73681ca9, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 135584629486683125, guid: 0a8c85d19aa5f6f49b08bc1e73681ca9, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 135584629486683125, guid: 0a8c85d19aa5f6f49b08bc1e73681ca9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 135584629486683125, guid: 0a8c85d19aa5f6f49b08bc1e73681ca9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 135584629486683125, guid: 0a8c85d19aa5f6f49b08bc1e73681ca9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1651630702174578907, guid: 0a8c85d19aa5f6f49b08bc1e73681ca9, type: 3}
-      propertyPath: m_Name
-      value: Enemy
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0a8c85d19aa5f6f49b08bc1e73681ca9, type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902256380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarkType: 0
+  CustomComponentName: Abilities
+  CustomComment: 
+  mComponentName: ProjectVampire.Abilities
