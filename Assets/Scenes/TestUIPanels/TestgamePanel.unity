@@ -855,6 +855,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: gamePanel
       objectReference: {fileID: 0}
+    - target: {fileID: 8263155629918215082, guid: 9d2d943a8c5e552489363787929b38fe, type: 3}
+      propertyPath: MarkType
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

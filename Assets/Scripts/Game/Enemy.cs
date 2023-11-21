@@ -72,7 +72,9 @@ namespace ProjectVampire
             }
         }
 
-        // 检测血量
+        /// <summary>
+        /// 检测血量
+        /// </summary>
         private void CheckHealth()
         {
             // 如果血量小于等于 0
@@ -83,6 +85,18 @@ namespace ProjectVampire
                 // 增加经验值
                 Global.Exp.Value += 1;
             }
+        }
+
+        /// <summary>
+        /// 受伤处理，改变颜色并减少生命值。
+        /// </summary>
+        /// <param name="damage">受到的伤害值。</param>
+        /// <param name="changeDuration">颜色改变持续的时间。</param>
+        public void TakeDamage(int damage, float changeDuration = 0.1f)
+        {
+            Sprite.color = Color.red; // 改变颜色为红色
+            Health -= damage; // 减少生命值
+            ActionKit.Delay(changeDuration, () => Sprite.color = Color.white).Start(this);// 延时后恢复颜色
         }
     }
 }

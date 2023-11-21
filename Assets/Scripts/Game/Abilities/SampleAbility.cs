@@ -5,11 +5,6 @@ namespace ProjectVampire
 {
     public partial class SampleAbility : ViewController
     {
-        /// <summary>
-        /// 私有 事件间隔 属性
-        /// </summary>
-        [SerializeField]
-        private float mInterval = 1.5f;
 
         /// <summary>
         /// 私有 计时器 属性
@@ -18,7 +13,17 @@ namespace ProjectVampire
 
         // 私有 攻击距离 属性
         [SerializeField]
-        private float mAttackDistance = 5f;
+        private float mAttackDistance = 1.5f;
+
+        // 私有 攻击间隔 属性
+        [SerializeField]
+        private float mAttackRate = 0.5f;
+        // 公开 攻击间隔 属性
+        public float AttackRate
+        {
+            get { return mAttackRate; }
+            set { mAttackRate = value; }
+        }
 
         /// <summary>
         /// 私有 攻击力 属性
@@ -45,7 +50,7 @@ namespace ProjectVampire
             // 计时器逐帧增加
             mTimer += Time.deltaTime;
             // 如果计时器大于事件间隔
-            if (mTimer > mInterval)
+            if (mTimer > mAttackRate)
             {
                 // 重置计时器
                 mTimer = 0f;
@@ -60,13 +65,7 @@ namespace ProjectVampire
                     // 如果距离小于 攻击距离
                     if (distance < mAttackDistance)
                     {
-                        // 修改敌人为红色
-                        enemy.Sprite.color = Color.red;
-                        // 扣血
-                        enemy.Health -= mAttack;
-                        // 延迟 0.1s,如果敌人角色不为空则改回白色
-                        ActionKit.Delay(0.1f, () => { if (enemy != null) enemy.Sprite.color = Color.white; }).StartGlobal();
-
+                        enemy.TakeDamage(mAttack); // 对敌人造成伤害
                     }
 
                 }

@@ -402,12 +402,6 @@ MonoBehaviour:
   - enemyPrefab: {fileID: 1651630702174578907, guid: 0a8c85d19aa5f6f49b08bc1e73681ca9, type: 3}
     duration: 3
     spawnInterval: 1
-  - enemyPrefab: {fileID: 1651630702174578907, guid: 6b43158f5c4366649acbbf14ee60ab72, type: 3}
-    duration: 3
-    spawnInterval: 0.8
-  - enemyPrefab: {fileID: 1651630702174578907, guid: e74345e1a4e466b44aeb8d43512fcf13, type: 3}
-    duration: 3
-    spawnInterval: 0.6
 --- !u!4 &567124737
 Transform:
   m_ObjectHideFlags: 0
@@ -794,7 +788,7 @@ MonoBehaviour:
   GeneratePrefab: 0
   PrefabFolder: Assets/Art/Prefab
   mSpeed: 10
-  mHealth: 1
+  mHealth: 100
   mExpValueMax: 10
   Sprite: {fileID: 158436712}
   HurtBox: {fileID: 1418043867}

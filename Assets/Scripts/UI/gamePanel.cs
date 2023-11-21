@@ -22,7 +22,7 @@ namespace ProjectVampire
             {
                 TextLevel.text = "等级:" + newValue.ToString();
                 // 显示升级按钮
-                BtnUpdate.Show();
+                BtnUpdateRoot.Show();
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
 
             // 给时间增加事件添加显示回调函数
@@ -50,19 +50,30 @@ namespace ProjectVampire
 
 
 
-            // 给升级按钮增加点击事件
-            BtnUpdate.onClick.AddListener(() =>
+            // 给升级攻击力按钮增加点击事件
+            BtnUpdateATK.onClick.AddListener(() =>
             {
                 // 取得玩家实例.以获取技能脚本
                 var sampleAbility = Player.Instance.Abilities.SampleAbility;
                 // sampleAbility 提升攻击力
                 sampleAbility.Attack += 1;
                 // 隐藏升级按钮
-                BtnUpdate.Hide();
+                BtnUpdateRoot.Hide();
                 // 时间恢复
                 Time.timeScale = 1;
             });
-
+            // 给升级攻击频率按钮增加点击事件
+            BtnUpgradeATKRate.onClick.AddListener(() =>
+            {
+                // 取得玩家实例.以获取技能脚本
+                var sampleAbility = Player.Instance.Abilities.SampleAbility;
+                // sampleAbility 提升攻击力
+                sampleAbility.AttackRate *= 0.9f;
+                // 隐藏升级按钮
+                BtnUpdateRoot.Hide();
+                // 时间恢复
+                Time.timeScale = 1;
+            });
             ActionKit.OnUpdate.Register(() =>
             {
 

@@ -25,11 +25,26 @@ namespace ProjectVampire
         [Tooltip("波次配置列表")]
         private WaveConfig[] waveConfigs; // 波次配置数组
 
-        private int currentWaveIndex = 0; // 当前波次的索引
-        private float waveTimer = 0f;     // 波次的计时器
-        private float spawnTimer = 0f;    // 敌人生成的计时器
-
-        private GameObject player;        // 玩家角色
+        /// <summary>
+        /// 当前波次的索引
+        /// </summary>
+        private int currentWaveIndex = 0;
+        /// <summary>
+        /// 波次的计时器
+        /// </summary>
+        private float waveTimer = 0f;
+        /// <summary>
+        /// 敌人生成的计时器
+        /// </summary>
+        private float spawnTimer = 0f;
+        /// <summary>
+        /// 玩家角色
+        /// </summary>
+        private GameObject player;
+        /// <summary>
+        /// 标志位，表示winPanel是否已被打开
+        /// </summary>
+        private bool isWinPanelOpened;
 
         void Start()
         {
@@ -43,6 +58,17 @@ namespace ProjectVampire
             if (currentWaveIndex < waveConfigs.Length)
             {
                 UpdateWave();
+            }
+            else if (!AreEnemiesAlive())
+            {
+                if (!isWinPanelOpened) // 检查winPanel是否已经被打开
+                {
+                    // 如果所有波次都已完成，且场上没有敌人，游戏胜利
+                    UIKit.OpenPanel<winPanel>();
+                    // 时间暂停
+                    Time.timeScale = 0f;
+                    isWinPanelOpened = true; // 设置标志位，表示winPanel已被打开
+                }
             }
         }
 
@@ -100,5 +126,18 @@ namespace ProjectVampire
                 .Rotation(Quaternion.identity)
                 .Show();
         }
+
+        /// <summary>
+        /// 检测场上是否还有敌人
+        /// </summary>
+        /// <returns> 如果场上还有敌人，返回 true，否则返回 false </returns>
+        private bool AreEnemiesAlive()
+        {
+            // 使用Unity的API查找场景中所有的Enemy对象
+            return FindObjectsOfType<Enemy>().Length > 0;
+        }
+
+
+
     }
 }
