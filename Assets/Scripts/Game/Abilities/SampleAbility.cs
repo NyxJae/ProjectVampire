@@ -1,5 +1,6 @@
 using UnityEngine;
 using QFramework;
+using System;
 
 namespace ProjectVampire
 {
@@ -11,14 +12,40 @@ namespace ProjectVampire
         /// </summary>
         private float mTimer = 0f;
 
-        // 私有 攻击距离 属性
+        /// <summary>
+        /// 私有 攻击距离 属性
+        /// </summary>
         [SerializeField]
         private float mAttackDistance = 1.5f;
+        /// <summary>
+        /// 公开 攻击距离 属性
+        /// </summary>
+        public float AttackDistance
+        {
+            get { return mAttackDistance; }
+            set
+            {
+                mAttackDistance = value;
+                UpdateAttackTriggerSize(); // 当攻击距离变化时更新触发器大小
+            }
+        }
 
-        // 私有 攻击间隔 属性
+        private void UpdateAttackTriggerSize()
+        {
+            if (AttackRange != null)
+            {
+                AttackRange.radius = mAttackDistance; // 设置碰撞器的半径与攻击距离相等
+            }
+        }
+
+        /// <summary>
+        /// 私有 攻击间隔 属性
+        /// </summary>
         [SerializeField]
         private float mAttackRate = 0.5f;
-        // 公开 攻击间隔 属性
+        /// <summary>
+        /// 公开 攻击间隔 属性
+        /// </summary>
         public float AttackRate
         {
             get { return mAttackRate; }
@@ -39,38 +66,53 @@ namespace ProjectVampire
             set { mAttack = value; }
         }
 
+        //攻击状态 控制变量
+        private bool canAttack = true; // 默认情况下可以攻击
+
 
         void Start()
         {
-
+            // 初始化攻击触发器大小
+            UpdateAttackTriggerSize();
+            AttackRange.OnTriggerStay2DEvent(Other =>
+            {
+                // 如果计时器大于攻击间隔
+                if (mTimer > mAttackRate)
+                {
+                    // 确认碰撞的对象的父对象或自身有Enemy标签
+                    if (Other.gameObject.CompareTag("Enemy") || Other.transform.parent.CompareTag("Enemy"))
+                    {
+                        // 使用GetComponentInParent来获取父对象上的Enemy组件
+                        var enemy = Other.GetComponentInParent<Enemy>();
+                        // 如果敌人组件不为空
+                        if (enemy != null)
+                        {
+                            // 对敌人造成伤害
+                            enemy.TakeDamage(mAttack);
+                        }
+                    }
+                }
+            }).UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 
         private void Update()
         {
             // 计时器逐帧增加
             mTimer += Time.deltaTime;
-            // 如果计时器大于事件间隔
+            // 如果计时器大于攻击间隔
             if (mTimer > mAttackRate)
             {
-                // 重置计时器
-                mTimer = 0f;
-                // 根据 标签 获取所有的敌人
-                var enemies = FindObjectsByType<Enemy>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
-                // 遍历所有的敌人
-                foreach (var enemy in enemies)
+                // 可以攻击
+                canAttack = true;
+                // 下一帧开始时,计时器归零
+                ActionKit.DelayFrame(1, () =>
                 {
-
-                    // 计算敌人与自己的距离
-                    var distance = Vector3.Distance(transform.position, enemy.transform.position);
-                    // 如果距离小于 攻击距离
-                    if (distance < mAttackDistance)
-                    {
-                        enemy.TakeDamage(mAttack); // 对敌人造成伤害
-                    }
-
-                }
-
+                    mTimer = 0f;
+                    canAttack = false;
+                }).Start(this);
             }
         }
+
+
     }
 }

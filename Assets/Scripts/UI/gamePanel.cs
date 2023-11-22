@@ -15,12 +15,12 @@ namespace ProjectVampire
             // 给经验值增加事件添加显示回调函数
             Global.Exp.RegisterWithInitValue(newValue =>
             {
-                TextExp.text = "经验值:" + newValue.ToString();
+                TextExp.text = $"经验值:{newValue}/{Player.Instance.ExpToNextLevel()}";
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
             // 给等级增加事件添加显示回调函数
             Global.Level.Register(newValue =>
             {
-                TextLevel.text = "等级:" + newValue.ToString();
+                TextLevel.text = $"等级:{newValue}";
                 // 显示升级按钮
                 BtnUpdateRoot.Show();
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
@@ -65,6 +65,7 @@ namespace ProjectVampire
             // 给升级攻击频率按钮增加点击事件
             BtnUpgradeATKRate.onClick.AddListener(() =>
             {
+
                 // 取得玩家实例.以获取技能脚本
                 var sampleAbility = Player.Instance.Abilities.SampleAbility;
                 // sampleAbility 提升攻击力

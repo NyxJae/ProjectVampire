@@ -19,23 +19,15 @@ MonoBehaviour:
     From: 0
     NameToFullName: []
     BindInfos:
-    - TypeName: SpriteRenderer
-      PathToRoot: Sprite
-      MemberName: Sprite
-    - TypeName: BoxCollider2D
-      PathToRoot: HurtBox
-      MemberName: HurtBox
-    - TypeName: ProjectVampire.Abilities
-      PathToRoot: Abilities
-      MemberName: Abilities
-    ScriptsFolder: Assets/Scripts/Game
-    ClassName: Player
+    - TypeName: CircleCollider2D
+      PathToRoot: AttackRange
+      MemberName: AttackRange
+    ScriptsFolder: Assets/Scripts/Game/Abilities
+    ClassName: SampleAbility
     Namespace: ProjectVampire
     MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace ProjectVampire\r\n{\r\n\tpublic
-      partial class Player : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
+      partial class SampleAbility : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:600add2e-4c02-4b7e-be66-f9db34c38289\r\nusing UnityEngine;\r\n\r\nnamespace
-      ProjectVampire\r\n{\r\n\tpublic partial class Player\r\n\t{\r\n\r\n\t\t///
-      <summary>\r\n\t\t/// \u5916\u89C2\r\n\t\t/// </summary>\r\n\t\tpublic SpriteRenderer
-      Sprite;\r\n\r\n\t\tpublic BoxCollider2D HurtBox;\r\n\r\n\t\tpublic ProjectVampire.Abilities
-      Abilities;\r\n\r\n\t}\r\n}\r\n"
+    DesignerCode: "// Generate Id:551b350d-7e47-44c0-ab0a-8ab9a8ca2584\r\nusing UnityEngine;\r\n\r\nnamespace
+      ProjectVampire\r\n{\r\n\tpublic partial class SampleAbility\r\n\t{\r\n\r\n\t\tpublic
+      CircleCollider2D AttackRange;\r\n\r\n\t}\r\n}\r\n"

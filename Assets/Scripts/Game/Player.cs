@@ -37,20 +37,8 @@ namespace ProjectVampire
         /// </summary>
         private int mDamage = 1;
 
-        /// <summary>
-        /// 私有的 当前经验值上限 属性
-        /// </summary>
-        [SerializeField]
-        private int mExpValueMax = 2;
 
-        /// <summary>
-        /// 公开的 当前经验值上限 属性
-        /// </summary>
-        public int ExpValueMax
-        {
-            get { return mExpValueMax; }
-            set { mExpValueMax = value; }
-        }
+
 
 
         // 公开的 静态 实例 属性
@@ -79,18 +67,18 @@ namespace ProjectVampire
             {
                 if (newValue <= 0)
                 {
-                    // 销毁自身
-                    Destroy(gameObject);
                     // 显示死亡面板
                     UIKit.OpenPanel<endPanel>();
                     // 时间暂停
                     Time.timeScale = 0;
+
+
                 }
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
             // 给经验值增加事件添加升级回调函数
             Global.Exp.Register(newValue =>
             {
-                if (newValue >= mExpValueMax)
+                if (newValue >= ExpToNextLevel())
                 {
                     Global.Level.Value += 1;
                     Global.Exp.Value = 0;
@@ -100,12 +88,6 @@ namespace ProjectVampire
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
 
 
-        }
-        // 销毁
-        public void Dispose()
-        {
-            // 销毁
-            MonoSingletonProperty<Player>.Dispose();
         }
 
         /// <summary>
@@ -143,6 +125,11 @@ namespace ProjectVampire
             mMoveInput = context.ReadValue<Vector2>();
         }
 
+        // 计算距离下次升级经验值 方法
+        public int ExpToNextLevel()
+        {
+            return 5 * Global.Level.Value;
+        }
 
 
         public void OnSingletonInit()
