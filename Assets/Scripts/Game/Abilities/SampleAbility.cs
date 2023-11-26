@@ -42,7 +42,7 @@ namespace ProjectVampire
         /// 私有 攻击间隔 属性
         /// </summary>
         [SerializeField]
-        private float mAttackRate = 0.5f;
+        private float mAttackRate = 1f;
         /// <summary>
         /// 公开 攻击间隔 属性
         /// </summary>
@@ -67,7 +67,7 @@ namespace ProjectVampire
         }
 
         //攻击状态 控制变量
-        private bool canAttack = true; // 默认情况下可以攻击
+        private bool canAttack = false; // 默认情况下可以攻击
 
 
         void Start()
@@ -76,8 +76,8 @@ namespace ProjectVampire
             UpdateAttackTriggerSize();
             AttackRange.OnTriggerStay2DEvent(Other =>
             {
-                // 如果计时器大于攻击间隔
-                if (mTimer > mAttackRate)
+                // 如果可以攻击
+                if (canAttack)
                 {
                     // 确认碰撞的对象的父对象或自身有Enemy标签
                     if (Other.gameObject.CompareTag("Enemy") || Other.transform.parent.CompareTag("Enemy"))
@@ -104,8 +104,8 @@ namespace ProjectVampire
             {
                 // 可以攻击
                 canAttack = true;
-                // 下一帧开始时,计时器归零
-                ActionKit.DelayFrame(1, () =>
+                // 延时2帧,计时器归零
+                ActionKit.DelayFrame(2, () =>
                 {
                     mTimer = 0f;
                     canAttack = false;

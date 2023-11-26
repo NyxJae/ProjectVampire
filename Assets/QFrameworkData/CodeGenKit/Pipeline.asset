@@ -20,14 +20,14 @@ MonoBehaviour:
     NameToFullName: []
     BindInfos:
     - TypeName: CircleCollider2D
-      PathToRoot: AttackRange
-      MemberName: AttackRange
+      PathToRoot: PickRange
+      MemberName: PickRange
     ScriptsFolder: Assets/Scripts/Game/Abilities
-    ClassName: SampleAbility
+    ClassName: PickAbility
     Namespace: ProjectVampire
     MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace ProjectVampire\r\n{\r\n\tpublic
-      partial class SampleAbility : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
+      partial class PickAbility : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:551b350d-7e47-44c0-ab0a-8ab9a8ca2584\r\nusing UnityEngine;\r\n\r\nnamespace
-      ProjectVampire\r\n{\r\n\tpublic partial class SampleAbility\r\n\t{\r\n\r\n\t\tpublic
-      CircleCollider2D AttackRange;\r\n\r\n\t}\r\n}\r\n"
+    DesignerCode: "// Generate Id:1b1fc8f3-48a0-4f25-b6b1-922d24d03c42\r\nusing UnityEngine;\r\n\r\nnamespace
+      ProjectVampire\r\n{\r\n\tpublic partial class PickAbility\r\n\t{\r\n\r\n\t\tpublic
+      CircleCollider2D PickRange;\r\n\r\n\t}\r\n}\r\n"

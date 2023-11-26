@@ -82,8 +82,8 @@ namespace ProjectVampire
             {
                 // 销毁自身
                 this.DestroyGameObjGracefully();
-                // 增加经验值
-                Global.Exp.Value += 1;
+                // 经验球生成
+                ExpBall.Instantiate().Position(transform.position).Show();
             }
         }
 

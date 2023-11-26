@@ -67,7 +67,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.27
+  m_Radius: 0.4
 --- !u!114 &6150436529922575135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,7 +131,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 411e729afed24c62a04e2b99d9122e78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Binds: []
+  Binds:
+  - MemberName: ExpBall
+    Object: {fileID: 7454236565741822591, guid: bab809f83b3d9e448beb971b3980ab4b, type: 3}
 --- !u!114 &4807786136300749142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,10 +151,11 @@ MonoBehaviour:
   ScriptsFolder: Assets/Scripts/Game
   GeneratePrefab: 1
   PrefabFolder: Assets/Art/Prefab
-  mSpeed: 3
+  mSpeed: 1
   Health: 5
   Sprite: {fileID: 497411548816826208}
   HitBox: {fileID: 1044044663226219858}
+  ExpBall: {fileID: 7454236565741822591, guid: bab809f83b3d9e448beb971b3980ab4b, type: 3}
 --- !u!1 &6138813683597813547
 GameObject:
   m_ObjectHideFlags: 0
