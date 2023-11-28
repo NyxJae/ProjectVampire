@@ -152,6 +152,7 @@ MonoBehaviour:
   GeneratePrefab: 1
   PrefabFolder: Assets/Art/Prefab
   mSpeed: 1
+  mDropExpRate: 0.5
   Health: 5
   Sprite: {fileID: 497411548816826208}
   HitBox: {fileID: 1044044663226219858}

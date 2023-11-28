@@ -18,16 +18,13 @@ MonoBehaviour:
     GameObject: {fileID: 0}
     From: 0
     NameToFullName: []
-    BindInfos:
-    - TypeName: CircleCollider2D
-      PathToRoot: PickRange
-      MemberName: PickRange
-    ScriptsFolder: Assets/Scripts/Game/Abilities
-    ClassName: PickAbility
+    BindInfos: []
+    ScriptsFolder: Assets/Scripts/Game
+    ClassName: PowerUpManager
     Namespace: ProjectVampire
     MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace ProjectVampire\r\n{\r\n\tpublic
-      partial class PickAbility : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
+      partial class PowerUpManager : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:1b1fc8f3-48a0-4f25-b6b1-922d24d03c42\r\nusing UnityEngine;\r\n\r\nnamespace
-      ProjectVampire\r\n{\r\n\tpublic partial class PickAbility\r\n\t{\r\n\r\n\t\tpublic
-      CircleCollider2D PickRange;\r\n\r\n\t}\r\n}\r\n"
+    DesignerCode: "// Generate Id:9442b41b-4b84-40e8-a808-e6f600ace49c\r\nusing UnityEngine;\r\n\r\nnamespace
+      ProjectVampire\r\n{\r\n\tpublic partial class PowerUpManager\r\n\t{\r\n\r\n\t\tpublic
+      UnityEngine.GameObject ExpBall;\r\n\r\n\t\tpublic UnityEngine.GameObject CoinBall;\r\n\r\n\t}\r\n}\r\n"

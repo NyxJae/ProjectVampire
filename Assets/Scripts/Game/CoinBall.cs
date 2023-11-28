@@ -3,18 +3,17 @@ using QFramework;
 
 namespace ProjectVampire
 {
-    public partial class ExpBall : ViewController
+    public partial class CoinBall : ViewController
     {
+        void Start()
+        {
+            // Code Here
+        }
         /// <summary>
-        ///  私有的 经验值 属性
-        /// </summary>
-        private int mExp = 1;
-
-        /// <summary>
-        /// 公开 获取经验值 方法
+        /// 公开 获取金币 方法
         /// </summary>
         /// <returns></returns>
-        public int GetExp()
+        public int GetCoin()
         {
             ActionKit.Sequence()
                 .Callback(() =>
@@ -29,9 +28,8 @@ namespace ProjectVampire
                     Destroy(gameObject);
                 }).Start(this);
             // 返回经验值
-            return mExp;
+            return 1;
         }
-
 
     }
 }

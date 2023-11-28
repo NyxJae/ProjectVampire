@@ -24,6 +24,11 @@ namespace ProjectVampire
                 // 显示升级按钮
                 BtnUpdateRoot.Show();
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            // 给金币增加事件添加显示回调函数
+            Global.Coin.Register(newValue =>
+            {
+                TextCoin.text = $"金币:{newValue}";
+            }).UnRegisterWhenGameObjectDestroyed(gameObject);
 
             // 给时间增加事件添加显示回调函数
             Global.Time.Register(newValue =>

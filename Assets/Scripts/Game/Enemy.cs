@@ -23,6 +23,13 @@ namespace ProjectVampire
         /// </summary>
         private GameObject player = null;
 
+        /// <summary>
+        /// 私有的 掉落经验几率 属性
+        /// </summary>
+        [SerializeField]
+        private float mDropExpRate = 0.5f;
+
+
         // 公开的 血量 属性
         [SerializeField]
         public int Health = 3;
@@ -82,8 +89,14 @@ namespace ProjectVampire
             {
                 // 销毁自身
                 this.DestroyGameObjGracefully();
-                // 经验球生成
-                ExpBall.Instantiate().Position(transform.position).Show();
+                // 随机数
+                var random = Random.Range(0f, 1f);
+                // 如果随机数小于等于掉落经验几率
+                if (random <= mDropExpRate)
+                {
+                    // 经验球生成
+                    PowerUpManager.Instance.DroReward(gameObject);
+                }
             }
         }
 

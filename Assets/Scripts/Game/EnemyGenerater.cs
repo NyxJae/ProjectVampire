@@ -121,7 +121,7 @@ namespace ProjectVampire
             // 计算生成位置
             var randomPosition = playerPosition + new Vector3(randomDirection.x, randomDirection.y, 0) * randomDistance;
             // 生成敌人
-            waveConfig.enemyPrefab.Instantiate()
+            waveConfig.enemyPrefab.InstantiateWithParent(transform)
                 .Position(randomPosition)
                 .Rotation(Quaternion.identity)
                 .Show();

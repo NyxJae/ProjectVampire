@@ -5,7 +5,7 @@ using QFramework;
 
 namespace ProjectVampire
 {
-	// Generate Id:5e9db04b-52d5-4cce-b135-fd55b6f91f97
+	// Generate Id:31ec7a14-1212-4b17-a9f7-0f609de1b414
 	public partial class gamePanel
 	{
 		public const string Name = "gamePanel";
@@ -24,6 +24,8 @@ namespace ProjectVampire
 		public UnityEngine.UI.Button BtnUpdateATK;
 		[SerializeField]
 		public UnityEngine.UI.Button BtnUpgradeATKRate;
+		[SerializeField]
+		public UnityEngine.UI.Text TextCoin;
 		
 		private gamePanelData mPrivateData = null;
 		
@@ -36,6 +38,7 @@ namespace ProjectVampire
 			BtnUpdateRoot = null;
 			BtnUpdateATK = null;
 			BtnUpgradeATKRate = null;
+			TextCoin = null;
 			
 			mData = null;
 		}
