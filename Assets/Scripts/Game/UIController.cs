@@ -10,7 +10,7 @@ namespace ProjectVampire
         /// </summary>
         void Start()
         {
-            UIKit.OpenPanel<gamePanel>();
+            UIKit.OpenPanel<UIBeginPanel>();
 
         }
 
@@ -19,7 +19,7 @@ namespace ProjectVampire
         /// </summary>
         private void OnDisable()
         {
-            UIKit.ClosePanel<gamePanel>();
+            UIKit.ClosePanel<UIBeginPanel>();
         }
     }
 }

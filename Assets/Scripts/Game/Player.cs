@@ -68,7 +68,7 @@ namespace ProjectVampire
                 if (newValue <= 0)
                 {
                     // 显示死亡面板
-                    UIKit.OpenPanel<endPanel>();
+                    UIKit.OpenPanel<UIEndPanel>();
                     // 时间暂停
                     Time.timeScale = 0;
 

@@ -64,7 +64,7 @@ namespace ProjectVampire
                 if (!isWinPanelOpened) // 检查winPanel是否已经被打开
                 {
                     // 如果所有波次都已完成，且场上没有敌人，游戏胜利
-                    UIKit.OpenPanel<winPanel>();
+                    UIKit.OpenPanel<UIWinPanel>();
                     // 时间暂停
                     Time.timeScale = 0f;
                     isWinPanelOpened = true; // 设置标志位，表示winPanel已被打开
