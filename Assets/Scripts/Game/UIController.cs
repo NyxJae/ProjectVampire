@@ -1,5 +1,6 @@
 using UnityEngine;
 using QFramework;
+using UnityEngine.SceneManagement;
 
 namespace ProjectVampire
 {
@@ -10,7 +11,15 @@ namespace ProjectVampire
         /// </summary>
         void Start()
         {
-            UIKit.OpenPanel<UIBeginPanel>();
+            if (SceneManager.GetActiveScene().name == "BeginScene")
+            {
+                UIKit.OpenPanel<UIBeginPanel>();
+            }
+            else if (SceneManager.GetActiveScene().name == "GameScene")
+            {
+                UIKit.OpenPanel<UIGamePanel>();
+            }
+            
 
         }
 
@@ -19,7 +28,14 @@ namespace ProjectVampire
         /// </summary>
         private void OnDisable()
         {
-            UIKit.ClosePanel<UIBeginPanel>();
+            if (SceneManager.GetActiveScene().name == "BeginScene")
+            {
+                UIKit.ClosePanel<UIBeginPanel>();
+            }
+            else if (SceneManager.GetActiveScene().name == "GameScene")
+            {
+                UIKit.ClosePanel<UIGamePanel>();
+            }
         }
     }
 }

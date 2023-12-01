@@ -17,8 +17,6 @@ namespace ProjectVampire
                     var expBalls = other.GetComponentsInParent<ExpBall>();
                     if (expBalls != null && expBalls.Length > 0)
                     {
-                        // 日志
-                        Debug.Log("碰撞到经验球");
                         // 给玩家增加经验值
                         Global.Exp.Value += expBalls[0].GetExp();
                     }
@@ -26,8 +24,6 @@ namespace ProjectVampire
                     var coinBalls = other.GetComponentsInParent<CoinBall>();
                     if (coinBalls != null && coinBalls.Length > 0)
                     {
-                        // 日志
-                        Debug.Log("碰撞到金币球");
                         // 给玩家增加金币
                         Global.Coin.Value += coinBalls[0].GetCoin();
                     }

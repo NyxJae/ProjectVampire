@@ -24,7 +24,7 @@ namespace ProjectVampire
 				// 关闭 Begin 界面
 				UIKit.ClosePanel<UIBeginPanel>();
 				// 打开游戏场景
-				SceneManager.LoadScene("GameScene");
+				SceneManager.LoadScene(Global.GameScene);
 				
 			});
 			// 注册 BtnReward 的点击事件
