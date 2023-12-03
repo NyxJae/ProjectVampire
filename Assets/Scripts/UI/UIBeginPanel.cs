@@ -39,6 +39,7 @@ namespace ProjectVampire
 		
 		protected override void OnShow()
 		{
+			// 
 		}
 		
 		protected override void OnHide()

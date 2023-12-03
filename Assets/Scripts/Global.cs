@@ -18,14 +18,34 @@ namespace ProjectVampire
         // 定义 常量 场景名称 为 数字
         public const int BeginScene = 0;
         public const int GameScene = 1;
-        
-        // 当场景加载时,重置各项属性
+
+
+        /// <summary>
+        ///  重置各项属性
+        /// </summary>
         public static void ResetProperties()
         {
             Exp.Value = 0;
             Level.Value = 1;
             Time.Value = 0;
         }
+
+        /// <summary>
+        /// 初始化 金币 存储与读取
+        /// </summary>
+        public static void InitCoin()
+        {
+            if (PlayerPrefs.HasKey("Coin"))
+            {
+                Coin.Value = PlayerPrefs.GetInt("Coin");
+            }
+            else
+            {
+                PlayerPrefs.SetInt("Coin", 0);
+            }
+        }
+
+
     }
 }
 

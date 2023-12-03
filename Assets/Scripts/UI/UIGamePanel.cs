@@ -12,11 +12,15 @@ namespace ProjectVampire
         protected override void OnInit(IUIData uiData = null)
         {
             mData = uiData as UIGamePanelData ?? new UIGamePanelData();
+            // 显示经验值
+            TextExp.text = $"经验值:{Global.Exp.Value}/{Player.Instance.ExpToNextLevel()}";
             // 给经验值增加事件添加显示回调函数
             Global.Exp.RegisterWithInitValue(newValue =>
             {
                 TextExp.text = $"经验值:{newValue}/{Player.Instance.ExpToNextLevel()}";
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            // 显示等级
+            TextLevel.text = $"等级:{Global.Level.Value}";
             // 给等级增加事件添加显示回调函数
             Global.Level.Register(newValue =>
             {
@@ -24,6 +28,8 @@ namespace ProjectVampire
                 // 显示升级按钮
                 BtnUpdateRoot.Show();
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            // 显示金币数量
+            TextCoin.text = $"金币:{Global.Coin.Value}";
             // 给金币增加事件添加显示回调函数
             Global.Coin.Register(newValue =>
             {

@@ -15,11 +15,14 @@ namespace ProjectVampire
 		protected override void OnInit(IUIData uiData = null)
 		{
 			mData = uiData as UIRewardPanelData ?? new UIRewardPanelData();
-			
+
 		}
-		
+
 		protected override void OnOpen(IUIData uiData = null)
 		{
+			// 显示金币数量
+			TextCoin.text = $"金币:{Global.Coin.Value}";
+			// 给金币增加事件添加显示回调函数
 			Global.Coin.Register(newValue =>
 			{
 				TextCoin.text = $"金币:{newValue}";
@@ -57,17 +60,17 @@ namespace ProjectVampire
 					// 提升经验掉落几率
 					PowerUpManager.Instance.DropExpRate += 0.05f;
 				}
-			});			 
+			});
 		}
-		
+
 		protected override void OnShow()
 		{
 		}
-		
+
 		protected override void OnHide()
 		{
 		}
-		
+
 		protected override void OnClose()
 		{
 		}
