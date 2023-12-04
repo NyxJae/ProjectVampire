@@ -63,6 +63,8 @@ namespace ProjectVampire
             {
                 if (!isWinPanelOpened) // 检查winPanel是否已经被打开
                 {
+                    // 播放胜利音效
+                    AudioKit.PlaySound("GamePass");
                     // 如果所有波次都已完成，且场上没有敌人，游戏胜利
                     UIKit.OpenPanel<UIWinPanel>();
                     // 时间暂停

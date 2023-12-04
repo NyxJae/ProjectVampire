@@ -67,6 +67,8 @@ namespace ProjectVampire
             {
                 if (newValue <= 0)
                 {
+                    // 播放死亡音效
+                    AudioKit.PlaySound("Die");
                     // 显示死亡面板
                     UIKit.OpenPanel<UIEndPanel>();
                     // 时间暂停

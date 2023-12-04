@@ -20,7 +20,8 @@ namespace ProjectVampire
                 {
                     // 飞向玩家
                     transform.position = Vector3.MoveTowards(transform.position, Player.Instance.transform.position, 5f * Time.deltaTime);
-
+                    // 播放音效
+                    AudioKit.PlaySound("Coin");
                 })
                 .Callback(() =>
                 {
