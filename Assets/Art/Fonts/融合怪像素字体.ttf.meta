@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: efd4e81823490bb4d8efc11b8fa29acd
+guid: 904888526dfe3d84c9d3becc393453a4
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Ark Pixel 10px Monospaced zh_cn
+  - Fusion Pixel 10px Monospaced zh_hans
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

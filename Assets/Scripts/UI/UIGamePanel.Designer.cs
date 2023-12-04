@@ -5,7 +5,7 @@ using QFramework;
 
 namespace ProjectVampire
 {
-	// Generate Id:e2ec1c5b-b724-4b36-acb2-18c23ef60b04
+	// Generate Id:b4f1be79-6ba3-44bb-b71c-ad0e9fc3c45b
 	public partial class UIGamePanel
 	{
 		public const string Name = "UIGamePanel";
@@ -19,13 +19,13 @@ namespace ProjectVampire
 		[SerializeField]
 		public UnityEngine.UI.Text TextTime;
 		[SerializeField]
+		public UnityEngine.UI.Text TextCoin;
+		[SerializeField]
 		public RectTransform BtnUpdateRoot;
 		[SerializeField]
 		public UnityEngine.UI.Button BtnUpdateATK;
 		[SerializeField]
 		public UnityEngine.UI.Button BtnUpgradeATKRate;
-		[SerializeField]
-		public UnityEngine.UI.Text TextCoin;
 		
 		private UIGamePanelData mPrivateData = null;
 		
@@ -35,10 +35,10 @@ namespace ProjectVampire
 			TextHP = null;
 			TextLevel = null;
 			TextTime = null;
+			TextCoin = null;
 			BtnUpdateRoot = null;
 			BtnUpdateATK = null;
 			BtnUpgradeATKRate = null;
-			TextCoin = null;
 			
 			mData = null;
 		}

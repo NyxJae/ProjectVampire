@@ -11,31 +11,50 @@ namespace ProjectVampire
         [SerializeField]
         private float mDropExpRate = 0.5f;
         /// <summary>
-        /// 共开的 经验掉落几率 属性
+        /// 公开的 经验掉落几率 属性
         /// </summary>
         public float DropExpRate
         {
             get { return mDropExpRate; }
-            set { mDropExpRate = value; }
+            set
+            {
+                mDropExpRate = value;
+                // 存储经验掉落几率
+                PlayerPrefs.SetFloat("DropExpRate", mDropExpRate);
+            }
         }
-        
+
         /// <summary>
         /// 私有的 金币掉落几率 属性
         /// </summary>
         [SerializeField]
         private float mDropCoinRate = 0.1f;
         /// <summary>
-        /// 共开的 金币掉落几率 属性
+        /// 公开的 金币掉落几率 属性
         /// </summary>
         public float DropCoinRate
         {
             get { return mDropCoinRate; }
-            set { mDropCoinRate = value; }
+            set
+            {
+                mDropCoinRate = value;
+                // 存储金币掉落几率
+                PlayerPrefs.SetFloat("DropCoinRate", mDropCoinRate);
+            }
         }
 
         public void OnSingletonInit()
         {
+
         }
+        private void Start()
+        {
+            // 初始化经验生成几率
+            mDropExpRate = Global.DropExpRate.Value;
+            // 初始化金币生成几率
+            mDropCoinRate = Global.DropCoinRate.Value;
+        }
+
 
         // 公开的 静态 实例 属性
         public static PowerUpManager Instance
