@@ -19,7 +19,9 @@ namespace ProjectVampire
             {
                 UIKit.OpenPanel<UIGamePanel>();
             }
-            
+            // TODO: 重构初始化数据位置
+            // 初始化数据
+            Global.InitData();
 
         }
 

@@ -27,6 +27,13 @@ namespace ProjectVampire
                         // 给玩家增加金币
                         Global.Coin.Value += coinBalls[0].GetCoin();
                     }
+                    // 获取血瓶的组件
+                    var HPBottles = other.GetComponentsInParent<HPBottle>();
+                    if (HPBottles != null && HPBottles.Length > 0)
+                    {
+                        // 给玩家增加血量
+                        Global.Health.Value += HPBottles[0].GetHPBottle();
+                    }
                 }
 
 

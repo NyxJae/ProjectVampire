@@ -53,10 +53,10 @@ namespace ProjectVampire
 
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
             // 血量显示
-            Player.Instance.Health.RegisterWithInitValue(newValue =>
+            Global.Health.RegisterWithInitValue(newValue =>
             {
                 // 显示血量
-                TextHP.text = "血量:" + newValue.ToString();
+                TextHP.text = $"血量:{newValue}/{Global.MaxHealth.Value}";
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
 
 

@@ -42,6 +42,22 @@ namespace ProjectVampire
                 PlayerPrefs.SetFloat("DropCoinRate", mDropCoinRate);
             }
         }
+        // 私有的 血瓶掉落几率 属性
+        [SerializeField]
+        private float mDropHealthRate = 0.1f;
+        /// <summary>
+        /// 公开的 血瓶掉落几率 属性
+        /// </summary>
+        public float DropHealthRate
+        {
+            get { return mDropHealthRate; }
+            set
+            {
+                mDropHealthRate = value;
+                // 存储血瓶掉落几率
+                PlayerPrefs.SetFloat("DropHealthRate", mDropHealthRate);
+            }
+        }
 
         public void OnSingletonInit()
         {
@@ -88,6 +104,16 @@ namespace ProjectVampire
             {
                 // 实例化金币
                 CoinBall.InstantiateWithParent(transform).Position(gameObject.transform.position + offset).Show();
+            }
+            // 随机生成坐标偏移量
+            offset = new Vector3(Random.Range(-0.5f, 0.5f), 0, Random.Range(-0.5f, 0.5f));
+            // 随机数
+            random = Random.Range(0f, 1f);
+            // 如果随机数小于掉落血瓶几率
+            if (random < mDropHealthRate)
+            {
+                // 实例化血瓶
+                HPBottle.InstantiateWithParent(transform).Position(gameObject.transform.position + offset).Show();
             }
         }
     }

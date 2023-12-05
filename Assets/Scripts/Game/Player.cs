@@ -20,19 +20,6 @@ namespace ProjectVampire
         private Vector2 mMoveInput = Vector2.zero;
 
         /// <summary>
-        /// 公开的 初始血量 属性
-        /// </summary>
-        [SerializeField]
-        private int mHealth = 100;
-
-
-        /// <summary>
-        /// 私有的 血量 属性
-        /// </summary>
-        public BindableProperty<int> Health = new BindableProperty<int>(100);
-
-
-        /// <summary>
         /// 私有的 被击扣血值 属性
         /// </summary>
         private int mDamage = 1;
@@ -59,11 +46,9 @@ namespace ProjectVampire
         private void Start()
         {
             // 给HurtBox被触碰时, 触发的事件添加回调函数(受伤),并设置自动销毁
-            HurtBox.OnTriggerEnter2DEvent(Collider2D => Health.Value -= mDamage).UnRegisterWhenGameObjectDestroyed(gameObject);
-            // 血量初始化
-            Health.Value = mHealth;
+            HurtBox.OnTriggerEnter2DEvent(Collider2D => Global.Health.Value -= mDamage).UnRegisterWhenGameObjectDestroyed(gameObject);
             // 给血量增加事件添加死亡回调函数
-            Health.Register(newValue =>
+            Global.Health.Register(newValue =>
             {
                 if (newValue <= 0)
                 {

@@ -66,9 +66,6 @@ namespace ProjectVampire
             set { mAttack = value; }
         }
 
-        //攻击状态 控制变量
-        private bool canAttack = false; // 默认情况下可以攻击
-
 
         void Start()
         {
@@ -76,21 +73,29 @@ namespace ProjectVampire
             UpdateAttackTriggerSize();
             AttackRange.OnTriggerStay2DEvent(Other =>
             {
-                // 如果可以攻击
-                if (canAttack)
+                // 如果计时器大于攻击间隔
+                if (mTimer >= mAttackRate)
                 {
                     // 确认碰撞的对象的父对象或自身有Enemy标签
-                    if (Other.gameObject.CompareTag("Enemy") || Other.transform.parent.CompareTag("Enemy"))
+                    if (Other.gameObject.CompareTag("Enemy"))
                     {
                         // 使用GetComponentInParent来获取父对象上的Enemy组件
                         var enemy = Other.GetComponentInParent<Enemy>();
                         // 如果敌人组件不为空
                         if (enemy != null)
                         {
+                            // 播放攻击音效
+                            AudioKit.PlaySound("Hit");
                             // 对敌人造成伤害
                             enemy.TakeDamage(mAttack);
+                            // 延时重置计时器
+                            ActionKit.Sequence()
+                                .DelayFrame(1)
+                                .Callback(() => mTimer = 0f)
+                                .Start(this);
                         }
                     }
+                    
                 }
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
         }
@@ -99,20 +104,6 @@ namespace ProjectVampire
         {
             // 计时器逐帧增加
             mTimer += Time.deltaTime;
-            // 如果计时器大于攻击间隔
-            if (mTimer > mAttackRate)
-            {
-                // 可以攻击
-                canAttack = true;
-                // 延时2帧,计时器归零
-                ActionKit.DelayFrame(2, () =>
-                {
-                    mTimer = 0f;
-                    canAttack = false;
-                }).Start(this);
-            }
         }
-
-
     }
 }
