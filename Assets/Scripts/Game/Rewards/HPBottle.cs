@@ -9,24 +9,33 @@ namespace ProjectVampire
 		[SerializeField]
 		private int mRecoverHP = 25;
 		
-		// 公开的 获取血瓶 方法
-		public int GetHPBottle()
+		private void Start()
 		{
-			ActionKit.Sequence()
-				.Callback(() =>
+			HitBox.OnTriggerStay2DEvent(other =>
+			{
+				// 如果碰撞器的父物体的名字为PickAbility
+				if (other.transform.parent.name == "PickAbility")
 				{
-					// 飞向玩家
-					transform.position = Vector3.MoveTowards(transform.position, Player.Instance.transform.position, 5f * Time.deltaTime);
-					// 播放音效
-					//AudioKit.PlaySound("Exp");
-				})
-				.Callback(() =>
-				{
-					// 销毁自身
-					Destroy(gameObject);
-				}).Start(this);
-			// 返回经验值
-			return mRecoverHP;
+					// 获取血瓶方法
+					GetHPBottle();
+				}
+				
+			}).UnRegisterWhenGameObjectDestroyed(this);
+		}
+		
+		
+		// 公开的 获取血瓶 方法
+		public void GetHPBottle()
+		{
+			// 销毁自身
+			Destroy(gameObject);
+			Global.Health.Value += mRecoverHP;
+			// 如果血量大于最大血量
+			if (Global.Health.Value > Global.MaxHealth.Value)
+			{
+				// 血量等于最大血量
+				Global.Health.Value = Global.MaxHealth.Value;
+			}
 		}
 	}
 }

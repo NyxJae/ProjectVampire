@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6150436529922575135}
   m_Layer: 0
   m_Name: HitBox
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,7 +93,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 135584629486683125}
-  - component: {fileID: 5515624286060743013}
   - component: {fileID: 4807786136300749142}
   m_Layer: 0
   m_Name: Enemy
@@ -119,21 +118,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5515624286060743013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1651630702174578907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 411e729afed24c62a04e2b99d9122e78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Binds:
-  - MemberName: ExpBall
-    Object: {fileID: 7454236565741822591, guid: bab809f83b3d9e448beb971b3980ab4b, type: 3}
 --- !u!114 &4807786136300749142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,10 +138,9 @@ MonoBehaviour:
   ArchitectureFullTypeName: 
   mSpeed: 1
   mDropExpRate: 0.5
-  Health: 5
+  Health: 1
   Sprite: {fileID: 497411548816826208}
   HitBox: {fileID: 1044044663226219858}
-  ExpBall: {fileID: 7454236565741822591, guid: bab809f83b3d9e448beb971b3980ab4b, type: 3}
 --- !u!1 &6138813683597813547
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,7 +154,7 @@ GameObject:
   - component: {fileID: 5363573079090591162}
   m_Layer: 0
   m_Name: Sprite
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

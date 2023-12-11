@@ -5,31 +5,29 @@ namespace ProjectVampire
 {
     public partial class CoinBall : ViewController
     {
-        void Start()
+        private void Start()
         {
-            // Code Here
+            HitBox.OnTriggerStay2DEvent(other =>
+            {
+                // 如果碰撞器的父物体的名字为PickAbility
+                if (other.transform.parent.name == "PickAbility")
+                {
+                    // 获取 金币 方法
+                    GetCoin();
+                }
+				
+            }).UnRegisterWhenGameObjectDestroyed(this);
         }
         /// <summary>
         /// 公开 获取金币 方法
         /// </summary>
         /// <returns></returns>
-        public int GetCoin()
-        {
-            ActionKit.Sequence()
-                .Callback(() =>
-                {
-                    // 飞向玩家
-                    transform.position = Vector3.MoveTowards(transform.position, Player.Instance.transform.position, 5f * Time.deltaTime);
-                    // 播放音效
-                    AudioKit.PlaySound("Coin");
-                })
-                .Callback(() =>
-                {
-                    // 销毁自身
-                    Destroy(gameObject);
-                }).Start(this);
-            // 返回经验值
-            return 1;
+        public void GetCoin()
+        { 
+            // 播放音效
+            AudioKit.PlaySound("Coin");
+            Destroy(gameObject);
+            Global.Coin.Value += 1;
         }
 
     }

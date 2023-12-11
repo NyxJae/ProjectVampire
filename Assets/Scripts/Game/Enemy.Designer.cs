@@ -1,4 +1,4 @@
-// Generate Id:b66e52cf-9728-46f4-94c7-30b68ae22718
+// Generate Id:57078a17-ca5e-4132-a963-7ffdd80adcc6
 using UnityEngine;
 
 namespace ProjectVampire
@@ -9,8 +9,6 @@ namespace ProjectVampire
 		public SpriteRenderer Sprite;
 
 		public CircleCollider2D HitBox;
-
-		public UnityEngine.GameObject ExpBall;
 
 	}
 }

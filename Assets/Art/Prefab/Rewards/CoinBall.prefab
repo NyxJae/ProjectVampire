@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7846609727938532116}
   - component: {fileID: -1469752189719913375}
+  - component: {fileID: 4793708342144211524}
   m_Layer: 0
   m_Name: CoinBall
   m_TagString: RewardBall
@@ -48,12 +49,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Namespace: ProjectVampire
   ScriptName: CoinBall
-  ScriptsFolder: Assets/Scripts/Game
+  ScriptsFolder: Assets/Scripts/Game/Rewards
   GeneratePrefab: 1
-  PrefabFolder: Assets/Art/Prefab
+  PrefabFolder: Assets/Art/Prefab/Rewards
   ArchitectureFullTypeName: 
   Sprite: {fileID: 2487213068860192920}
   HitBox: {fileID: 3057687481663314175}
+--- !u!114 &4793708342144211524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7454236565741822591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarkType: 0
+  CustomComponentName: CoinBall
+  CustomComment: "\u91D1\u5E01"
+  mComponentName: UnityEngine.Transform
 --- !u!1 &7932392617877984202
 GameObject:
   m_ObjectHideFlags: 0
@@ -67,7 +84,7 @@ GameObject:
   - component: {fileID: 1779521383526347808}
   m_Layer: 0
   m_Name: Sprite
-  m_TagString: RewardBall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -168,7 +185,7 @@ GameObject:
   - component: {fileID: 6282656359829641263}
   m_Layer: 0
   m_Name: HitBox
-  m_TagString: RewardBall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

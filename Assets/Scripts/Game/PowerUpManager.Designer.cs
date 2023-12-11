@@ -1,4 +1,4 @@
-// Generate Id:1f70ea44-3feb-4ec0-b441-0a0487828afa
+// Generate Id:eb4f5b1c-dac4-4c22-bbba-2e4b60d2ad7a
 using UnityEngine;
 
 namespace ProjectVampire
@@ -6,11 +6,30 @@ namespace ProjectVampire
 	public partial class PowerUpManager
 	{
 
-		public UnityEngine.GameObject HPBottle;
+		/// <summary>
+		/// 炸弹
+		/// </summary>
+		public UnityEngine.Transform Bomb;
 
-		public UnityEngine.GameObject ExpBall;
+		/// <summary>
+		/// 经验球
+		/// </summary>
+		public UnityEngine.Transform ExpBall;
 
-		public UnityEngine.GameObject CoinBall;
+		/// <summary>
+		/// 血瓶
+		/// </summary>
+		public UnityEngine.Transform HPBottle;
+
+		/// <summary>
+		/// 吸经验石
+		/// </summary>
+		public UnityEngine.Transform Magnet;
+
+		/// <summary>
+		/// 金币
+		/// </summary>
+		public UnityEngine.Transform CoinBall;
 
 	}
 }

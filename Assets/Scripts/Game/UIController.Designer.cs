@@ -1,4 +1,4 @@
-// Generate Id:d3f32ddf-222f-498e-a557-ab3645e85e10
+// Generate Id:41431bfe-2da5-4e34-b2a2-9988372f64a5
 using UnityEngine;
 
 namespace ProjectVampire

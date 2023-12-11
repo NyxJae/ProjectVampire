@@ -1,12 +1,10 @@
-// Generate Id:0de839fc-9217-4ab8-8d8b-bc110a770230
+// Generate Id:3935cdd4-57bd-43a8-8434-b35eb0ba2a20
 using UnityEngine;
 
 namespace ProjectVampire
 {
 	public partial class EnemyGenerater
 	{
-
-		public UnityEngine.GameObject Enemy;
 
 	}
 }

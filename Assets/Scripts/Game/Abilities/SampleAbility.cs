@@ -76,8 +76,8 @@ namespace ProjectVampire
                 // 如果计时器大于攻击间隔
                 if (mTimer >= mAttackRate)
                 {
-                    // 确认碰撞的对象的父对象或自身有Enemy标签
-                    if (Other.gameObject.CompareTag("Enemy"))
+                    // 确认碰撞的对象的父对象是否有Enemy标签
+                    if (Other.transform.parent != null && Other.transform.parent.tag == "Enemy")
                     {
                         // 使用GetComponentInParent来获取父对象上的Enemy组件
                         var enemy = Other.GetComponentInParent<Enemy>();

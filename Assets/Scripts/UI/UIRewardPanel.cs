@@ -45,7 +45,7 @@ namespace ProjectVampire
 					// 消耗金币
 					Global.Coin.Value -= mCoinUp;
 					// 提升金币掉落几率
-					PowerUpManager.Instance.DropCoinRate += 0.05f;
+					Global.DropCoinRate.Value += 0.05f;
 				}
 			});
 			// 注册 BtnExpUp 的点击事件
@@ -58,7 +58,7 @@ namespace ProjectVampire
 					// 消耗金币
 					Global.Coin.Value -= mCoinUp;
 					// 提升经验掉落几率
-					PowerUpManager.Instance.DropExpRate += 0.05f;
+					Global.DropExpRate.Value += 0.05f;
 				}
 			});
 		}

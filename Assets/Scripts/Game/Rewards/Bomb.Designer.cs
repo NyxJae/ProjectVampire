@@ -1,9 +1,9 @@
-// Generate Id:c0e6fac5-c7b8-477b-90ad-9ad511dd34dc
+// Generate Id:a728626d-4d0f-43bd-8a93-ae24800f9dab
 using UnityEngine;
 
 namespace ProjectVampire
 {
-	public partial class ExpBall
+	public partial class Bomb
 	{
 
 		public SpriteRenderer Sprite;

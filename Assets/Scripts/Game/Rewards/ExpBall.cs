@@ -10,27 +10,34 @@ namespace ProjectVampire
         /// </summary>
         private int mExp = 1;
 
+        
+        private void Start()
+        {
+            HitBox.OnTriggerStay2DEvent(other =>
+            {
+                // 如果碰撞器的父物体的名字为PickAbility
+                if (other.transform.parent.name == "PickAbility")
+                {
+                    // 获取 经验值 方法
+                    GetExp();
+                }
+				
+            }).UnRegisterWhenGameObjectDestroyed(this);
+        }
+        
+        
         /// <summary>
         /// 公开 获取经验值 方法
         /// </summary>
         /// <returns></returns>
-        public int GetExp()
+        public void GetExp()
         {
-            ActionKit.Sequence()
-                .Callback(() =>
-                {
-                    // 飞向玩家
-                    transform.position = Vector3.MoveTowards(transform.position, Player.Instance.transform.position, 5f * Time.deltaTime);
-                    // 播放音效
-                    AudioKit.PlaySound("Exp");
-                })
-                .Callback(() =>
-                {
-                    // 销毁自身
-                    Destroy(gameObject);
-                }).Start(this);
-            // 返回经验值
-            return mExp;
+            // 播放音效
+            AudioKit.PlaySound("Exp");
+            // 销毁自己
+            Destroy(gameObject);
+            // 获取经验值
+            Global.Exp.Value += mExp;
         }
 
 

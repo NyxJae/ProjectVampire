@@ -25,6 +25,10 @@ namespace ProjectVampire
         public static BindableProperty<float> DropExpRate = new BindableProperty<float>(0.5f);
         // 公开的 血瓶掉落几率 属性
         public static BindableProperty<float> DropHPBottleRate = new BindableProperty<float>(0.1f);
+        // 公开的 炸弹掉落几率 属性
+        public static BindableProperty<float> DropBombRate = new BindableProperty<float>(0.1f);
+        // 公开的 吸铁石掉落几率 属性
+        public static BindableProperty<float> DropMagnetRate = new BindableProperty<float>(0.1f);
         // 定义 常量 场景名称 为 数字
         public const int BeginScene = 0;
         public const int GameScene = 1;
@@ -117,6 +121,35 @@ namespace ProjectVampire
             {
                 PlayerPrefs.SetFloat("DropHPBottleRate", newValue);
             });
+            // 炸弹掉落几率 存储与读取
+            if (PlayerPrefs.HasKey("DropBombRate"))
+            {
+                DropBombRate.Value = PlayerPrefs.GetFloat("DropBombRate");
+            }
+            else
+            {
+                PlayerPrefs.SetFloat("DropBombRate", 0.1f);
+            }
+            // 注册炸弹掉落几率增加事件,并存储炸弹掉落几率
+            DropBombRate.Register(newValue =>
+            {
+                PlayerPrefs.SetFloat("DropBombRate", newValue);
+            });
+            // 吸铁石掉落几率 存储与读取
+            if (PlayerPrefs.HasKey("DropMagnetRate"))
+            {
+                DropMagnetRate.Value = PlayerPrefs.GetFloat("DropMagnetRate");
+            }
+            else
+            {
+                PlayerPrefs.SetFloat("DropMagnetRate", 0.1f);
+            }
+            // 注册吸铁石掉落几率增加事件,并存储吸铁石掉落几率
+            DropMagnetRate.Register(newValue =>
+            {
+                PlayerPrefs.SetFloat("DropMagnetRate", newValue);
+            });
+            
         }
 
 

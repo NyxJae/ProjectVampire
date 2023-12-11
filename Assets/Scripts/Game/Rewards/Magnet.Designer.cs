@@ -1,9 +1,9 @@
-// Generate Id:c0e6fac5-c7b8-477b-90ad-9ad511dd34dc
+// Generate Id:c0bee97b-0a37-405d-860c-bb7d55584c07
 using UnityEngine;
 
 namespace ProjectVampire
 {
-	public partial class ExpBall
+	public partial class Magnet
 	{
 
 		public SpriteRenderer Sprite;

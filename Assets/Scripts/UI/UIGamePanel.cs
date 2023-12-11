@@ -76,7 +76,7 @@ namespace ProjectVampire
             // 给升级攻击频率按钮增加点击事件
             BtnUpgradeATKRate.onClick.AddListener(() =>
             {
-
+            
                 // 取得玩家实例.以获取技能脚本
                 var sampleAbility = Player.Instance.Abilities.SampleAbility;
                 // sampleAbility 提升攻击力

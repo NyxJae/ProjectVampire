@@ -11,12 +11,8 @@ namespace ProjectVampire
         /// 私有的 移动速度系数 属性 在 Inspector 中显示
         /// </summary>
         [SerializeField]
+        [Tooltip("移动速度系数")]
         private float mSpeed = 3.0f;
-
-        /// <summary>
-        /// 私有的 移动速度方向 属性
-        /// </summary>
-        private Vector2 mMoveInput = Vector2.zero;
 
         /// <summary>
         /// 私有的 player 角色
@@ -27,11 +23,13 @@ namespace ProjectVampire
         /// 私有的 掉落经验几率 属性
         /// </summary>
         [SerializeField]
+        [Tooltip("掉落经验几率")]
         private float mDropExpRate = 0.5f;
 
 
         // 公开的 血量 属性
         [SerializeField]
+        [Tooltip("血量")]
         public int Health = 3;
 
         private void Start()
@@ -50,8 +48,6 @@ namespace ProjectVampire
             }
             // 追逐 player
             ChasingPlayrt();
-            // 检测血量
-            CheckHealth();
 
         }
 
@@ -87,16 +83,10 @@ namespace ProjectVampire
             // 如果血量小于等于 0
             if (Health <= 0)
             {
+                // 掉落奖励
+                PowerUpManager.Instance.DroReward(gameObject);
                 // 销毁自身
                 this.DestroyGameObjGracefully();
-                // 随机数
-                var random = Random.Range(0f, 1f);
-                // 如果随机数小于等于掉落经验几率
-                if (random <= mDropExpRate)
-                {
-                    // 经验球生成
-                    PowerUpManager.Instance.DroReward(gameObject);
-                }
             }
         }
 
@@ -110,6 +100,7 @@ namespace ProjectVampire
             Sprite.color = Color.red; // 改变颜色为红色
             Health -= damage; // 减少生命值
             ActionKit.Delay(changeDuration, () => Sprite.color = Color.white).Start(this);// 延时后恢复颜色
+            CheckHealth();
         }
     }
 }

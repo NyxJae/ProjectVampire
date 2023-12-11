@@ -1,4 +1,4 @@
-// Generate Id:5f06e61b-0713-4b99-8368-1cbf89bdf54d
+// Generate Id:f4b6a99f-8d81-4a1c-a393-419fbeed76ea
 using UnityEngine;
 
 namespace ProjectVampire
@@ -8,7 +8,7 @@ namespace ProjectVampire
 
 		public ProjectVampire.SampleAbility SampleAbility;
 
-		public CircleCollider2D PickRange;
+		public ProjectVampire.PickAbility PickAbility;
 
 	}
 }
