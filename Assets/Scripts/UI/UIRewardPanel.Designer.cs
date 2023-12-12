@@ -5,7 +5,7 @@ using QFramework;
 
 namespace ProjectVampire
 {
-	// Generate Id:f3742f46-6447-48e0-a00f-07bc70eab846
+	// Generate Id:8989b624-1c0c-4ea2-9423-b52c9c13b157
 	public partial class UIRewardPanel
 	{
 		public const string Name = "UIRewardPanel";
@@ -14,6 +14,8 @@ namespace ProjectVampire
 		public UnityEngine.UI.Button BtnCoinUp;
 		[SerializeField]
 		public UnityEngine.UI.Button BtnExpUp;
+		[SerializeField]
+		public UnityEngine.UI.Button BtnMaxHPUp;
 		[SerializeField]
 		public UnityEngine.UI.Button BtnClose;
 		[SerializeField]
@@ -25,6 +27,7 @@ namespace ProjectVampire
 		{
 			BtnCoinUp = null;
 			BtnExpUp = null;
+			BtnMaxHPUp = null;
 			BtnClose = null;
 			TextCoin = null;
 			

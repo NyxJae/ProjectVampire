@@ -1,59 +1,41 @@
-using UnityEngine;
 using QFramework;
-using Unity.VisualScripting;
-
+using UnityEngine;
 
 namespace ProjectVampire
 {
     public partial class Enemy : ViewController
     {
         /// <summary>
-        /// 私有的 移动速度系数 属性 在 Inspector 中显示
+        ///     私有的 移动速度系数 属性 在 Inspector 中显示
         /// </summary>
-        [SerializeField]
-        [Tooltip("移动速度系数")]
-        private float mSpeed = 3.0f;
-
-        /// <summary>
-        /// 私有的 player 角色
-        /// </summary>
-        private GameObject player = null;
-
-        /// <summary>
-        /// 私有的 掉落经验几率 属性
-        /// </summary>
-        [SerializeField]
-        [Tooltip("掉落经验几率")]
-        private float mDropExpRate = 0.5f;
+        [SerializeField] [Tooltip("移动速度系数")] private float mSpeed = 3.0f;
 
 
         // 公开的 血量 属性
-        [SerializeField]
-        [Tooltip("血量")]
-        public int Health = 3;
+        [SerializeField] [Tooltip("血量")] public int Health = 3;
+
+        /// <summary>
+        ///     私有的 player 角色
+        /// </summary>
+        private GameObject player;
 
         private void Start()
         {
             // 获取 player 角色
             player = Player.Instance.gameObject;
-
         }
 
         private void Update()
         {
             // 如果 player 为空,则返回
-            if (player == null)
-            {
-                return;
-            }
+            if (player == null) return;
             // 追逐 player
             ChasingPlayrt();
-
         }
 
 
         /// <summary>
-        /// 追逐 player
+        ///     追逐 player
         /// </summary>
         private void ChasingPlayrt()
         {
@@ -76,7 +58,7 @@ namespace ProjectVampire
         }
 
         /// <summary>
-        /// 检测血量
+        ///     检测血量
         /// </summary>
         private void CheckHealth()
         {
@@ -91,7 +73,7 @@ namespace ProjectVampire
         }
 
         /// <summary>
-        /// 受伤处理，改变颜色并减少生命值。
+        ///     受伤处理，改变颜色并减少生命值。
         /// </summary>
         /// <param name="damage">受到的伤害值。</param>
         /// <param name="changeDuration">颜色改变持续的时间。</param>
@@ -99,7 +81,7 @@ namespace ProjectVampire
         {
             Sprite.color = Color.red; // 改变颜色为红色
             Health -= damage; // 减少生命值
-            ActionKit.Delay(changeDuration, () => Sprite.color = Color.white).Start(this);// 延时后恢复颜色
+            ActionKit.Delay(changeDuration, () => Sprite.color = Color.white).Start(this); // 延时后恢复颜色
             CheckHealth();
         }
     }

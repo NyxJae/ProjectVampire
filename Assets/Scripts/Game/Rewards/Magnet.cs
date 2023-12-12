@@ -19,12 +19,12 @@ namespace ProjectVampire
         // 公开的 获取磁铁的方法
         public void GetMagnet()
         {
+            // 播放音效
+            AudioKit.PlaySound("GetAllExp");
             // 获取所有奖励物
             var rewards = GameObject.FindGameObjectsWithTag("RewardBall");
             // 遍历所有奖励物
             foreach (var reward in rewards)
-            {
-                Debug.Log($"名字是{reward.name}");
                 // 如果奖励物的名字为ExpBall
                 if (reward.name.Contains("ExpBall"))
                     // 注册经验球的移动方法
@@ -36,7 +36,6 @@ namespace ProjectVampire
                         reward.transform.position = Vector3.MoveTowards(reward.transform.position,
                             Player.Instance.transform.position, distance * Time.deltaTime);
                     }).UnRegisterWhenGameObjectDestroyed(reward);
-            }
 
             // 销毁自身
             Destroy(gameObject);
