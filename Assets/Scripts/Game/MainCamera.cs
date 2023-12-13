@@ -6,20 +6,50 @@ namespace ProjectVampire
     // MainCamera 类，用于处理摄像机跟随玩家的逻辑
     public partial class MainCamera : ViewController, ISingleton
     {
-        [SerializeField] private Transform mPlayer; // 玩家的 Transform 组件
-        [SerializeField] private float smoothTime = 0.3f; // 平滑移动时间
-        private readonly float initialShakeMagnitude = 0.7f; // 初始震动幅度
+        /// <summary>
+        ///     玩家的 Transform 组件。
+        /// </summary>
+        [SerializeField] private Transform mPlayer;
 
-        // 震动持续时间和初始强度
-        private readonly float shakeDuration = 0.5f; // 震动持续时间，单位秒
+        /// <summary>
+        ///     平滑移动时间。
+        /// </summary>
+        [SerializeField] private float smoothTime = 0.3f;
 
+        /// <summary>
+        ///     初始震动幅度。
+        /// </summary>
+        private readonly float initialShakeMagnitude = 0.7f;
+
+        /// <summary>
+        ///     震动持续时间，单位秒。
+        /// </summary>
+        private readonly float shakeDuration = 0.5f;
+
+        /// <summary>
+        ///     表示是否正在震动的标志。
+        /// </summary>
         private bool isShaking;
-        private Vector3 mCameraOffset; // 摄像机与玩家的偏移量
 
-        private Vector3 mVelocity = Vector3.zero; // 用于平滑移动的速度变量
+        /// <summary>
+        ///     摄像机与玩家的偏移量。
+        /// </summary>
+        private Vector3 mCameraOffset;
+
+        /// <summary>
+        ///     用于平滑移动的速度变量。
+        /// </summary>
+        private Vector3 mVelocity = Vector3.zero;
+
+        /// <summary>
+        ///     震动计时器。
+        /// </summary>
         private float shakeTimer;
 
-        // 摄像机实例
+
+        /// <summary>
+        ///     摄像机实例
+        /// </summary>
         public static MainCamera Instance => MonoSingletonProperty<MainCamera>.Instance;
 
         // Start 方法初始化玩家位置和摄像机偏移量
@@ -43,7 +73,10 @@ namespace ProjectVampire
         {
         }
 
-        // 公共方法 Shake，触发摄像机震动效果
+
+        /// <summary>
+        ///     公共方法 Shake，触发摄像机震动效果
+        /// </summary>
         public void Shake()
         {
             isShaking = true;

@@ -81,6 +81,8 @@ namespace ProjectVampire
         {
             Sprite.color = Color.red; // 改变颜色为红色
             Health -= damage; // 减少生命值
+            // 显示浮动文字
+            FloatingText.Instance.play(damage.ToString(), transform.position);
             ActionKit.Delay(changeDuration, () => Sprite.color = Color.white).Start(this); // 延时后恢复颜色
             CheckHealth();
         }
