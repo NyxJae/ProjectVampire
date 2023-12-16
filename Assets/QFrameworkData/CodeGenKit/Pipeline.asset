@@ -23,11 +23,11 @@ MonoBehaviour:
       PathToRoot: Text
       MemberName: Text
     ScriptsFolder: Assets/Scripts/Game
-    ClassName: FloatingText
+    ClassName: BtnUpgradePrefab
     Namespace: ProjectVampire
     MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace ProjectVampire\r\n{\r\n\tpublic
-      partial class FloatingText : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
+      partial class BtnUpgradePrefab : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:d19c02e1-8c21-475a-bfd4-8a4b6f8d2184\r\nusing UnityEngine;\r\n\r\nnamespace
-      ProjectVampire\r\n{\r\n\tpublic partial class FloatingText\r\n\t{\r\n\r\n\t\tpublic
+    DesignerCode: "// Generate Id:bd3b5c8f-1017-4ad0-bdd8-bd5c1ae89c37\r\nusing UnityEngine;\r\n\r\nnamespace
+      ProjectVampire\r\n{\r\n\tpublic partial class BtnUpgradePrefab\r\n\t{\r\n\r\n\t\tpublic
       TMPro.TextMeshProUGUI Text;\r\n\r\n\t}\r\n}\r\n"

@@ -89,6 +89,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7761781191218647436}
   - component: {fileID: 7387940856617516651}
+  - component: {fileID: 261038090003116964}
   m_Layer: 0
   m_Name: GroupBtns
   m_TagString: Untagged
@@ -143,6 +144,22 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &261038090003116964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1085100551437302298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarkType: 0
+  CustomComponentName: GroupBtns
+  CustomComment: 
+  mComponentName: RectTransform
 --- !u!1 &1555097400531055077
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,7 +598,7 @@ GameObject:
   - component: {fileID: 7515585436821833996}
   - component: {fileID: 5591578978683427049}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -635,7 +652,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u91D1\u5E01\u6389\u843D\u51E0\u7387\u63D0\u5347.\u8D39\u7528:5\u91D1\u5E01"
+  m_text: "\u80FD\u529B\u63D0\u5347|\u8D39\u7528:5\u91D1\u5E01"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ea30ea79bee769748abf9deeca5e70b6, type: 2}
   m_sharedMaterial: {fileID: -6113064289374512538, guid: ea30ea79bee769748abf9deeca5e70b6, type: 2}
@@ -894,6 +911,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCoinUp: 5
+  GroupBtns: {fileID: 7761781191218647436}
   BtnUpgradePrefab: {fileID: 614021068159569195}
   BtnClose: {fileID: 1028998121371844818}
   TextCoin: {fileID: 8934938250885612839}

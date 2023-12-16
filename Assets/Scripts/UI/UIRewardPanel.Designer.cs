@@ -5,11 +5,13 @@ using QFramework;
 
 namespace ProjectVampire
 {
-	// Generate Id:1d83804e-76ba-48a1-8cd5-6d5c33405725
+	// Generate Id:ee36792b-d364-4370-ab2e-6bd8dd754384
 	public partial class UIRewardPanel
 	{
 		public const string Name = "UIRewardPanel";
 		
+		[SerializeField]
+		public RectTransform GroupBtns;
 		[SerializeField]
 		public UnityEngine.UI.Button BtnUpgradePrefab;
 		[SerializeField]
@@ -21,6 +23,7 @@ namespace ProjectVampire
 		
 		protected override void ClearUIComponents()
 		{
+			GroupBtns = null;
 			BtnUpgradePrefab = null;
 			BtnClose = null;
 			TextCoin = null;
