@@ -1,3 +1,4 @@
+using ProjectVampire.System;
 using QFramework;
 using UnityEngine;
 
@@ -7,14 +8,20 @@ namespace ProjectVampire
     {
     }
 
-    public partial class UIRewardPanel : UIPanel
+    public partial class UIRewardPanel : UIPanel, IController
     {
         // 私有的 升级所需金币数量
         [SerializeField] private int mCoinUp = 5;
 
+        public IArchitecture GetArchitecture()
+        {
+            return Global.Interface;
+        }
+
         protected override void OnInit(IUIData uiData = null)
         {
             mData = uiData as UIRewardPanelData ?? new UIRewardPanelData();
+            this.GetSystem<CoinUpgradeSystem>();
         }
 
         protected override void OnOpen(IUIData uiData = null)
@@ -31,45 +38,6 @@ namespace ProjectVampire
                 UIKit.ClosePanel<UIRewardPanel>();
                 // 打开 Begin 界面
                 UIKit.OpenPanel<UIBeginPanel>();
-            });
-            // 注册 BtnCoinUp 的点击事件
-            BtnCoinUp.onClick.AddListener(() =>
-            {
-                // 花金币,提升金币掉落几率
-                // 如果金币够
-                if (Global.Coin.Value >= mCoinUp)
-                {
-                    // 消耗金币
-                    Global.Coin.Value -= mCoinUp;
-                    // 提升金币掉落几率
-                    Global.DropCoinRate.Value += 0.05f;
-                }
-            });
-            // 注册 BtnExpUp 的点击事件
-            BtnExpUp.onClick.AddListener(() =>
-            {
-                // 花金币,提升经验掉落几率
-                // 如果金币够
-                if (Global.Coin.Value >= mCoinUp)
-                {
-                    // 消耗金币
-                    Global.Coin.Value -= mCoinUp;
-                    // 提升经验掉落几率
-                    Global.DropExpRate.Value += 0.05f;
-                }
-            });
-            // 注册 BtnMaxHPUp 的点击事件
-            BtnMaxHPUp.onClick.AddListener(() =>
-            {
-                // 花金币,提升最大血量
-                // 如果金币够
-                if (Global.Coin.Value >= mCoinUp)
-                {
-                    // 消耗金币
-                    Global.Coin.Value -= mCoinUp;
-                    // 提升最大血量
-                    Global.MaxHealth.Value += 5;
-                }
             });
         }
 

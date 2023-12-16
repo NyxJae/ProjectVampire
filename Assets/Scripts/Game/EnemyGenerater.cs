@@ -1,52 +1,44 @@
-using UnityEngine;
+using System;
 using QFramework;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace ProjectVampire
 {
-    public partial class EnemyWaveGenerator : ViewController
+    public class EnemyWaveGenerator : ViewController
     {
-        // 每个波次的配置
-        [System.Serializable]
-        public class WaveConfig
-        {
-            [Tooltip("敌人预制体")]
-            public GameObject enemyPrefab; // 敌人预制体
-            [Tooltip("持续时间")]
-            public float duration;         // 每个波次的持续时间
-            [Tooltip("生成间隔时间")]
-            public float spawnInterval;    // 每个波次的敌人生成间隔时间
-        }
+        [Tooltip("敌人生成最小距离")] public float minSpawnDistance; // 敌人生成的最小距离
 
-        [Tooltip("敌人生成最小距离")]
-        public float minSpawnDistance; // 敌人生成的最小距离
-        [Tooltip("敌人生成最大距离")]
-        public float maxSpawnDistance; // 敌人生成的最大距离
-        [SerializeField]
-        [Tooltip("波次配置列表")]
-        private WaveConfig[] waveConfigs; // 波次配置数组
+        [Tooltip("敌人生成最大距离")] public float maxSpawnDistance; // 敌人生成的最大距离
+
+        [SerializeField] [Tooltip("波次配置列表")] private WaveConfig[] waveConfigs; // 波次配置数组
 
         /// <summary>
-        /// 当前波次的索引
+        ///     当前波次的索引
         /// </summary>
-        private int currentWaveIndex = 0;
+        private int currentWaveIndex;
+
         /// <summary>
-        /// 波次的计时器
-        /// </summary>
-        private float waveTimer = 0f;
-        /// <summary>
-        /// 敌人生成的计时器
-        /// </summary>
-        private float spawnTimer = 0f;
-        /// <summary>
-        /// 玩家角色
-        /// </summary>
-        private GameObject player;
-        /// <summary>
-        /// 标志位，表示winPanel是否已被打开
+        ///     标志位，表示winPanel是否已被打开
         /// </summary>
         private bool isWinPanelOpened;
 
-        void Start()
+        /// <summary>
+        ///     玩家角色
+        /// </summary>
+        private GameObject player;
+
+        /// <summary>
+        ///     敌人生成的计时器
+        /// </summary>
+        private float spawnTimer;
+
+        /// <summary>
+        ///     波次的计时器
+        /// </summary>
+        private float waveTimer;
+
+        private void Start()
         {
             // 获取玩家角色实例
             player = Player.Instance.gameObject;
@@ -56,11 +48,8 @@ namespace ProjectVampire
         {
             // 如果还有未完成的波次
             if (currentWaveIndex < waveConfigs.Length)
-            {
                 UpdateWave();
-            }
             else if (!AreEnemiesAlive())
-            {
                 if (!isWinPanelOpened) // 检查winPanel是否已经被打开
                 {
                     // 播放胜利音效
@@ -71,11 +60,10 @@ namespace ProjectVampire
                     Time.timeScale = 0f;
                     isWinPanelOpened = true; // 设置标志位，表示winPanel已被打开
                 }
-            }
         }
 
         /// <summary>
-        /// 更新波次
+        ///     更新波次
         /// </summary>
         private void UpdateWave()
         {
@@ -109,7 +97,7 @@ namespace ProjectVampire
         }
 
         /// <summary>
-        /// 生成敌人
+        ///     生成敌人
         /// </summary>
         /// <param name="waveConfig">波次配置</param>
         private void GenerateEnemy(WaveConfig waveConfig)
@@ -130,7 +118,7 @@ namespace ProjectVampire
         }
 
         /// <summary>
-        /// 检测场上是否还有敌人
+        ///     检测场上是否还有敌人
         /// </summary>
         /// <returns> 如果场上还有敌人，返回 true，否则返回 false </returns>
         private bool AreEnemiesAlive()
@@ -139,7 +127,15 @@ namespace ProjectVampire
             return FindObjectsOfType<Enemy>().Length > 0;
         }
 
+        // 每个波次的配置, 用于在Inspector面板中配置
+        [Serializable]
+        public class WaveConfig
+        {
+            [Tooltip("敌人预制体")] public GameObject enemyPrefab; // 敌人预制体
 
+            [Tooltip("持续时间")] public float duration; // 每个波次的持续时间
 
+            [Tooltip("生成间隔时间")] public float spawnInterval; // 每个波次的敌人生成间隔时间
+        }
     }
 }
