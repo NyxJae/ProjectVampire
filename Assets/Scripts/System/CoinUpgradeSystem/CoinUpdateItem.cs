@@ -1,25 +1,37 @@
 ﻿using System;
+using UnityEngine;
 
 namespace ProjectVampire.System
 {
     public class CoinUpdateItem
     {
+        // condition, 用于判断是否可以升级
+        private Func<CoinUpdateItem, bool> mCondition;
+
         // 升级Action
         private Action<CoinUpdateItem> mOnUpgrade;
 
+        // 升级项状态
+        public bool IsUpdated { get; private set; }
+
         // 升级项的key
-        public string Key { get; set; }
+        public string Key { get; private set; }
 
         // 升级项的描述
-        public string Description { get; set; }
+        public string Description { get; private set; }
 
         // 升级项的价格
-        public int Price { get; set; }
+        public int Price { get; private set; }
 
         // 升级方法
         public void Upgrade()
         {
+            // 执行外部设置的升级方法
             mOnUpgrade?.Invoke(this);
+            // 设置升级项状态为已升级
+            IsUpdated = true;
+            // 触发升级事件
+            CoinUpgradeSystem.OnCoinUpgradeSystemChanged.Trigger();
         }
 
         // 链式封装 setkey
@@ -68,6 +80,27 @@ namespace ProjectVampire.System
         {
             Price = price;
             return this;
+        }
+
+        // 链式封装 setcondition
+        public CoinUpdateItem SetCondition(Func<CoinUpdateItem, bool> condition)
+        {
+            mCondition = condition;
+            return this;
+        }
+
+
+        /// <summary>
+        ///     设置升级项的条件
+        /// </summary>
+        /// <returns></returns>
+        public bool ConditionCheck()
+        {
+            // 如果有前置依赖条件, 则判断是否满足依赖条件且未升级
+            if (mCondition != null)
+                return !IsUpdated && mCondition.Invoke(this);
+            // 如果没有前置依赖条件, 则判断是否已经升级
+            return !IsUpdated;
         }
     }
 }

@@ -5,7 +5,7 @@ using QFramework;
 
 namespace ProjectVampire
 {
-	// Generate Id:245fb286-04f1-4a2f-bf1b-3c3a5f2c24fb
+	// Generate Id:29df6fd0-d808-470a-9105-e0edfec3a466
 	public partial class UIBeginPanel
 	{
 		public const string Name = "UIBeginPanel";

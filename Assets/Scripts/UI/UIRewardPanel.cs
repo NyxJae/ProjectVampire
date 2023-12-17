@@ -1,3 +1,4 @@
+using System.Linq;
 using ProjectVampire.System;
 using QFramework;
 using TMPro;
@@ -19,37 +20,58 @@ namespace ProjectVampire
             return Global.Interface;
         }
 
+        // 按钮更新方法
+        private void ReFrashBtn()
+        {
+            // 清除所有的激活状态的升级按钮
+            GroupBtns.DestroyChildrenWithCondition(btn => btn.gameObject.activeSelf);
+            foreach (var coinUpdateItem in this.GetSystem<CoinUpgradeSystem>().CoinUpdateItems
+                         .Where(item => item.ConditionCheck()))
+                // 实例化升级项
+                BtnUpgradePrefab.InstantiateWithParent(GroupBtns)
+                    .Self(self =>
+                    {
+                        // 缓存升级项
+                        var itemCatch = coinUpdateItem;
+                        // 设置按钮的文本(textMeshPro)
+                        self.GetComponentInChildren<TextMeshProUGUI>().text = itemCatch.Description;
+                        // 给按钮添加点击事件
+                        self.onClick.AddListener(() =>
+                        {
+                            itemCatch.Upgrade();
+                            AudioKit.PlaySound("AbilityLevelUp");
+                        });
+                        // 缓存self
+                        var selfCatch = self;
+                        // 给按钮添加金币数量变化事件, 用于判断是否可以升级
+                        Global.Coin.RegisterWithInitValue(coin =>
+                        {
+                            if (coin < itemCatch.Price)
+                                selfCatch.interactable = false;
+                            else
+                                selfCatch.interactable = true;
+                        }).UnRegisterWhenGameObjectDestroyed(selfCatch);
+                    })
+                    .Show();
+        }
+
         protected override void OnInit(IUIData uiData = null)
         {
             mData = uiData as UIRewardPanelData ?? new UIRewardPanelData();
-            // 显示金币数量
-            TextCoin.text = $"金币:{Global.Coin.Value}";
             // 给金币增加事件添加显示回调函数
-            Global.Coin.Register(newValue => { TextCoin.text = $"金币:{newValue}"; })
+            Global.Coin.RegisterWithInitValue(newValue => { TextCoin.text = $"金币:{newValue}"; })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
             // 注册 BtnClose 的点击事件
             BtnClose.onClick.AddListener(() =>
             {
                 // 关闭当前界面
                 UIKit.ClosePanel<UIRewardPanel>();
-                // 打开 Begin 界面
-                UIKit.OpenPanel<UIBeginPanel>();
             });
-            foreach (var coinUpdateItem in this.GetSystem<CoinUpgradeSystem>().CoinUpdateItems)
-            {
-                // 缓存升级项
-                var item = coinUpdateItem;
-                // 实例化升级项
-                var upgradeItem = BtnUpgradePrefab.InstantiateWithParent(GroupBtns)
-                    .Self(self =>
-                    {
-                        // 设置按钮的文本(textMeshPro)
-                        self.GetComponentInChildren<TextMeshProUGUI>().text = item.Description;
-                        // 给按钮添加点击事件
-                        self.onClick.AddListener(() => item.Upgrade());
-                    })
-                    .Show();
-            }
+            // 注册 CoinUpgradeSystem 的变化事件
+            CoinUpgradeSystem.OnCoinUpgradeSystemChanged.Register(() => { ReFrashBtn(); })
+                .UnRegisterWhenGameObjectDestroyed(gameObject);
+            // 更新按钮
+            ReFrashBtn();
         }
 
         protected override void OnOpen(IUIData uiData = null)
