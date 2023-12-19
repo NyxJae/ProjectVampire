@@ -1,18 +1,22 @@
 ﻿using System;
-using UnityEngine;
+using QFramework;
 
-namespace ProjectVampire.System
+namespace ProjectVampire.System.ExpUpgradeSystem
 {
-    public class CoinUpdateItem
+    public class ExpUpgradeItem
     {
+        
         // condition, 用于判断是否可以升级
-        private Func<CoinUpdateItem, bool> mCondition;
+        private Func<ExpUpgradeItem, bool> mCondition;
 
         // 升级Action
-        private Action<CoinUpdateItem> mOnUpgrade;
+        private Action<ExpUpgradeItem> mOnUpgrade;
+
+        // 创建发生更改事件
+        public EasyEvent OnExpUpgradeItemChanged = new();
 
         // 升级项状态
-        public bool IsUpdated { get; private set; }
+        public bool IsUpdated { get; set; }
 
         // 升级项的key
         public string Key { get; private set; }
@@ -32,7 +36,10 @@ namespace ProjectVampire.System
             IsUpdated = true;
             // 触发升级事件
             CoinUpgradeSystem.OnCoinUpgradeSystemChanged.Trigger();
+            // 触发升级项发生更改事件
+            OnExpUpgradeItemChanged.Trigger();
         }
+        
 
         // 链式封装 setkey
         /// <summary>
@@ -40,7 +47,7 @@ namespace ProjectVampire.System
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public CoinUpdateItem SetKey(string key)
+        public ExpUpgradeItem SetKey(string key)
         {
             Key = key;
             return this;
@@ -52,7 +59,7 @@ namespace ProjectVampire.System
         /// </summary>
         /// <param name="description"></param>
         /// <returns></returns>
-        public CoinUpdateItem SetDescription(string description)
+        public ExpUpgradeItem SetDescription(string description)
         {
             Description = description + $"|价格:{Price}金币";
             return this;
@@ -64,7 +71,7 @@ namespace ProjectVampire.System
         /// </summary>
         /// <param name="onUpgrade"></param>
         /// <returns></returns>
-        public CoinUpdateItem SetOnUpgrade(Action<CoinUpdateItem> onUpgrade)
+        public ExpUpgradeItem SetOnUpgrade(Action<ExpUpgradeItem> onUpgrade)
         {
             mOnUpgrade = onUpgrade;
             return this;
@@ -76,14 +83,14 @@ namespace ProjectVampire.System
         /// </summary>
         /// <param name="price"></param>
         /// <returns></returns>
-        public CoinUpdateItem SetPrice(int price)
+        public ExpUpgradeItem SetPrice(int price)
         {
             Price = price;
             return this;
         }
 
         // 链式封装 setcondition
-        public CoinUpdateItem SetCondition(Func<CoinUpdateItem, bool> condition)
+        public ExpUpgradeItem SetCondition(Func<ExpUpgradeItem, bool> condition)
         {
             mCondition = condition;
             return this;
@@ -102,5 +109,6 @@ namespace ProjectVampire.System
             // 如果没有前置依赖条件, 则判断是否已经升级
             return !IsUpdated;
         }
+    
     }
 }

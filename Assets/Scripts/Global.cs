@@ -1,4 +1,3 @@
-using ProjectVampire.System;
 using QFramework;
 using UnityEngine;
 
@@ -117,6 +116,8 @@ namespace ProjectVampire
         protected override void Init()
         {
             RegisterSystem(new CoinUpgradeSystem());
+            RegisterSystem(new SaveSystem());
+            RegisterSystem(new ExpUpgradeSystem());
         }
     }
 }

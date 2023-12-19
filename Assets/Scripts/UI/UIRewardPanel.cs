@@ -1,5 +1,4 @@
 using System.Linq;
-using ProjectVampire.System;
 using QFramework;
 using TMPro;
 using UnityEngine;
@@ -20,13 +19,20 @@ namespace ProjectVampire
             return Global.Interface;
         }
 
-        // 按钮更新方法
-        private void ReFrashBtn()
+        protected override void OnInit(IUIData uiData = null)
         {
-            // 清除所有的激活状态的升级按钮
-            GroupBtns.DestroyChildrenWithCondition(btn => btn.gameObject.activeSelf);
+            mData = uiData as UIRewardPanelData ?? new UIRewardPanelData();
+            // 给金币增加事件添加显示回调函数
+            Global.Coin.RegisterWithInitValue(newValue => { TextCoin.text = $"金币:{newValue}"; })
+                .UnRegisterWhenGameObjectDestroyed(gameObject);
+            // 注册 BtnClose 的点击事件
+            BtnClose.onClick.AddListener(() =>
+            {
+                // 关闭当前界面
+                UIKit.ClosePanel<UIRewardPanel>();
+            });
             foreach (var coinUpdateItem in this.GetSystem<CoinUpgradeSystem>().CoinUpdateItems
-                         .Where(item => item.ConditionCheck()))
+                         .Where(item => item.IsUpdated == false))
                 // 实例化升级项
                 BtnUpgradePrefab.InstantiateWithParent(GroupBtns)
                     .Self(self =>
@@ -51,27 +57,25 @@ namespace ProjectVampire
                             else
                                 selfCatch.interactable = true;
                         }).UnRegisterWhenGameObjectDestroyed(selfCatch);
-                    })
-                    .Show();
-        }
-
-        protected override void OnInit(IUIData uiData = null)
-        {
-            mData = uiData as UIRewardPanelData ?? new UIRewardPanelData();
-            // 给金币增加事件添加显示回调函数
-            Global.Coin.RegisterWithInitValue(newValue => { TextCoin.text = $"金币:{newValue}"; })
-                .UnRegisterWhenGameObjectDestroyed(gameObject);
-            // 注册 BtnClose 的点击事件
-            BtnClose.onClick.AddListener(() =>
-            {
-                // 关闭当前界面
-                UIKit.ClosePanel<UIRewardPanel>();
-            });
-            // 注册 CoinUpgradeSystem 的变化事件
-            CoinUpgradeSystem.OnCoinUpgradeSystemChanged.Register(() => { ReFrashBtn(); })
-                .UnRegisterWhenGameObjectDestroyed(gameObject);
-            // 更新按钮
-            ReFrashBtn();
+                        // 注册更改事件
+                        itemCatch.OnCoinUpdateItemChanged.Register(() =>
+                        {
+                            // 如果可以显示
+                            if (itemCatch.ConditionCheck())
+                                // 显示按钮
+                                selfCatch.Show();
+                            else
+                                // 隐藏按钮
+                                selfCatch.Hide();
+                        }).UnRegisterWhenGameObjectDestroyed(selfCatch);
+                        // 如果可以显示
+                        if (itemCatch.ConditionCheck())
+                            // 显示按钮
+                            selfCatch.Show();
+                        else
+                            // 隐藏按钮
+                            selfCatch.Hide();
+                    });
         }
 
         protected override void OnOpen(IUIData uiData = null)
