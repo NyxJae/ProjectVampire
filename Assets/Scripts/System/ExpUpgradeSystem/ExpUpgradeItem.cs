@@ -5,7 +5,6 @@ namespace ProjectVampire.System.ExpUpgradeSystem
 {
     public class ExpUpgradeItem
     {
-        
         // condition, 用于判断是否可以升级
         private Func<ExpUpgradeItem, bool> mCondition;
 
@@ -24,8 +23,6 @@ namespace ProjectVampire.System.ExpUpgradeSystem
         // 升级项的描述
         public string Description { get; private set; }
 
-        // 升级项的价格
-        public int Price { get; private set; }
 
         // 升级方法
         public void Upgrade()
@@ -39,7 +36,7 @@ namespace ProjectVampire.System.ExpUpgradeSystem
             // 触发升级项发生更改事件
             OnExpUpgradeItemChanged.Trigger();
         }
-        
+
 
         // 链式封装 setkey
         /// <summary>
@@ -61,7 +58,7 @@ namespace ProjectVampire.System.ExpUpgradeSystem
         /// <returns></returns>
         public ExpUpgradeItem SetDescription(string description)
         {
-            Description = description + $"|价格:{Price}金币";
+            Description = description;
             return this;
         }
 
@@ -77,17 +74,6 @@ namespace ProjectVampire.System.ExpUpgradeSystem
             return this;
         }
 
-        // 链式封装 setprice
-        /// <summary>
-        ///     设置升级项的价格
-        /// </summary>
-        /// <param name="price"></param>
-        /// <returns></returns>
-        public ExpUpgradeItem SetPrice(int price)
-        {
-            Price = price;
-            return this;
-        }
 
         // 链式封装 setcondition
         public ExpUpgradeItem SetCondition(Func<ExpUpgradeItem, bool> condition)
@@ -109,6 +95,5 @@ namespace ProjectVampire.System.ExpUpgradeSystem
             // 如果没有前置依赖条件, 则判断是否已经升级
             return !IsUpdated;
         }
-    
     }
 }

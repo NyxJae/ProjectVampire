@@ -22,6 +22,8 @@ namespace ProjectVampire
         protected override void OnInit(IUIData uiData = null)
         {
             mData = uiData as UIRewardPanelData ?? new UIRewardPanelData();
+            // 隐藏升级按钮
+            BtnUpgradePrefab.Hide();
             // 给金币增加事件添加显示回调函数
             Global.Coin.RegisterWithInitValue(newValue => { TextCoin.text = $"金币:{newValue}"; })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
@@ -80,8 +82,6 @@ namespace ProjectVampire
 
         protected override void OnOpen(IUIData uiData = null)
         {
-            // 隐藏升级按钮
-            BtnUpgradePrefab.Hide();
         }
 
         protected override void OnShow()

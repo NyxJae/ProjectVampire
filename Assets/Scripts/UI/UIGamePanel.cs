@@ -18,8 +18,6 @@ namespace ProjectVampire
         protected override void OnInit(IUIData uiData = null)
         {
             mData = uiData as UIGamePanelData ?? new UIGamePanelData();
-            // 显示经验值
-            TextExp.text = $"经验值:{Global.Exp.Value}/{Player.Instance.ExpToNextLevel()}";
             // 给经验值增加事件添加显示回调函数
             Global.Exp.RegisterWithInitValue(newValue =>
             {
@@ -28,12 +26,8 @@ namespace ProjectVampire
             // 显示等级
             TextLevel.text = $"等级:{Global.Level.Value}";
             // 给等级增加事件添加显示回调函数
-            Global.Level.Register(newValue =>
-            {
-                TextLevel.text = $"等级:{newValue}";
-                // 显示升级按钮
-                BtnUpdateRoot.Show();
-            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            Global.Level.Register(newValue => { TextLevel.text = $"等级:{newValue}"; })
+                .UnRegisterWhenGameObjectDestroyed(gameObject);
             // 显示金币数量
             TextCoin.text = $"金币:{Global.Coin.Value}";
             // 给金币增加事件添加显示回调函数
@@ -62,31 +56,6 @@ namespace ProjectVampire
                 TextHP.text = $"血量:{newValue}/{Global.MaxHealth.Value}";
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
 
-
-            // 给升级攻击力按钮增加点击事件
-            BtnUpdateATK.onClick.AddListener(() =>
-            {
-                // 取得玩家实例.以获取技能脚本
-                var sampleAbility = Player.Instance.Abilities.SampleAbility;
-                // sampleAbility 提升攻击力
-                sampleAbility.Attack += 1;
-                // 隐藏升级按钮
-                BtnUpdateRoot.Hide();
-                // 时间恢复
-                Time.timeScale = 1;
-            });
-            // 给升级攻击频率按钮增加点击事件
-            BtnUpgradeATKRate.onClick.AddListener(() =>
-            {
-                // 取得玩家实例.以获取技能脚本
-                var sampleAbility = Player.Instance.Abilities.SampleAbility;
-                // sampleAbility 提升攻击力
-                sampleAbility.AttackRate *= 0.9f;
-                // 隐藏升级按钮
-                BtnUpdateRoot.Hide();
-                // 时间恢复
-                Time.timeScale = 1;
-            });
             ActionKit.OnUpdate.Register(() =>
             {
                 // 时间

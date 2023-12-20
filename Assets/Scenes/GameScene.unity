@@ -1011,6 +1011,9 @@ MonoBehaviour:
   - enemyPrefab: {fileID: 1651630702174578907, guid: 0a8c85d19aa5f6f49b08bc1e73681ca9, type: 3}
     duration: 20
     spawnInterval: 0.5
+  - enemyPrefab: {fileID: 7773316304982453888, guid: a90688a07bb5f7347918255f37c4952e, type: 3}
+    duration: 20
+    spawnInterval: 0.5
 --- !u!4 &567124737
 Transform:
   m_ObjectHideFlags: 0
@@ -1024,6 +1027,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9076731800182272820}
+  - {fileID: 5862600032319817348}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -44039,10 +44043,76 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &51826046177711250
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 567124737}
+    m_Modifications:
+    - target: {fileID: 3118991253266236698, guid: a90688a07bb5f7347918255f37c4952e, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118991253266236698, guid: a90688a07bb5f7347918255f37c4952e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.509
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118991253266236698, guid: a90688a07bb5f7347918255f37c4952e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118991253266236698, guid: a90688a07bb5f7347918255f37c4952e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118991253266236698, guid: a90688a07bb5f7347918255f37c4952e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118991253266236698, guid: a90688a07bb5f7347918255f37c4952e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118991253266236698, guid: a90688a07bb5f7347918255f37c4952e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118991253266236698, guid: a90688a07bb5f7347918255f37c4952e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118991253266236698, guid: a90688a07bb5f7347918255f37c4952e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118991253266236698, guid: a90688a07bb5f7347918255f37c4952e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118991253266236698, guid: a90688a07bb5f7347918255f37c4952e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7773316304982453888, guid: a90688a07bb5f7347918255f37c4952e, type: 3}
+      propertyPath: m_Name
+      value: Enemy2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a90688a07bb5f7347918255f37c4952e, type: 3}
 --- !u!4 &657090684606156002 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 422979165426373734, guid: 6f6a87108ebb7ac4f9651d803bb51367, type: 3}
   m_PrefabInstance: {fileID: 6294702898803399485}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5862600032319817348 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3118991253266236698, guid: a90688a07bb5f7347918255f37c4952e, type: 3}
+  m_PrefabInstance: {fileID: 51826046177711250}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6294702898803399485
 PrefabInstance:
@@ -44159,7 +44229,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1651630702174578907, guid: 0a8c85d19aa5f6f49b08bc1e73681ca9, type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: Enemy1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

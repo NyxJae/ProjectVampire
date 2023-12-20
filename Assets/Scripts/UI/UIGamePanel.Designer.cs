@@ -5,11 +5,13 @@ using QFramework;
 
 namespace ProjectVampire
 {
-	// Generate Id:b4f1be79-6ba3-44bb-b71c-ad0e9fc3c45b
+	// Generate Id:8d737291-bad3-444c-bf49-0a23030519a8
 	public partial class UIGamePanel
 	{
 		public const string Name = "UIGamePanel";
 		
+		[SerializeField]
+		public UnityEngine.UI.Text TextCoin;
 		[SerializeField]
 		public UnityEngine.UI.Text TextExp;
 		[SerializeField]
@@ -19,26 +21,18 @@ namespace ProjectVampire
 		[SerializeField]
 		public UnityEngine.UI.Text TextTime;
 		[SerializeField]
-		public UnityEngine.UI.Text TextCoin;
-		[SerializeField]
-		public RectTransform BtnUpdateRoot;
-		[SerializeField]
-		public UnityEngine.UI.Button BtnUpdateATK;
-		[SerializeField]
-		public UnityEngine.UI.Button BtnUpgradeATKRate;
+		public ExpUpgradeRoot ExpUpgradeRoot;
 		
 		private UIGamePanelData mPrivateData = null;
 		
 		protected override void ClearUIComponents()
 		{
+			TextCoin = null;
 			TextExp = null;
 			TextHP = null;
 			TextLevel = null;
 			TextTime = null;
-			TextCoin = null;
-			BtnUpdateRoot = null;
-			BtnUpdateATK = null;
-			BtnUpgradeATKRate = null;
+			ExpUpgradeRoot = null;
 			
 			mData = null;
 		}
