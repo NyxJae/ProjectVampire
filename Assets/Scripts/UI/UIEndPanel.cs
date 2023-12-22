@@ -1,15 +1,19 @@
-using UnityEngine;
-using UnityEngine.UI;
 using QFramework;
-using UnityEngine.SceneManagement;
 
 namespace ProjectVampire
 {
     public class UIEndPanelData : UIPanelData
     {
     }
-    public partial class UIEndPanel : UIPanel
+
+    public partial class UIEndPanel : UIPanel, IController
+
     {
+        public IArchitecture GetArchitecture()
+        {
+            return Global.Interface;
+        }
+
         protected override void OnInit(IUIData uiData = null)
         {
             mData = uiData as UIEndPanelData ?? new UIEndPanelData();
@@ -18,13 +22,9 @@ namespace ProjectVampire
             {
                 // 关闭当前界面
                 UIKit.ClosePanel<UIEndPanel>();
-                // 重置各项属性
-                Global.ResetProperties();
-                // 重新加载场景
-                SceneManager.LoadScene("GameScene");
-
+                // 发送开始游戏命令
+                this.SendCommand<BeginGameCommand>();
             });
-
         }
 
         protected override void OnOpen(IUIData uiData = null)

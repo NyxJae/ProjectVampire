@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using ProjectVampire.System.ExpUpgradeSystem;
 using QFramework;
+using UnityEngine;
 
 namespace ProjectVampire
 {
@@ -18,72 +20,78 @@ namespace ProjectVampire
 
         protected override void OnInit()
         {
-            // 添加升级项 基础能力攻击力LV1
-            var attackUpgradeLv1 = Add(new ExpUpgradeItem()
-                .SetKey("SampleAbilityATKLV1") // 设置升级项的key
-                .SetDescription("基础能力攻击力LV1") // 设置升级项的描述
+            // 添加升级项 基础能力攻击力
+            var attackUpgrade = Add(new ExpUpgradeItem()
+                .SetKey("SampleAbilityATK") // 设置升级项的key
+                .SetDescription("基础能力攻击力") // 设置升级项的描述
+                .SetMaxLevel(10)
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
                     // 增加攻击力
                     Player.Instance.Abilities.SampleAbility.Attack += 1;
                 }));
-            // 添加升级项 基础能力攻击力LV2
-            var attackUpgradeLv2 = Add(new ExpUpgradeItem()
-                .SetKey("SampleAbilityATKLV2") // 设置升级项的key
-                .SetDescription("基础能力攻击力LV2") // 设置升级项的描述
-                .SetCondition(item => // 设置升级项的条件
-                    // 判断是否显示
-                    attackUpgradeLv1.IsUpdated)
-                .SetOnUpgrade(item => // 设置升级项的升级方法
-                {
-                    // 增加攻击力
-                    Player.Instance.Abilities.SampleAbility.Attack += 1;
-                }));
-            // 添加升级项 基础能力攻击力LV3
-            var attackUpgradeLv3 = Add(new ExpUpgradeItem()
-                .SetKey("SampleAbilityATKLV3") // 设置升级项的key
-                .SetDescription("基础能力攻击力LV3") // 设置升级项的描述
-                .SetCondition(item => // 设置升级项的条件
-                    // 判断是否显示
-                    attackUpgradeLv2.IsUpdated)
-                .SetOnUpgrade(item => // 设置升级项的升级方法
-                {
-                    // 增加攻击力
-                    Player.Instance.Abilities.SampleAbility.Attack += 1;
-                }));
-            // 添加升级项 基础能力攻击范围LV1
-            var attackRangeUpgradeLv1 = Add(new ExpUpgradeItem()
-                .SetKey("SampleAbilityATKRangeLV1") // 设置升级项的key
-                .SetDescription("基础能力攻击范围LV1") // 设置升级项的描述
+            // 添加升级项 基础能力攻击范围
+            var attackRangeUpgrade = Add(new ExpUpgradeItem()
+                .SetKey("SampleAbilityATKRange") // 设置升级项的key
+                .SetDescription("基础能力攻击范围") // 设置升级项的描述
+                .SetMaxLevel(10)
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
                     // 增加攻击范围
-                    Player.Instance.Abilities.SampleAbility.AttackDistance *= 1.1f;
+                    Player.Instance.Abilities.SampleAbility.AttackRange.radius *= 1.1f;
                 }));
-            // 添加升级项 基础能力攻击范围LV2
-            var attackRangeUpgradeLv2 = Add(new ExpUpgradeItem()
-                .SetKey("SampleAbilityATKRangeLV2") // 设置升级项的key
-                .SetDescription("基础能力攻击范围LV2") // 设置升级项的描述
-                .SetCondition(item => // 设置升级项的条件
-                    // 判断是否显示
-                    attackRangeUpgradeLv1.IsUpdated)
+            // 添加升级项 基础能力攻击速度
+            var attackSpeedUpgrade = Add(new ExpUpgradeItem()
+                .SetKey("SampleAbilityATKSpeed") // 设置升级项的key
+                .SetDescription("基础能力攻击速度") // 设置升级项的描述
+                .SetMaxLevel(10)
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
-                    // 增加攻击范围
-                    Player.Instance.Abilities.SampleAbility.AttackDistance *= 1.1f;
+                    // 增加攻击速度
+                    Player.Instance.Abilities.SampleAbility.AttackRate *= 1.1f;
                 }));
-            // 添加升级项 基础能力攻击范围LV3
-            var attackRangeUpgradeLv3 = Add(new ExpUpgradeItem()
-                .SetKey("SampleAbilityATKRangeLV3") // 设置升级项的key
-                .SetDescription("基础能力攻击范围LV3") // 设置升级项的描述
-                .SetCondition(item => // 设置升级项的条件
-                    // 判断是否显示
-                    attackRangeUpgradeLv2.IsUpdated)
+            // 添加升级项 拾取范围提升
+            var pickUpRangeUpgrade = Add(new ExpUpgradeItem()
+                .SetKey("PickUpRangeUpgrade") // 设置升级项的key
+                .SetDescription("拾取范围提升") // 设置升级项的描述
+                .SetMaxLevel(10)
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
-                    // 增加攻击范围
-                    Player.Instance.Abilities.SampleAbility.AttackDistance *= 1.1f;
+                    // 增加拾取范围
+                    Player.Instance.Abilities.PickAbility.PickRange.radius *= 1.1f;
                 }));
+        }
+
+        // 随机获取n个未升级的升级项
+        /// <summary>
+        ///     随机获取n个未升级的升级项
+        /// </summary>
+        /// <param name="n"> 随机获取的数量 </param>
+        public void RandomUnUpdatedItem(int n)
+        {
+            // 每个项设为不可见
+            foreach (var item in ExpUpdateItems)
+                item.IsVisible.Value = false;
+            // 获取未升级的项
+            var unUpdatedItems = ExpUpdateItems.Where(item => !item.IsUpdated).ToList();
+            // 随机获取n个未升级的项
+            var randomItems = unUpdatedItems.OrderBy(item => Random.Range(0, 100)).Take(n).ToList();
+            // 将n个未升级的项设为可见
+            foreach (var item in randomItems)
+            {
+                item.IsVisible.Value = true;
+                Debug.Log($"显示的名字是:{item.Description}");
+            }
+        }
+
+        // 重置所有升级项
+        public void ResetAll()
+        {
+            foreach (var item in ExpUpdateItems)
+            {
+                item.IsUpdated = false;
+                item.CurrentLevel.Value = 1;
+            }
         }
     }
 }

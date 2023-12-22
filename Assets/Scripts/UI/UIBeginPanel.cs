@@ -1,5 +1,4 @@
 using QFramework;
-using UnityEngine.SceneManagement;
 
 namespace ProjectVampire
 {
@@ -7,8 +6,13 @@ namespace ProjectVampire
     {
     }
 
-    public partial class UIBeginPanel : UIPanel
+    public partial class UIBeginPanel : UIPanel, IController
     {
+        public IArchitecture GetArchitecture()
+        {
+            return Global.Interface;
+        }
+
         protected override void OnInit(IUIData uiData = null)
         {
             mData = uiData as UIBeginPanelData ?? new UIBeginPanelData();
@@ -22,8 +26,8 @@ namespace ProjectVampire
             {
                 // 关闭 Begin 界面
                 UIKit.ClosePanel<UIBeginPanel>();
-                // 打开游戏场景
-                SceneManager.LoadScene(Global.GameScene);
+                // 发送开始游戏命令
+                this.SendCommand<BeginGameCommand>();
             });
             // 注册 BtnReward 的点击事件
             BtnReward.onClick.AddListener(() =>

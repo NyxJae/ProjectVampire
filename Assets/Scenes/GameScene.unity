@@ -1280,7 +1280,6 @@ MonoBehaviour:
   GeneratePrefab: 0
   PrefabFolder: Assets/Art/Prefab
   ArchitectureFullTypeName: 
-  mAttackDistance: 1.5
   mAttackRate: 1
   mAttack: 1
   AttackRange: {fileID: 389075777}

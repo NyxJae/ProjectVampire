@@ -19,15 +19,15 @@ MonoBehaviour:
     From: 0
     NameToFullName: []
     BindInfos:
-    - TypeName: TMPro.TextMeshProUGUI
-      PathToRoot: Text
-      MemberName: Text
-    ScriptsFolder: Assets/Scripts/Game
-    ClassName: BtnUpgradePrefab
+    - TypeName: CircleCollider2D
+      PathToRoot: AttackRange
+      MemberName: AttackRange
+    ScriptsFolder: Assets/Scripts/Game/Abilities
+    ClassName: SampleAbility
     Namespace: ProjectVampire
     MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace ProjectVampire\r\n{\r\n\tpublic
-      partial class BtnUpgradePrefab : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
+      partial class SampleAbility : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:bd3b5c8f-1017-4ad0-bdd8-bd5c1ae89c37\r\nusing UnityEngine;\r\n\r\nnamespace
-      ProjectVampire\r\n{\r\n\tpublic partial class BtnUpgradePrefab\r\n\t{\r\n\r\n\t\tpublic
-      TMPro.TextMeshProUGUI Text;\r\n\r\n\t}\r\n}\r\n"
+    DesignerCode: "// Generate Id:9c51e66f-2560-49cb-b402-aeafc198b31e\r\nusing UnityEngine;\r\n\r\nnamespace
+      ProjectVampire\r\n{\r\n\tpublic partial class SampleAbility\r\n\t{\r\n\r\n\t\tpublic
+      CircleCollider2D AttackRange;\r\n\r\n\t}\r\n}\r\n"

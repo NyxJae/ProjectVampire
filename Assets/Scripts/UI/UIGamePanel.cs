@@ -23,15 +23,11 @@ namespace ProjectVampire
             {
                 TextExp.text = $"经验值:{newValue}/{Player.Instance.ExpToNextLevel()}";
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
-            // 显示等级
-            TextLevel.text = $"等级:{Global.Level.Value}";
             // 给等级增加事件添加显示回调函数
-            Global.Level.Register(newValue => { TextLevel.text = $"等级:{newValue}"; })
+            Global.Level.RegisterWithInitValue(newValue => { TextLevel.text = $"等级:{newValue}"; })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
-            // 显示金币数量
-            TextCoin.text = $"金币:{Global.Coin.Value}";
             // 给金币增加事件添加显示回调函数
-            Global.Coin.Register(newValue => { TextCoin.text = $"金币:{newValue}"; })
+            Global.Coin.RegisterWithInitValue(newValue => { TextCoin.text = $"金币:{newValue}"; })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
 
             // 给时间增加事件添加显示回调函数
