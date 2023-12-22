@@ -20,35 +20,35 @@ namespace ProjectVampire
 
         protected override void OnInit()
         {
-            // 添加升级项 基础能力攻击力
+            // 添加升级项 雷电场攻击力
             var attackUpgrade = Add(new ExpUpgradeItem()
-                .SetKey("SampleAbilityATK") // 设置升级项的key
-                .SetDescription("基础能力攻击力") // 设置升级项的描述
+                .SetKey("LightingSiteATK") // 设置升级项的key
+                .SetDescription("雷电场攻击力") // 设置升级项的描述
                 .SetMaxLevel(10)
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
                     // 增加攻击力
-                    Player.Instance.Abilities.SampleAbility.Attack += 1;
+                    Player.Instance.Abilities.LightingSite.Attack *= 1.1f;
                 }));
-            // 添加升级项 基础能力攻击范围
+            // 添加升级项 雷电场攻击范围
             var attackRangeUpgrade = Add(new ExpUpgradeItem()
-                .SetKey("SampleAbilityATKRange") // 设置升级项的key
-                .SetDescription("基础能力攻击范围") // 设置升级项的描述
+                .SetKey("LightingSiteATKRange") // 设置升级项的key
+                .SetDescription("雷电场攻击范围") // 设置升级项的描述
                 .SetMaxLevel(10)
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
                     // 增加攻击范围
-                    Player.Instance.Abilities.SampleAbility.AttackRange.radius *= 1.1f;
+                    Player.Instance.Abilities.LightingSite.transform.localScale *= 1.1f;
                 }));
-            // 添加升级项 基础能力攻击速度
+            // 添加升级项 雷电场攻击速度
             var attackSpeedUpgrade = Add(new ExpUpgradeItem()
-                .SetKey("SampleAbilityATKSpeed") // 设置升级项的key
-                .SetDescription("基础能力攻击速度") // 设置升级项的描述
+                .SetKey("LightingSiteATKSpeed") // 设置升级项的key
+                .SetDescription("雷电场攻击速度") // 设置升级项的描述
                 .SetMaxLevel(10)
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
                     // 增加攻击速度
-                    Player.Instance.Abilities.SampleAbility.AttackRate *= 1.1f;
+                    Player.Instance.Abilities.LightingSite.AttackRate *= 1.1f;
                 }));
             // 添加升级项 拾取范围提升
             var pickUpRangeUpgrade = Add(new ExpUpgradeItem()

@@ -12,7 +12,7 @@ namespace ProjectVampire
 
 
         // 公开的 血量 属性
-        [SerializeField] [Tooltip("血量")] public int Health = 3;
+        [SerializeField] [Tooltip("血量")] public float Health = 3;
 
         /// <summary>
         ///     私有的 player 角色
@@ -77,7 +77,7 @@ namespace ProjectVampire
         /// </summary>
         /// <param name="damage">受到的伤害值。</param>
         /// <param name="changeDuration">颜色改变持续的时间。</param>
-        public void TakeDamage(int damage, float changeDuration = 0.1f)
+        public void TakeDamage(float damage, float changeDuration = 0.1f)
         {
             Sprite.color = Color.red; // 改变颜色为红色
             Health -= damage; // 减少生命值

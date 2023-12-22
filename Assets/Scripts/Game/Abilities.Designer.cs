@@ -1,4 +1,4 @@
-// Generate Id:f4b6a99f-8d81-4a1c-a393-419fbeed76ea
+// Generate Id:33d0c584-6522-4472-a509-06fbac0f9dc5
 using UnityEngine;
 
 namespace ProjectVampire
@@ -6,9 +6,9 @@ namespace ProjectVampire
 	public partial class Abilities
 	{
 
-		public ProjectVampire.SampleAbility SampleAbility;
-
 		public ProjectVampire.PickAbility PickAbility;
+
+		public ProjectVampire.LightingSite LightingSite;
 
 	}
 }
