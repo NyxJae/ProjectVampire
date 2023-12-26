@@ -62,6 +62,8 @@ namespace ProjectVampire
 
         protected override void OnOpen(IUIData uiData = null)
         {
+            // 每次打开都隐藏ExpUpgradeRoot
+            ExpUpgradeRoot.Hide();
         }
 
         protected override void OnShow()

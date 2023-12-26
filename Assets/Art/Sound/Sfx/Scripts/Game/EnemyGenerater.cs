@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 namespace ProjectVampire
 {
-    public class EnemyWaveGenerator : ViewController
+    public class EnemyWaveGenerator : ViewController, ISingleton
     {
         [Tooltip("敌人生成最小距离")] public float minSpawnDistance; // 敌人生成的最小距离
 
@@ -38,6 +38,9 @@ namespace ProjectVampire
         /// </summary>
         private float waveTimer;
 
+        // 公开的 静态 实例 属性
+        public static EnemyWaveGenerator Instance => MonoSingletonProperty<EnemyWaveGenerator>.Instance;
+
         private void Start()
         {
             // 获取玩家角色实例
@@ -60,6 +63,10 @@ namespace ProjectVampire
                     Time.timeScale = 0f;
                     isWinPanelOpened = true; // 设置标志位，表示winPanel已被打开
                 }
+        }
+
+        public void OnSingletonInit()
+        {
         }
 
         /// <summary>

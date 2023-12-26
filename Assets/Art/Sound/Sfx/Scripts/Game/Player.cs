@@ -47,7 +47,13 @@ namespace ProjectVampire
         private void Start()
         {
             // 给HurtBox被触碰时, 触发的事件添加回调函数(受伤),并设置自动销毁
-            HurtBox.OnTriggerEnter2DEvent(Collider2D => Global.Health.Value -= mDamage)
+            HurtBox.OnTriggerEnter2DEvent(Collider2D =>
+                    {
+                        // 如果碰撞的对象的父对象没有Enemy标签 则返回
+                        if (!Collider2D.gameObject.transform.parent.CompareTag("Enemy")) return;
+                        Global.Health.Value -= mDamage;
+                    }
+                )
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
             // 给血量增加事件添加死亡回调函数
             Global.Health.Register(newValue =>
@@ -69,8 +75,6 @@ namespace ProjectVampire
                 {
                     Global.Level.Value += 1;
                     Global.Exp.Value = 0;
-                    // 时间暂停
-                    Time.timeScale = 0;
                 }
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
         }

@@ -44,13 +44,15 @@ namespace ProjectVampire
                     });
             Global.Level.Register(newValue =>
             {
-                // 时间暂停
-                Time.timeScale = 0;
+                // 日志
+                Debug.Log($"显示升级面板,当前等级:{newValue}");
                 // 显示升级面板
                 Show();
                 // 随机n个未升级的升级项设置为可见
-                this.GetSystem<ExpUpgradeSystem>().RandomUnUpdatedItem(4);
-            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+                this.GetSystem<ExpUpgradeSystem>().RandomUnUpdatedItem(3);
+                // 时间暂停
+                Time.timeScale = 0;
+            }).UnRegisterWhenGameObjectDestroyed(this);
         }
 
         public IArchitecture GetArchitecture()

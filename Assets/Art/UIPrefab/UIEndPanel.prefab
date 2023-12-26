@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 1717820770012336421}
   - component: {fileID: 8528661773597495322}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: TexTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -337,7 +337,7 @@ MonoBehaviour:
   m_text: "\u9769\u547D\u5C1A\u672A\u6210\u529F,\u5927\u4FA0\u8BF7\u91CD\u65B0\u6765\u8FC7"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ea30ea79bee769748abf9deeca5e70b6, type: 2}
-  m_sharedMaterial: {fileID: -6113064289374512538, guid: ea30ea79bee769748abf9deeca5e70b6, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: ecbc4a3f143fbed4b86b261e81d17b69, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
