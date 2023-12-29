@@ -1283,6 +1283,7 @@ Transform:
   m_Children:
   - {fileID: 5469242485742620308}
   - {fileID: 5862600032319817348}
+  - {fileID: 1407207031357090127}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -44814,11 +44815,107 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a90688a07bb5f7347918255f37c4952e, type: 3}
+--- !u!1 &327939827666813537 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5085165724929303497, guid: 1e292f9a2f3424547975a2120b315d15, type: 3}
+  m_PrefabInstance: {fileID: 3703429241240525990}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &657090684606156002 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 422979165426373734, guid: 6f6a87108ebb7ac4f9651d803bb51367, type: 3}
   m_PrefabInstance: {fileID: 6294702898803399485}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1407207031357090127 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4063829039034703576, guid: 1e292f9a2f3424547975a2120b315d15, type: 3}
+  m_PrefabInstance: {fileID: 3703429241240525990}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1407207031357090128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327939827666813537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81936539ae2d84665a86a2b3f531955f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Namespace: ProjectVampire
+  ScriptName: EnemyMiniBoss
+  ScriptsFolder: Assets/Scripts/Game
+  GeneratePrefab: 0
+  PrefabFolder: Assets/Art/Prefab
+  ArchitectureFullTypeName: 
+--- !u!1001 &3703429241240525990
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 567124737}
+    m_Modifications:
+    - target: {fileID: 4063829039034703576, guid: 1e292f9a2f3424547975a2120b315d15, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4063829039034703576, guid: 1e292f9a2f3424547975a2120b315d15, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4063829039034703576, guid: 1e292f9a2f3424547975a2120b315d15, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4063829039034703576, guid: 1e292f9a2f3424547975a2120b315d15, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4063829039034703576, guid: 1e292f9a2f3424547975a2120b315d15, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4063829039034703576, guid: 1e292f9a2f3424547975a2120b315d15, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4063829039034703576, guid: 1e292f9a2f3424547975a2120b315d15, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4063829039034703576, guid: 1e292f9a2f3424547975a2120b315d15, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4063829039034703576, guid: 1e292f9a2f3424547975a2120b315d15, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4063829039034703576, guid: 1e292f9a2f3424547975a2120b315d15, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4063829039034703576, guid: 1e292f9a2f3424547975a2120b315d15, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5085165724929303497, guid: 1e292f9a2f3424547975a2120b315d15, type: 3}
+      propertyPath: m_Name
+      value: EnemyMiniBoss
+      objectReference: {fileID: 0}
+    - target: {fileID: 5085165724929303497, guid: 1e292f9a2f3424547975a2120b315d15, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5085165724929303497, guid: 1e292f9a2f3424547975a2120b315d15, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1407207031357090128}
+  m_SourcePrefab: {fileID: 100100000, guid: 1e292f9a2f3424547975a2120b315d15, type: 3}
 --- !u!1001 &5469242485742620307
 PrefabInstance:
   m_ObjectHideFlags: 0

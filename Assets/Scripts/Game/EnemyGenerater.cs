@@ -5,13 +5,18 @@ using Random = UnityEngine.Random;
 
 namespace ProjectVampire
 {
-    public class EnemyWaveGenerator : ViewController, ISingleton
+    public class EnemyGenerator : ViewController, ISingleton
     {
         [Tooltip("敌人生成最小距离")] public float minSpawnDistance; // 敌人生成的最小距离
 
         [Tooltip("敌人生成最大距离")] public float maxSpawnDistance; // 敌人生成的最大距离
 
         [SerializeField] [Tooltip("波次配置列表")] private WaveConfig[] waveConfigs; // 波次配置数组
+
+        /// <summary>
+        ///     在场地人数
+        /// </summary>
+        public int EnemyCount;
 
         /// <summary>
         ///     当前波次的索引
@@ -38,8 +43,9 @@ namespace ProjectVampire
         /// </summary>
         private float waveTimer;
 
+
         // 公开的 静态 实例 属性
-        public static EnemyWaveGenerator Instance => MonoSingletonProperty<EnemyWaveGenerator>.Instance;
+        public static EnemyGenerator Instance => MonoSingletonProperty<EnemyGenerator>.Instance;
 
         private void Start()
         {
@@ -49,6 +55,8 @@ namespace ProjectVampire
 
         private void Update()
         {
+            // log 肾功能与地人数
+            Debug.Log("敌人数量" + EnemyCount);
             // 如果还有未完成的波次
             if (currentWaveIndex < waveConfigs.Length)
                 UpdateWave();
@@ -130,8 +138,7 @@ namespace ProjectVampire
         /// <returns> 如果场上还有敌人，返回 true，否则返回 false </returns>
         private bool AreEnemiesAlive()
         {
-            // 使用Unity的API查找场景中所有的Enemy对象
-            return FindObjectsOfType<Enemy>().Length > 0;
+            return EnemyCount > 0;
         }
 
         // 每个波次的配置, 用于在Inspector面板中配置

@@ -22,12 +22,12 @@ namespace ProjectVampire
         // 时间计时器
         private float mTimer;
 
-        public EnemyWaveGenerator enemyWaveGenerator { get; set; }
+        public EnemyGenerator enemyGenerator { get; set; }
 
         private void Start()
         {
             // 获取敌人生成器
-            enemyWaveGenerator = EnemyWaveGenerator.Instance;
+            enemyGenerator = EnemyGenerator.Instance;
         }
 
 
@@ -40,14 +40,16 @@ namespace ProjectVampire
             {
                 // 重置计时器
                 mTimer = 0;
-                // 获取敌人生成器的所有子对象
-                var enemyList = enemyWaveGenerator.gameObject.GetComponentsInChildren<Enemy>();
+                // 获取敌人生成器的所有子对象,tag为Enemy的
+                var enemyList = enemyGenerator.gameObject.GetComponentsInChildren<Transform>()
+                    .Where(child => child.CompareTag("Enemy"))
+                    .ToArray();
                 // 如果敌人列表不为空
-                if (enemyList != null)
+                if (enemyList.Length > 0)
                 {
                     // 根据敌人的位置,排序
                     enemyList = enemyList
-                        .OrderBy(enemy => Vector3.Distance(enemy.transform.position, transform.position))
+                        .OrderBy(enemy => Vector3.Distance(enemy.position, transform.position))
                         .ToArray();
                     // 获取最近的敌人
                     var nearestEnemy = enemyList[0];
@@ -58,7 +60,7 @@ namespace ProjectVampire
                         .Self(self =>
                         {
                             // 旋转z轴 使飞刀朝向敌人
-                            Vector2 direction = nearestEnemy.transform.position - transform.position;
+                            Vector2 direction = nearestEnemy.position - transform.position;
                             var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
                             self.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
                             // 向最近的敌人发射飞刀,设置飞刀的飞行速度
@@ -66,8 +68,6 @@ namespace ProjectVampire
                                 direction.normalized * mSpeed;
                             self.HitBox.OnTriggerEnter2DEvent(Other =>
                             {
-                                // log 发生碰撞
-                                Debug.Log("碰撞到了" + Other.name);
                                 // 如果碰到的是敌人
                                 if (!Other.transform.parent.CompareTag("Enemy")) return; // 发送攻击命令
                                 this.SendCommand(new AttackEnemyCommand(Other.gameObject, mAttack));

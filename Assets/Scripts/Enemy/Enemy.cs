@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ProjectVampire
 {
-    public partial class Enemy : ViewController
+    public partial class Enemy : ViewController, IEnemy
     {
         /// <summary>
         ///     私有的 移动速度系数 属性 在 Inspector 中显示
@@ -12,15 +12,18 @@ namespace ProjectVampire
 
 
         // 公开的 血量 属性
-        [SerializeField] [Tooltip("血量")] public float Health = 3;
+        [SerializeField] [Tooltip("血量")] private float mHealth = 3;
 
         /// <summary>
         ///     私有的 player 角色
         /// </summary>
         private GameObject player;
 
+
         private void Start()
         {
+            // 获取敌人生成器
+            EnemyGenerator.Instance.EnemyCount++;
             // 获取 player 角色
             player = Player.Instance.gameObject;
         }
@@ -31,6 +34,27 @@ namespace ProjectVampire
             if (player == null) return;
             // 追逐 player
             ChasingPlayrt();
+        }
+
+        public float Health
+        {
+            get => mHealth;
+            set => mHealth = value;
+        }
+
+        /// <summary>
+        ///     受伤处理，改变颜色并减少生命值。
+        /// </summary>
+        /// <param name="damage">受到的伤害值。</param>
+        /// <param name="changeDuration">颜色改变持续的时间。</param>
+        public void TakeDamage(float damage, float changeDuration = 0.1f)
+        {
+            Sprite.color = Color.red; // 改变颜色为红色
+            Health -= damage; // 减少生命值
+            // 显示浮动文字
+            FloatingText.Instance.play(damage.ToString(), transform.position);
+            ActionKit.Delay(changeDuration, () => Sprite.color = Color.white).Start(this); // 延时后恢复颜色
+            CheckHealth();
         }
 
 
@@ -65,26 +89,13 @@ namespace ProjectVampire
             // 如果血量小于等于 0
             if (Health <= 0)
             {
+                // 减少敌人数量
+                EnemyGenerator.Instance.EnemyCount--;
                 // 掉落奖励
                 PowerUpManager.Instance.DroReward(gameObject);
                 // 销毁自身
                 this.DestroyGameObjGracefully();
             }
-        }
-
-        /// <summary>
-        ///     受伤处理，改变颜色并减少生命值。
-        /// </summary>
-        /// <param name="damage">受到的伤害值。</param>
-        /// <param name="changeDuration">颜色改变持续的时间。</param>
-        public void TakeDamage(float damage, float changeDuration = 0.1f)
-        {
-            Sprite.color = Color.red; // 改变颜色为红色
-            Health -= damage; // 减少生命值
-            // 显示浮动文字
-            FloatingText.Instance.play(damage.ToString(), transform.position);
-            ActionKit.Delay(changeDuration, () => Sprite.color = Color.white).Start(this); // 延时后恢复颜色
-            CheckHealth();
         }
     }
 }

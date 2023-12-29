@@ -24,7 +24,7 @@ namespace ProjectVampire
             if (mOther == null) return;
             if (!mOther.transform.parent.CompareTag("Enemy")) return;
             // 使用GetComponentInParent来获取父对象上的Enemy组件
-            var enemy = mOther.GetComponentInParent<Enemy>();
+            var enemy = mOther.GetComponentInParent<IEnemy>();
             // 如果敌人组件不为空
             if (enemy != null)
             {
