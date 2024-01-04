@@ -5,14 +5,8 @@ namespace ProjectVampire
 {
     public partial class Enemy : ViewController, IEnemy
     {
-        /// <summary>
-        ///     私有的 移动速度系数 属性 在 Inspector 中显示
-        /// </summary>
-        [SerializeField] [Tooltip("移动速度系数")] private float mSpeed = 3.0f;
-
-
-        // 公开的 血量 属性
-        [SerializeField] [Tooltip("血量")] private float mHealth = 3;
+        [SerializeField] [Tooltip("敌人的血量")] private float mhealth = 100f;
+        [SerializeField] [Tooltip("敌人的速度")] private float mspeed = 5f;
 
         /// <summary>
         ///     私有的 player 角色
@@ -38,8 +32,14 @@ namespace ProjectVampire
 
         public float Health
         {
-            get => mHealth;
-            set => mHealth = value;
+            get => mhealth;
+            set => mhealth = value;
+        }
+
+        public float Speed
+        {
+            get => mspeed;
+            set => mspeed = value;
         }
 
         /// <summary>
@@ -55,6 +55,13 @@ namespace ProjectVampire
             FloatingText.Instance.play(damage.ToString(), transform.position);
             ActionKit.Delay(changeDuration, () => Sprite.color = Color.white).Start(this); // 延时后恢复颜色
             CheckHealth();
+        }
+
+        public void AdjustAttributes(float multiplier)
+        {
+            // 调整血量和速度
+            Health *= multiplier;
+            Speed *= multiplier;
         }
 
 
@@ -75,7 +82,7 @@ namespace ProjectVampire
                 // 计算 player 和 enemy 的方向
                 var direction = (playerPosition - enemyPosition).normalized;
                 // 计算移动距离
-                var moveDistance = direction * (mSpeed * Time.deltaTime);
+                var moveDistance = direction * (Speed * Time.deltaTime);
                 // 移动
                 transform.Translate(moveDistance);
             }

@@ -132,12 +132,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Namespace: ProjectVampire
   ScriptName: Enemy
-  ScriptsFolder: Assets\Art\Sound\Sfx\Scripts\Game
+  ScriptsFolder: Assets\Scripts\Enemy
   GeneratePrefab: 1
   PrefabFolder: Assets/Art/Prefab
   ArchitectureFullTypeName: 
-  mSpeed: 1
-  Health: 1
+  mhealth: 2
+  mspeed: 1
   Sprite: {fileID: 497411548816826208}
   HitBox: {fileID: 1044044663226219858}
 --- !u!1 &6138813683597813547

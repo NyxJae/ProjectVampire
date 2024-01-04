@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8946e4b290e2ea4eb3e8dd869054146, type: 3}
+  m_Name: EnemyLevelConfig
+  m_EditorClassIdentifier: 
+  groups:
+  - groupName: 1
+    groupEnabled: 1
+    waves:
+    - enemyPrefab: {fileID: 1651630702174578907, guid: 0a8c85d19aa5f6f49b08bc1e73681ca9, type: 3}
+      duration: 5
+      spawnInterval: 0.5
+      attributeMultiplier: 1

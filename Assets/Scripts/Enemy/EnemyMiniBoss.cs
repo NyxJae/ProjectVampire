@@ -5,20 +5,19 @@ namespace ProjectVampire
 {
     public partial class EnemyMiniBoss : ViewController, IEnemy
     {
-        /// <summary>
-        ///     私有的 移动速度系数 属性 在 Inspector 中显示
-        /// </summary>
-        [SerializeField] private float mSpeed = 3.0f;
+        [SerializeField] [Tooltip("敌人的血量")] private float mhealth = 100f;
+        [SerializeField] [Tooltip("敌人的速度")] private float mspeed = 5f;
 
         /// <summary>
         ///     私有的 攻击距离 属性 在 Inspector 中显示
         /// </summary>
-        [SerializeField] private float mAttackDistance = 5f;
+        [SerializeField] [Tooltip("敌人的攻击距离")] private float mAttackDistance = 5f;
 
         /// <summary>
         ///     私有的 攻击前摇时间 属性 在 Inspector 中显示
         /// </summary>
-        [SerializeField] private float mAfterAttackTime = 3f;
+        [SerializeField] [Tooltip("敌人的攻击前摇时间")]
+        private float mAfterAttackTime = 3f;
 
         // 声明状态机
         private readonly FSM<State> mFsm = new();
@@ -56,7 +55,7 @@ namespace ProjectVampire
                         // 计算 player 和 enemy 的方向
                         var direction = (playerPosition - enemyPosition).normalized;
                         // 计算移动距离
-                        var moveDistance = direction * (mSpeed * Time.deltaTime);
+                        var moveDistance = direction * (Speed * Time.deltaTime);
                         // 移动
                         transform.Translate(moveDistance);
                     }
@@ -96,7 +95,7 @@ namespace ProjectVampire
                     // 计算 方向
                     var direction = (playerPosition - enemyPosition).normalized;
                     // 设置速度
-                    mRigidbody2D.velocity = direction * mSpeed * 5f;
+                    mRigidbody2D.velocity = direction * Speed * 5f;
                 })
                 .OnUpdate(() =>
                 {
@@ -124,6 +123,8 @@ namespace ProjectVampire
         }
 
         public float Health { get; set; } = 30;
+        public float Speed { get; set; }
+
 
         public void TakeDamage(float damage, float changeDuration = 0.1f)
         {
@@ -133,6 +134,13 @@ namespace ProjectVampire
             FloatingText.Instance.play(damage.ToString(), transform.position);
             ActionKit.Delay(changeDuration, () => Sprite.color = Color.white).Start(this); // 延时后恢复颜色
             CheckHealth();
+        }
+
+        public void AdjustAttributes(float multiplier)
+        {
+            // 调整血量和速度
+            Health *= multiplier;
+            Speed *= multiplier;
         }
 
         /// <summary>
