@@ -31,8 +31,6 @@ namespace ProjectVampire
 
         private void Start()
         {
-            // 增加敌人数量
-            EnemyGenerator.Instance.EnemyCount++;
             // 获取玩家实例
             player = Player.Instance;
             // 获取rigidbody2D组件
@@ -136,11 +134,10 @@ namespace ProjectVampire
             CheckHealth();
         }
 
-        public void AdjustAttributes(float multiplier)
+        public void AdjustAttributes(float healthMultiplier, float speedMultiplier)
         {
-            // 调整血量和速度
-            Health *= multiplier;
-            Speed *= multiplier;
+            Health *= healthMultiplier;
+            Speed *= speedMultiplier;
         }
 
         /// <summary>
@@ -152,7 +149,7 @@ namespace ProjectVampire
             if (Health <= 0)
             {
                 // 减少敌人数量
-                EnemyGenerator.Instance.EnemyCount--;
+                EnemyGenerator.Instance.enemyCount--;
                 // 掉落奖励
                 PowerUpManager.Instance.DroReward(gameObject);
                 // 销毁自身

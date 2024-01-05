@@ -1,170 +1,137 @@
 using QFramework;
 using UnityEngine;
-using Random = UnityEngine.Random;
+// 使用QFramework框架
+// 使用Unity引擎的命名空间
+using Random = UnityEngine.Random; // 使用UnityEngine下的Random类来避免与其他命名空间下的Random类冲突
 
+// 定义命名空间ProjectVampire
 namespace ProjectVampire
 {
+    // 敌人生成器类，继承自ViewController并实现ISingleton接口确保为单例
     public class EnemyGenerator : ViewController, ISingleton
     {
-        [Tooltip("敌人生成最小距离")] public float minSpawnDistance; // 敌人生成的最小距离
-        [Tooltip("敌人生成最大距离")] public float maxSpawnDistance; // 敌人生成的最大距离
-        [SerializeField] [Tooltip("组配置列表")] private EnemyLevelConfig groupConfig; // 组配置列表
+        [Tooltip("敌人生成最小距离")] public float minSpawnDistance; // 表示敌人生成时与玩家的最小距离
+        [Tooltip("敌人生成最大距离")] public float maxSpawnDistance; // 表示敌人生成时与玩家的最大距离
 
-        /// <summary>
-        ///     在场地人数
-        /// </summary>
-        public int EnemyCount;
+        [SerializeField] [Tooltip("敌人配置")] private EnemyLevelConfig levelConfig; // 敌人波次配置文件的引用
 
-        /// <summary>
-        ///     当前波次的索引
-        /// </summary>
-        private int currentGroupIndex, currentWaveIndex;
+        public int enemyCount; // 表示场上当前的敌人数量
 
-        /// <summary>
-        ///     标志位，表示winPanel是否已被打开
-        /// </summary>
-        private bool isWinPanelOpened;
+        private int _currentGroupIndex; // 当前正在处理的组索引
+        private int _currentWaveIndex; // 当前正在处理的波次索引
+        private bool _isWinPanelOpened; // 是否已经打开胜利面板的标志
 
-        /// <summary>
-        ///     玩家角色
-        /// </summary>
-        private GameObject player;
+        private GameObject _player; // 玩家对象的引用
+        private float _spawnTimer; // 敌人生成的计时器
+        private float _waveTimer; // 波次的计时器
 
-        /// <summary>
-        ///     敌人生成的计时器
-        /// </summary>
-        private float spawnTimer;
-
-        /// <summary>
-        ///     波次的计时器
-        /// </summary>
-        private float waveTimer;
-
-        // 公开的 静态 实例 属性
+        // 单例模式的静态实例访问器
         public static EnemyGenerator Instance => MonoSingletonProperty<EnemyGenerator>.Instance;
 
+        // 当对象启用时，Start方法会被调用一次
         private void Start()
         {
-            // 获取玩家角色实例
-            player = Player.Instance.gameObject;
+            _player = Player.Instance.gameObject; // 获取并存储玩家对象的引用
         }
 
+        // 每一帧调用一次Update方法
         private void Update()
         {
-            // 如果还有未完成的组
-            if (currentGroupIndex < groupConfig.groups.Length)
+            // 如果当前组索引未超过组的总数
+            if (_currentGroupIndex < levelConfig.groups.Length)
             {
-                // 如果当前组是开启状态
-                if (groupConfig.groups[currentGroupIndex].groupEnabled)
-                    UpdateWave();
-                else
-                    // 如果当前组被禁用，则跳过这个组
-                    currentGroupIndex++;
-            }
-            else if (!AreEnemiesAlive())
-            {
-                if (!isWinPanelOpened) // 检查winPanel是否已经被打开
+                // 如果当前波次索引未超过当前组波次的总数
+                if (_currentWaveIndex < levelConfig.groups[_currentGroupIndex].waves.Length)
                 {
-                    // 播放胜利音效
-                    AudioKit.PlaySound("GamePass");
-                    // 如果所有波次都已完成，且场上没有敌人，游戏胜利
-                    UIKit.OpenPanel<UIWinPanel>();
-                    // 时间暂停
-                    Time.timeScale = 0f;
-                    isWinPanelOpened = true; // 设置标志位，表示winPanel已被打开
+                    UpdateWave(); // 更新波次
                 }
+                else
+                {
+                    // 当前组的波次已完成，开始下一个组
+                    _currentGroupIndex++; // 组索引增加
+                    _currentWaveIndex = 0; // 波次索引重置
+                }
+            }
+            // 如果所有组的波次都已完成，并且场上没有敌人
+            else if (!AreEnemiesAlive() && !_isWinPanelOpened)
+            {
+                AudioKit.PlaySound("GamePass"); // 播放胜利音效
+                UIKit.OpenPanel<UIWinPanel>(); // 打开胜利面板
+                Time.timeScale = 0f; // 游戏时间暂停
+                _isWinPanelOpened = true; // 设置胜利面板已打开的标志
             }
         }
 
+        // 单例初始化方法，当单例被创建时调用
         public void OnSingletonInit()
         {
+            // 用于初始化单例，此处暂无代码
         }
 
-        /// <summary>
-        ///     更新波次
-        /// </summary>
+        // 更新波次的方法
         private void UpdateWave()
         {
-            // 更新波次的计时器
-            waveTimer += Time.deltaTime;
-            // 获取当前组的当前波次的配置
-            var currentWave = groupConfig.groups[currentGroupIndex].waves[currentWaveIndex];
+            _waveTimer += Time.deltaTime; // 波次计时器累加时间
 
-            // 如果当前波次的时间未结束
-            if (waveTimer < currentWave.duration)
+            // 确保当前组索引在有效范围内
+            if (_currentGroupIndex < levelConfig.groups.Length)
             {
-                // 更新敌人生成的计时器
-                spawnTimer += Time.deltaTime;
+                var currentWave = levelConfig.groups[_currentGroupIndex].waves[_currentWaveIndex]; // 获取当前波次的配置信息
 
-                // 如果到达生成间隔时间
-                if (spawnTimer >= currentWave.spawnInterval)
+                // 如果当前波次的时间未结束，并且波次是激活状态
+                if (_waveTimer < currentWave.duration && currentWave.waveEnabled)
                 {
-                    // 重置生成计时器
-                    spawnTimer = 0f;
-                    // 生成敌人
-                    GenerateEnemy(currentWave);
-                }
-            }
-            else
-            {
-                // 波次结束，切换到下一波次
-                currentWaveIndex++;
-                // 如果当前组的所有波次都结束了
-                if (currentWaveIndex >= groupConfig.groups[currentGroupIndex].waves.Length)
-                {
-                    // 切换到下一组
-                    currentGroupIndex++;
-                    // 重置波次索引
-                    currentWaveIndex = 0;
-                }
+                    _spawnTimer += Time.deltaTime; // 敌人生成计时器累加时间
 
-                waveTimer = 0f;
-                spawnTimer = 0f;
+                    // 如果达到了敌人生成间隔时间
+                    if (_spawnTimer >= currentWave.spawnInterval)
+                    {
+                        _spawnTimer = 0f; // 重置敌人生成计时器
+                        GenerateEnemy(currentWave); // 生成敌人
+                    }
+                }
+                else
+                {
+                    _currentWaveIndex++; // 波次索引增加，准备进入下一波次
+                    _waveTimer = 0f; // 波次计时器重置
+                    _spawnTimer = 0f; // 敌人生成计时器重置
+
+                    // 如果当前组的所有波次都已完成
+                    if (_currentWaveIndex >= levelConfig.groups[_currentGroupIndex].waves.Length)
+                    {
+                        _currentGroupIndex++; // 组索引增加，准备进入下一组
+                        _currentWaveIndex = 0; // 波次索引重置
+                    }
+                }
             }
         }
 
-        /// <summary>
-        ///     生成敌人
-        /// </summary>
-        /// <param name="waveDetails">波次配置</param>
+        // 生成敌人的方法
         private void GenerateEnemy(WaveDetails waveDetails)
         {
-            // 获取玩家位置
-            var playerPosition = player.transform.position;
-            // 随机方向
-            var randomDirection = Random.insideUnitCircle.normalized;
-            // 随机距离，根据波次配置的最小和最大生成距离
-            var randomDistance = Random.Range(minSpawnDistance, maxSpawnDistance);
-            // 计算生成位置
-            var randomPosition = playerPosition + new Vector3(randomDirection.x, randomDirection.y, 0) * randomDistance;
-            // 生成敌人
-            var enemyInstance = waveDetails.enemyPrefab.InstantiateWithParent(transform)
-                .Position(randomPosition)
-                .Rotation(Quaternion.identity)
-                .Show();
-
-            // 应用属性系数
-            AdjustEnemyAttributes(enemyInstance, waveDetails.attributeMultiplier);
+            var playerPosition = _player.transform.position; // 获取玩家位置
+            var randomDirection = Random.insideUnitCircle.normalized; // 随机生成一个方向
+            var randomDistance = Random.Range(minSpawnDistance, maxSpawnDistance); // 随机生成一个距离
+            var randomPosition =
+                playerPosition + new Vector3(randomDirection.x, randomDirection.y) * randomDistance; // 计算生成位置
+            var enemyInstance = Instantiate(waveDetails.enemyPrefab, randomPosition, Quaternion.identity); // 实例化敌人预制体
+            AdjustEnemyAttributes(enemyInstance, waveDetails.healthMultiplier, waveDetails.speedMultiplier); // 调整敌人的属性
+            enemyInstance.transform.SetParent(transform); // 设置敌人的父对象
+            enemyInstance.SetActive(true); // 激活敌人对象
+            enemyCount++; // 敌人数量增加
         }
 
-        /// <summary>
-        ///     调整敌人属性
-        /// </summary>
-        /// <param name="enemy">敌人实例</param>
-        /// <param name="multiplier">属性系数</param>
-        private void AdjustEnemyAttributes(GameObject enemy, float multiplier)
+        // 调整敌人属性的方法
+        private void AdjustEnemyAttributes(GameObject enemy, float healthMultiplier, float speedMultiplier)
         {
-            var enemyScript = enemy.GetComponent<IEnemy>();
-            enemyScript.AdjustAttributes(multiplier);
+            var enemyScript = enemy.GetComponent<IEnemy>(); // 获取敌人的接口脚本
+            enemyScript.AdjustAttributes(healthMultiplier, speedMultiplier); // 调整敌人属性
         }
 
-        /// <summary>
-        ///     检测场上是否还有敌人
-        /// </summary>
-        /// <returns> 如果场上还有敌人，返回 true，否则返回 false </returns>
+        // 检查场上是否还有敌人的方法
         private bool AreEnemiesAlive()
         {
-            return EnemyCount > 0;
+            return enemyCount > 0; // 如果敌人数量大于0，则返回true，表示还有敌人存活
         }
     }
 }

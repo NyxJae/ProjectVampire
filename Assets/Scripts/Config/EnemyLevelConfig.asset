@@ -13,10 +13,21 @@ MonoBehaviour:
   m_Name: EnemyLevelConfig
   m_EditorClassIdentifier: 
   groups:
-  - groupName: 1
-    groupEnabled: 1
+  - groupName: "\u7B2C\u4E00\u7EC4"
     waves:
-    - enemyPrefab: {fileID: 1651630702174578907, guid: 0a8c85d19aa5f6f49b08bc1e73681ca9, type: 3}
-      duration: 5
+    - waveName: "\u5E7D\u70751"
+      waveEnabled: 1
+      enemyPrefab: {fileID: 1651630702174578907, guid: 0a8c85d19aa5f6f49b08bc1e73681ca9, type: 3}
+      duration: 1
       spawnInterval: 0.5
-      attributeMultiplier: 1
+      healthMultiplier: 1
+      speedMultiplier: 1
+  - groupName: "\u7B2C\u4E8C\u7EC4"
+    waves:
+    - waveName: "\u5E7D\u70752"
+      waveEnabled: 1
+      enemyPrefab: {fileID: 1651630702174578907, guid: 0a8c85d19aa5f6f49b08bc1e73681ca9, type: 3}
+      duration: 1
+      spawnInterval: 0.5
+      healthMultiplier: 1
+      speedMultiplier: 1

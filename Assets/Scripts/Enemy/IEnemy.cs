@@ -22,7 +22,8 @@
         /// <summary>
         ///     调整敌人属性
         /// </summary>
-        /// <param name="multiplier">属性调整系数</param>
-        void AdjustAttributes(float multiplier);
+        /// <param name="healthMultiplier">生命系数</param>
+        /// <param name="speedMultiplier">速度系数</param>
+        void AdjustAttributes(float healthMultiplier, float speedMultiplier);
     }
 }
