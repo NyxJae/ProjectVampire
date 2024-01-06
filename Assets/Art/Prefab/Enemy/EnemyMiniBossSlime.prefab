@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 4315623909511211023}
   - component: {fileID: 5187441439825640975}
   m_Layer: 0
-  m_Name: EnemyMiniBoss
+  m_Name: EnemyMiniBossSlime
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

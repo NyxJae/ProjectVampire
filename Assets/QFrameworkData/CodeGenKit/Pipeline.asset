@@ -20,17 +20,14 @@ MonoBehaviour:
     NameToFullName: []
     BindInfos:
     - TypeName: SpriteRenderer
-      PathToRoot: Sprite
-      MemberName: Sprite
-    - TypeName: CircleCollider2D
-      PathToRoot: HitBox
-      MemberName: HitBox
-    ScriptsFolder: Assets/Art/Sound/Sfx/Scripts/Enemy
-    ClassName: EnemyMiniBoss
+      PathToRoot: EnemyDieFx
+      MemberName: EnemyDieFx
+    ScriptsFolder: Assets/Scripts/Game
+    ClassName: FxController
     Namespace: ProjectVampire
     MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace ProjectVampire\r\n{\r\n\tpublic
-      partial class EnemyMiniBoss : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
+      partial class FxController : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:f5137f81-8965-4fd2-86ee-c87b83b99b10\r\nusing UnityEngine;\r\n\r\nnamespace
-      ProjectVampire\r\n{\r\n\tpublic partial class EnemyMiniBoss\r\n\t{\r\n\r\n\t\tpublic
-      SpriteRenderer Sprite;\r\n\r\n\t\tpublic CircleCollider2D HitBox;\r\n\r\n\t}\r\n}\r\n"
+    DesignerCode: "// Generate Id:a9717a0e-dcd4-42ed-81a3-8bef441fce5c\r\nusing UnityEngine;\r\n\r\nnamespace
+      ProjectVampire\r\n{\r\n\tpublic partial class FxController\r\n\t{\r\n\r\n\t\tpublic
+      SpriteRenderer EnemyDieFx;\r\n\r\n\t}\r\n}\r\n"

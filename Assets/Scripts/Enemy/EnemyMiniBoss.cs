@@ -120,8 +120,17 @@ namespace ProjectVampire
             mFsm.FixedUpdate();
         }
 
-        public float Health { get; set; } = 30;
-        public float Speed { get; set; }
+        public float Health
+        {
+            get => mhealth;
+            set => mhealth = value;
+        }
+
+        public float Speed
+        {
+            get => mspeed;
+            set => mspeed = value;
+        }
 
 
         public void TakeDamage(float damage, float changeDuration = 0.1f)
@@ -152,6 +161,8 @@ namespace ProjectVampire
                 EnemyGenerator.Instance.enemyCount--;
                 // 掉落奖励
                 PowerUpManager.Instance.DroReward(gameObject);
+                // 播放死亡特效
+                FxController.Instance.Play(Sprite);
                 // 销毁自身
                 Destroy(gameObject);
             }

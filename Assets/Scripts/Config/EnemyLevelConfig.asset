@@ -15,19 +15,45 @@ MonoBehaviour:
   groups:
   - groupName: "\u7B2C\u4E00\u7EC4"
     waves:
-    - waveName: "\u5E7D\u70751"
+    - waveName: "\u53F2\u83B1\u59C60"
       waveEnabled: 1
-      enemyPrefab: {fileID: 1651630702174578907, guid: 0a8c85d19aa5f6f49b08bc1e73681ca9, type: 3}
-      duration: 1
+      enemyPrefab: {fileID: 6079736196447174833, guid: 502e39ce473ed4146bc1f1308d031782, type: 3}
+      duration: 10
       spawnInterval: 0.5
       healthMultiplier: 1
       speedMultiplier: 1
-  - groupName: "\u7B2C\u4E8C\u7EC4"
-    waves:
-    - waveName: "\u5E7D\u70752"
+    - waveName: "\u53F2\u83B1\u59C61"
       waveEnabled: 1
-      enemyPrefab: {fileID: 1651630702174578907, guid: 0a8c85d19aa5f6f49b08bc1e73681ca9, type: 3}
-      duration: 1
+      enemyPrefab: {fileID: 6079736196447174833, guid: 502e39ce473ed4146bc1f1308d031782, type: 3}
+      duration: 10
       spawnInterval: 0.5
+      healthMultiplier: 2
+      speedMultiplier: 1
+    - waveName: "\u53F2\u83B1\u59C62"
+      waveEnabled: 1
+      enemyPrefab: {fileID: 6079736196447174833, guid: 502e39ce473ed4146bc1f1308d031782, type: 3}
+      duration: 10
+      spawnInterval: 0.5
+      healthMultiplier: 2
+      speedMultiplier: 2
+    - waveName: "\u53F2\u83B1\u59C63"
+      waveEnabled: 1
+      enemyPrefab: {fileID: 6079736196447174833, guid: 502e39ce473ed4146bc1f1308d031782, type: 3}
+      duration: 10
+      spawnInterval: 0.3
+      healthMultiplier: 2
+      speedMultiplier: 2
+    - waveName: "\u53F2\u83B1\u59C64"
+      waveEnabled: 1
+      enemyPrefab: {fileID: 6079736196447174833, guid: 502e39ce473ed4146bc1f1308d031782, type: 3}
+      duration: 10
+      spawnInterval: 0.3
+      healthMultiplier: 2
+      speedMultiplier: 2
+    - waveName: "\u53F2\u83B1\u59C6Boss"
+      waveEnabled: 1
+      enemyPrefab: {fileID: 5085165724929303497, guid: 1e292f9a2f3424547975a2120b315d15, type: 3}
+      duration: 1
+      spawnInterval: 0.9
       healthMultiplier: 1
       speedMultiplier: 1

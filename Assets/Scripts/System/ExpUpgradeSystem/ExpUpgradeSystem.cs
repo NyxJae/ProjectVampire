@@ -77,11 +77,7 @@ namespace ProjectVampire
             // 随机获取n个未升级的项
             var randomItems = unUpdatedItems.OrderBy(item => Random.Range(0, 100)).Take(n).ToList();
             // 将n个未升级的项设为可见
-            foreach (var item in randomItems)
-            {
-                item.IsVisible.Value = true;
-                Debug.Log($"显示的名字是:{item.Description}");
-            }
+            foreach (var item in randomItems) item.IsVisible.Value = true;
         }
 
         // 重置所有升级项

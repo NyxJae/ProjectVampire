@@ -13,7 +13,6 @@ namespace ProjectVampire
         /// </summary>
         private GameObject player;
 
-
         private void Start()
         {
             // 获取 player 角色
@@ -97,6 +96,8 @@ namespace ProjectVampire
                 EnemyGenerator.Instance.enemyCount--;
                 // 掉落奖励
                 PowerUpManager.Instance.DroReward(gameObject);
+                // 播放死亡特效
+                FxController.Instance.Play(Sprite);
                 // 销毁自身
                 this.DestroyGameObjGracefully();
             }
