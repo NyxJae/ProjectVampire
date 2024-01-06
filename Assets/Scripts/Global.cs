@@ -11,7 +11,10 @@ namespace ProjectVampire
         public const int GameScene = 1;
 
         // 公开的 经验 属性
-        public static BindableProperty<int> Exp = new();
+        public static BindableProperty<float> Exp = new();
+
+        // 经验升级所需经验值
+        public static BindableProperty<float> MaxExp = new();
 
         // 公开的 等级 属性
         public static BindableProperty<int> Level = new(1);
@@ -50,6 +53,7 @@ namespace ProjectVampire
         public static void ResetProperties()
         {
             Exp.Value = 0;
+            MaxExp.Value = 10;
             Level.Value = 1;
             Time.Value = 0;
             Health.Value = MaxHealth.Value;

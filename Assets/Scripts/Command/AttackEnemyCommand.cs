@@ -1,4 +1,5 @@
-﻿using QFramework;
+﻿using QAssetBundle;
+using QFramework;
 using UnityEngine;
 
 namespace ProjectVampire
@@ -29,7 +30,7 @@ namespace ProjectVampire
             if (enemy != null)
             {
                 // 播放攻击音效
-                AudioKit.PlaySound("Hit");
+                AudioKit.PlaySound(Sfx.HIT);
                 // 对敌人造成伤害
                 enemy.TakeDamage(mAttack);
             }

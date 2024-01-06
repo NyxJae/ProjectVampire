@@ -71,10 +71,12 @@ namespace ProjectVampire
             // 给经验值增加事件添加升级回调函数
             Global.Exp.Register(newValue =>
             {
-                if (newValue >= ExpToNextLevel())
+                if (newValue >= Global.MaxHealth.Value)
                 {
                     Global.Level.Value += 1;
                     Global.Exp.Value = 0;
+                    // 最大经验值增加1.2倍再向下取整
+                    Global.MaxHealth.Value = (int)(Global.MaxHealth.Value * 1.2f);
                 }
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
         }
@@ -112,13 +114,6 @@ namespace ProjectVampire
         {
             // 获取输入的值，转换为2D向量并标准化
             mMoveInput = context.ReadValue<Vector2>().normalized;
-        }
-
-
-        // 计算距离下次升级经验值 方法
-        public int ExpToNextLevel()
-        {
-            return 5 * Global.Level.Value;
         }
     }
 }

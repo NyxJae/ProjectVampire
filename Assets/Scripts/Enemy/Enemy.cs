@@ -1,3 +1,4 @@
+using QAssetBundle;
 using QFramework;
 using UnityEngine;
 
@@ -98,6 +99,8 @@ namespace ProjectVampire
                 PowerUpManager.Instance.DroReward(gameObject);
                 // 播放死亡特效
                 FxController.Instance.Play(Sprite);
+                // 播放音效
+                AudioKit.PlaySound(Sfx.ENEMY_DIE);
                 // 销毁自身
                 this.DestroyGameObjGracefully();
             }

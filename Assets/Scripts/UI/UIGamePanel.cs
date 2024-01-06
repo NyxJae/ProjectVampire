@@ -20,9 +20,12 @@ namespace ProjectVampire
             mData = uiData as UIGamePanelData ?? new UIGamePanelData();
             // 给经验值增加事件添加显示回调函数
             Global.Exp.RegisterWithInitValue(newValue =>
-            {
-                TextExp.text = $"经验值:{newValue}/{Player.Instance.ExpToNextLevel()}";
-            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+                {
+                    ExpValue.fillAmount = newValue / Global.MaxExp.Value;
+                    // 日志 打印经验值
+                    Debug.Log($"经验值:{newValue}/{Global.MaxExp.Value}");
+                })
+                .UnRegisterWhenGameObjectDestroyed(gameObject);
             // 给等级增加事件添加显示回调函数
             Global.Level.RegisterWithInitValue(newValue => { TextLevel.text = $"等级:{newValue}"; })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
