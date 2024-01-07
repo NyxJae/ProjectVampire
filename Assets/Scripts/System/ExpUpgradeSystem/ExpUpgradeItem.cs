@@ -5,9 +5,14 @@ namespace ProjectVampire.System.ExpUpgradeSystem
 {
     public class ExpUpgradeItem
     {
+        // condition, 用于判断是否可以升级
+        private Func<ExpUpgradeItem, bool> mCondition;
+
+        // 升级项描述 Func
+        private Func<int, string> mDescription;
+
         // 升级Action
         private Action<ExpUpgradeItem> mOnUpgrade;
-
 
         // 升级项状态
         public bool IsUpdated { get; set; }
@@ -36,7 +41,7 @@ namespace ProjectVampire.System.ExpUpgradeSystem
             // 升级
             CurrentLevel.Value++;
             // 如果升级到最大等级, 则设置为已经升级
-            if (CurrentLevel.Value == MaxLevel)
+            if (CurrentLevel.Value >= MaxLevel)
                 IsUpdated = true;
         }
 
@@ -59,9 +64,9 @@ namespace ProjectVampire.System.ExpUpgradeSystem
         /// </summary>
         /// <param name="description"></param>
         /// <returns></returns>
-        public ExpUpgradeItem SetDescription(string description)
+        public ExpUpgradeItem SetDescription(Func<int, string> description)
         {
-            Description = $"{description}";
+            Description = description.Invoke(CurrentLevel.Value);
             return this;
         }
 
@@ -87,6 +92,26 @@ namespace ProjectVampire.System.ExpUpgradeSystem
         {
             mOnUpgrade = onUpgrade;
             return this;
+        }
+
+        // 链式封装 setcondition
+        public ExpUpgradeItem SetCondition(Func<ExpUpgradeItem, bool> condition)
+        {
+            mCondition = condition;
+            return this;
+        }
+
+        /// <summary>
+        ///     设置升级项的条件
+        /// </summary>
+        /// <returns></returns>
+        public bool ConditionCheck()
+        {
+            // 如果有前置依赖条件, 则判断是否满足依赖条件且未升级
+            if (mCondition != null)
+                return !IsUpdated && mCondition.Invoke(this);
+            // 如果没有前置依赖条件, 则判断是否已经升级
+            return !IsUpdated;
         }
     }
 }

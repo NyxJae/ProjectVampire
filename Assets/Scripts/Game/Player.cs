@@ -58,6 +58,7 @@ namespace ProjectVampire
             // 给血量增加事件添加死亡回调函数
             Global.Health.Register(newValue =>
             {
+                HPValue.fillAmount = (float)newValue / Global.MaxHealth.Value;
                 if (newValue <= 0)
                 {
                     // 播放死亡音效
@@ -68,6 +69,12 @@ namespace ProjectVampire
                     Time.timeScale = 0;
                 }
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            // 给血量最大值增加事件添加显示回调函数
+            Global.MaxHealth.RegisterWithInitValue(newValue =>
+                {
+                    HPValue.fillAmount = (float)Global.Health.Value / newValue;
+                })
+                .UnRegisterWhenGameObjectDestroyed(gameObject);
             // 给经验值增加事件添加升级回调函数
             Global.Exp.Register(newValue =>
             {
@@ -76,7 +83,7 @@ namespace ProjectVampire
                     Global.Level.Value += 1;
                     Global.Exp.Value = 0;
                     // 最大经验值增加1.2倍再向下取整
-                    Global.MaxHealth.Value = (int)(Global.MaxHealth.Value * 1.2f);
+                    Global.MaxExp.Value = (int)(Global.MaxExp.Value * 1.2f);
                 }
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
         }

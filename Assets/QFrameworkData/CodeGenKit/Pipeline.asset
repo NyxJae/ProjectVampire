@@ -19,15 +19,26 @@ MonoBehaviour:
     From: 0
     NameToFullName: []
     BindInfos:
-    - TypeName: SpriteRenderer
-      PathToRoot: EnemyDieFx
-      MemberName: EnemyDieFx
-    ScriptsFolder: Assets/Scripts/Game
-    ClassName: FxController
+    - TypeName: ProjectVampire.PickAbility
+      PathToRoot: PickAbility
+      MemberName: PickAbility
+    - TypeName: ProjectVampire.LightingSite
+      PathToRoot: LightingSite
+      MemberName: LightingSite
+    - TypeName: ProjectVampire.FireBall
+      PathToRoot: FireBall
+      MemberName: FireBall
+    - TypeName: ProjectVampire.KnifeAbility
+      PathToRoot: KnifeAbility
+      MemberName: KnifeAbility
+    ScriptsFolder: Assets/Scripts/Game/Abilities
+    ClassName: Abilities
     Namespace: ProjectVampire
     MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace ProjectVampire\r\n{\r\n\tpublic
-      partial class FxController : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
+      partial class Abilities : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:a9717a0e-dcd4-42ed-81a3-8bef441fce5c\r\nusing UnityEngine;\r\n\r\nnamespace
-      ProjectVampire\r\n{\r\n\tpublic partial class FxController\r\n\t{\r\n\r\n\t\tpublic
-      SpriteRenderer EnemyDieFx;\r\n\r\n\t}\r\n}\r\n"
+    DesignerCode: "// Generate Id:68ce6257-a9a1-44df-9156-bf82c6296225\r\nusing UnityEngine;\r\n\r\nnamespace
+      ProjectVampire\r\n{\r\n\tpublic partial class Abilities\r\n\t{\r\n\r\n\t\tpublic
+      ProjectVampire.PickAbility PickAbility;\r\n\r\n\t\tpublic ProjectVampire.LightingSite
+      LightingSite;\r\n\r\n\t\tpublic ProjectVampire.FireBall FireBall;\r\n\r\n\t\tpublic
+      ProjectVampire.KnifeAbility KnifeAbility;\r\n\r\n\t}\r\n}\r\n"

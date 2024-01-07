@@ -70,6 +70,9 @@ namespace ProjectVampire
                 // 计时器归零
                 mTimer = 0;
             }
+
+            // 旋转贴图
+            Sprite.transform.Rotate(0, 0, 10 * Time.deltaTime);
         }
 
         public IArchitecture GetArchitecture()

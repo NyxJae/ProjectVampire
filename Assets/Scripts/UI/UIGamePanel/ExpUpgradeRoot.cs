@@ -37,7 +37,7 @@ namespace ProjectVampire
                         {
                             // 更新升级项描述(textMeshPro)
                             selfCatch.GetComponentInChildren<TextMeshProUGUI>().text =
-                                $"{itemCatch.Description}LV{itemCatch.CurrentLevel.Value}";
+                                itemCatch.Description;
                             // 设置按钮是否可见
                             selfCatch.gameObject.SetActive(newValue);
                         }).UnRegisterWhenGameObjectDestroyed(selfCatch);

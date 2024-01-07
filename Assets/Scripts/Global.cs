@@ -14,7 +14,7 @@ namespace ProjectVampire
         public static BindableProperty<float> Exp = new();
 
         // 经验升级所需经验值
-        public static BindableProperty<float> MaxExp = new();
+        public static BindableProperty<float> MaxExp = new(10);
 
         // 公开的 等级 属性
         public static BindableProperty<int> Level = new(1);

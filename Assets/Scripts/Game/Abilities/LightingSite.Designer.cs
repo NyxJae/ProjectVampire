@@ -1,4 +1,4 @@
-// Generate Id:407b5f45-3e2d-48f9-9a1e-0e176d7a8f90
+// Generate Id:5525786d-962f-49c2-9a9d-b7b1bfbbe2b4
 using UnityEngine;
 
 namespace ProjectVampire
@@ -7,6 +7,8 @@ namespace ProjectVampire
 	{
 
 		public CircleCollider2D AttackRange;
+
+		public SpriteRenderer Sprite;
 
 	}
 }

@@ -17,6 +17,13 @@ namespace ProjectVampire
         /// </summary>
         [SerializeField] private float mAttack = 2f;
 
+        // 攻击力属性
+        public float Attack
+        {
+            get => mAttack;
+            set => mAttack = value;
+        }
+
         private void Start()
         {
             HitBox.OnTriggerStay2DEvent(Other =>

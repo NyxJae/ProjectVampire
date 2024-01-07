@@ -1,4 +1,4 @@
-// Generate Id:e8874bf3-ce0a-4410-b2dd-02eca15aa47f
+// Generate Id:56acb2ce-a6cf-433d-80eb-33f9cce36b65
 using UnityEngine;
 
 namespace ProjectVampire
@@ -14,6 +14,8 @@ namespace ProjectVampire
 		public BoxCollider2D HurtBox;
 
 		public ProjectVampire.Abilities Abilities;
+
+		public UnityEngine.UI.Image HPValue;
 
 	}
 }

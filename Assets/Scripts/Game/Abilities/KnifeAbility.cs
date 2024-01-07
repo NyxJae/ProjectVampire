@@ -22,6 +22,20 @@ namespace ProjectVampire
         // 时间计时器
         private float mTimer;
 
+        // 飞刀的攻击力属性
+        public float Attack
+        {
+            get => mAttack;
+            set => mAttack = value;
+        }
+
+        // 飞刀的攻击间隔属性
+        public float AttackRate
+        {
+            get => mAttackRate;
+            set => mAttackRate = value;
+        }
+
         public EnemyGenerator enemyGenerator { get; set; }
 
         private void Start()

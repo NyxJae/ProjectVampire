@@ -18,21 +18,21 @@ MonoBehaviour:
     - waveName: "\u53F2\u83B1\u59C60"
       waveEnabled: 1
       enemyPrefab: {fileID: 6079736196447174833, guid: 502e39ce473ed4146bc1f1308d031782, type: 3}
-      duration: 10
+      duration: 30
       spawnInterval: 0.5
       healthMultiplier: 1
       speedMultiplier: 1
     - waveName: "\u53F2\u83B1\u59C61"
       waveEnabled: 1
       enemyPrefab: {fileID: 6079736196447174833, guid: 502e39ce473ed4146bc1f1308d031782, type: 3}
-      duration: 10
+      duration: 30
       spawnInterval: 0.5
       healthMultiplier: 2
       speedMultiplier: 1
     - waveName: "\u53F2\u83B1\u59C62"
       waveEnabled: 1
       enemyPrefab: {fileID: 6079736196447174833, guid: 502e39ce473ed4146bc1f1308d031782, type: 3}
-      duration: 10
+      duration: 30
       spawnInterval: 0.5
       healthMultiplier: 2
       speedMultiplier: 2
