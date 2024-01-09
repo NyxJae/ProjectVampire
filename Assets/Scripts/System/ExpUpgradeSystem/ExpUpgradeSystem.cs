@@ -124,6 +124,16 @@ namespace ProjectVampire
                     // 增加飞刀数量
                     Player.Instance.Abilities.KnifeAbility.KnifeCount += 1;
                 }));
+            // 添加升级项 飞刀穿透敌人数量提升
+            var knifePierceCountUpgrade = Add(new ExpUpgradeItem()
+                .SetKey("KnifePierceCountUpgrade") // 设置升级项的key
+                .SetDescription(lv => $"飞刀穿透敌人数量提升LV{lv}") // 设置升级项的描述
+                .SetMaxLevel(5)
+                .SetOnUpgrade(item => // 设置升级项的升级方法
+                {
+                    // 增加飞刀穿透敌人数量
+                    Player.Instance.Abilities.KnifeAbility.KnifePierceCount += 1;
+                }));
 
             // 添加升级项 拾取范围提升
             var pickUpRangeUpgrade = Add(new ExpUpgradeItem()
