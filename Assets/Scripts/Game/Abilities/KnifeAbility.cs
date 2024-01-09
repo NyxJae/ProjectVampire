@@ -4,36 +4,38 @@ using UnityEngine;
 
 namespace ProjectVampire
 {
-    // todo: 飞刀能力 根据指定间隔时间 向最近的敌人发射飞刀 打到敌人 飞刀消失 飞的太远也消失 
     public partial class KnifeAbility : ViewController, IController
     {
-        // 飞刀的攻击力
+        // 新增属性：可发射的飞刀数量
         [SerializeField] private float mAttack = 2f;
 
-        // 飞刀的攻击间隔
         [SerializeField] private float mAttackRate = 1f;
 
-        // 飞刀的飞行速度
+        // 新增属性：可发射的飞刀数量
+        [SerializeField] private int mKnifeCount = 1;
         private readonly float mSpeed = 10f;
-
-        // 飞刀的最远飞行距离
         private float mMaxDistance = 20f;
-
-        // 时间计时器
         private float mTimer;
 
-        // 飞刀的攻击力属性
+        // 获取和设置飞刀攻击力
         public float Attack
         {
             get => mAttack;
             set => mAttack = value;
         }
 
-        // 飞刀的攻击间隔属性
+        // 获取和设置飞刀的攻击间隔
         public float AttackRate
         {
             get => mAttackRate;
             set => mAttackRate = value;
+        }
+
+        // 获取和设置可以发射的飞刀数量
+        public int KnifeCount
+        {
+            get => mKnifeCount;
+            set => mKnifeCount = Mathf.Max(1, value); // 确保至少发射一个飞刀
         }
 
         public EnemyGenerator enemyGenerator { get; set; }
@@ -44,60 +46,69 @@ namespace ProjectVampire
             enemyGenerator = EnemyGenerator.Instance;
         }
 
-
         private void Update()
         {
-            // 计时器逐帧增加
+            // 更新计时器
             mTimer += Time.deltaTime;
-            // 如果计时器大于攻击间隔期间
+            // 如果计时器大于攻击间隔
             if (mTimer >= mAttackRate)
             {
                 // 重置计时器
                 mTimer = 0;
-                // 获取敌人生成器的所有子对象,tag为Enemy的
+                // 获取所有敌人，并按距离排序
                 var enemyList = enemyGenerator.gameObject.GetComponentsInChildren<Transform>()
                     .Where(child => child.CompareTag("Enemy"))
+                    .OrderBy(enemy => Vector3.Distance(enemy.position, transform.position))
                     .ToArray();
-                // 如果敌人列表不为空
-                if (enemyList.Length > 0)
-                {
-                    // 根据敌人的位置,排序
-                    enemyList = enemyList
-                        .OrderBy(enemy => Vector3.Distance(enemy.position, transform.position))
-                        .ToArray();
-                    // 获取最近的敌人
-                    var nearestEnemy = enemyList[0];
-                    // 实例化飞刀
-                    Knife.InstantiateWithParent(transform)
-                        .Position(transform.position)
-                        .Show()
-                        .Self(self =>
-                        {
-                            // 旋转z轴 使飞刀朝向敌人
-                            Vector2 direction = nearestEnemy.position - transform.position;
-                            var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-                            self.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-                            // 向最近的敌人发射飞刀,设置飞刀的飞行速度
-                            self.Rigidbody2D.velocity =
-                                direction.normalized * mSpeed;
-                            self.HitBox.OnTriggerEnter2DEvent(Other =>
-                            {
-                                // 如果碰到的是敌人
-                                if (!Other.transform.parent.CompareTag("Enemy")) return; // 发送攻击命令
-                                this.SendCommand(new AttackEnemyCommand(Other.gameObject, mAttack));
-                                // 销毁飞刀
-                                Destroy(self.gameObject);
-                            });
-                            // 延时3秒后销毁飞刀
-                            ActionKit.Delay(2, () => Destroy(self.gameObject));
-                        });
-                }
+
+                // 获取最近的几个敌人，数量由mKnifeCount决定
+                var nearestEnemies = enemyList.Take(mKnifeCount).ToArray();
+
+                // 对每个最近的敌人发射一个飞刀
+                foreach (var enemy in nearestEnemies)
+                    // 对每个最近的敌人发射一个飞刀
+                    FireKnife(enemy);
             }
         }
 
         public IArchitecture GetArchitecture()
         {
+            // 返回全局接口
             return Global.Interface;
+        }
+
+        private void FireKnife(Transform target)
+        {
+            // 创建一个飞刀，并设置其父物体为transform
+            Knife.InstantiateWithParent(transform)
+                // 设置飞刀的位置为transform的位置
+                .Position(transform.position)
+                // 显示飞刀
+                .Show()
+                // 设置自毁函数
+                .Self(self =>
+                {
+                    // 计算飞刀的目标方向
+                    Vector2 direction = target.position - transform.position;
+                    // 计算飞刀的旋转角度
+                    var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                    // 设置飞刀的旋转角度
+                    self.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                    // 设置飞刀的速度
+                    self.Rigidbody2D.velocity = direction.normalized * mSpeed;
+                    // 设置触发器
+                    self.HitBox.OnTriggerEnter2DEvent(Other =>
+                    {
+                        // 如果触发器不是敌人，则返回
+                        if (!Other.transform.parent.CompareTag("Enemy")) return;
+                        // 向敌人发送攻击命令
+                        this.SendCommand(new AttackEnemyCommand(Other.gameObject, mAttack));
+                        // 销毁飞刀
+                        Destroy(self.gameObject);
+                    });
+                    // 设置自毁时间
+                    ActionKit.Delay(2, () => Destroy(self.gameObject));
+                });
         }
     }
 }

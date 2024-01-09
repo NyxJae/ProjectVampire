@@ -21,7 +21,11 @@ namespace ProjectVampire.System.ExpUpgradeSystem
         public string Key { get; private set; }
 
         // 升级项的描述
-        public string Description { get; private set; }
+        public string Description
+        {
+            get => mDescription?.Invoke(CurrentLevel.Value);
+            private set { }
+        }
 
         // 最大等级
         public int MaxLevel { get; private set; }
@@ -41,7 +45,7 @@ namespace ProjectVampire.System.ExpUpgradeSystem
             // 升级
             CurrentLevel.Value++;
             // 如果升级到最大等级, 则设置为已经升级
-            if (CurrentLevel.Value >= MaxLevel)
+            if (CurrentLevel.Value > MaxLevel)
                 IsUpdated = true;
         }
 
@@ -66,7 +70,8 @@ namespace ProjectVampire.System.ExpUpgradeSystem
         /// <returns></returns>
         public ExpUpgradeItem SetDescription(Func<int, string> description)
         {
-            Description = description.Invoke(CurrentLevel.Value);
+            mDescription = description;
+            ;
             return this;
         }
 

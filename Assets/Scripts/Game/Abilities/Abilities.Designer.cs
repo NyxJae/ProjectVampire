@@ -10,7 +10,7 @@ namespace ProjectVampire
 
 		public ProjectVampire.LightingSite LightingSite;
 
-		public ProjectVampire.FireBall FireBall;
+		public ProjectVampire.FireBallAbility FireBall;
 
 		public ProjectVampire.KnifeAbility KnifeAbility;
 

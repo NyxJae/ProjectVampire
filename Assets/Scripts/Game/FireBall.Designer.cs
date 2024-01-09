@@ -1,4 +1,4 @@
-// Generate Id:f6b1ecf3-723e-42fd-af16-933a56007636
+// Generate Id:b5d4ebdb-82c6-4fcd-ab9b-82390dd49a03
 using UnityEngine;
 
 namespace ProjectVampire
@@ -6,7 +6,7 @@ namespace ProjectVampire
 	public partial class FireBall
 	{
 
-		public SpriteRenderer Circle;
+		public SpriteRenderer Sprite;
 
 		public CircleCollider2D HitBox;
 

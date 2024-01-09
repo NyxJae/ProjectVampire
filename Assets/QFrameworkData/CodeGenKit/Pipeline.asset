@@ -19,26 +19,15 @@ MonoBehaviour:
     From: 0
     NameToFullName: []
     BindInfos:
-    - TypeName: ProjectVampire.PickAbility
-      PathToRoot: PickAbility
-      MemberName: PickAbility
-    - TypeName: ProjectVampire.LightingSite
-      PathToRoot: LightingSite
-      MemberName: LightingSite
     - TypeName: ProjectVampire.FireBall
       PathToRoot: FireBall
       MemberName: FireBall
-    - TypeName: ProjectVampire.KnifeAbility
-      PathToRoot: KnifeAbility
-      MemberName: KnifeAbility
-    ScriptsFolder: Assets/Scripts/Game/Abilities
-    ClassName: Abilities
+    ScriptsFolder: Assets\Scripts\Game\Abilities
+    ClassName: FireBallAbility
     Namespace: ProjectVampire
     MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace ProjectVampire\r\n{\r\n\tpublic
-      partial class Abilities : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
+      partial class FireBallAbility : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:68ce6257-a9a1-44df-9156-bf82c6296225\r\nusing UnityEngine;\r\n\r\nnamespace
-      ProjectVampire\r\n{\r\n\tpublic partial class Abilities\r\n\t{\r\n\r\n\t\tpublic
-      ProjectVampire.PickAbility PickAbility;\r\n\r\n\t\tpublic ProjectVampire.LightingSite
-      LightingSite;\r\n\r\n\t\tpublic ProjectVampire.FireBall FireBall;\r\n\r\n\t\tpublic
-      ProjectVampire.KnifeAbility KnifeAbility;\r\n\r\n\t}\r\n}\r\n"
+    DesignerCode: "// Generate Id:f18115b8-e5bf-455d-b620-331302957b33\r\nusing UnityEngine;\r\n\r\nnamespace
+      ProjectVampire\r\n{\r\n\tpublic partial class FireBallAbility\r\n\t{\r\n\r\n\t\tpublic
+      ProjectVampire.FireBall FireBall;\r\n\r\n\t}\r\n}\r\n"

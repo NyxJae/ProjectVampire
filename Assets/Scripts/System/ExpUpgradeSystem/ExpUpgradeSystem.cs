@@ -81,6 +81,17 @@ namespace ProjectVampire
                     // 增加攻击力
                     Player.Instance.Abilities.FireBall.Attack *= 1.1f;
                 }));
+            // 火球数量提升
+            var fireBallCountUpgrade = Add(new ExpUpgradeItem()
+                .SetKey("FireBallCountUpgrade") // 设置升级项的key
+                .SetDescription(lv => $"火球数量提升LV{lv}") // 设置升级项的描述
+                .SetMaxLevel(8)
+                .SetCondition(item => fireBall.IsUpdated)
+                .SetOnUpgrade(item => // 设置升级项的升级方法
+                {
+                    // 增加火球数量
+                    Player.Instance.Abilities.FireBall.FireBallCount.Value += 1;
+                }));
 
             // 添加升级项 飞刀攻击力提升
             var knifeAtkUpgrade = Add(new ExpUpgradeItem()
@@ -102,6 +113,16 @@ namespace ProjectVampire
                 {
                     // 增加攻击间隔
                     Player.Instance.Abilities.KnifeAbility.AttackRate *= 0.9f;
+                }));
+            // 添加升级项 飞刀数量提升
+            var knifeCountUpgrade = Add(new ExpUpgradeItem()
+                .SetKey("KnifeCountUpgrade") // 设置升级项的key
+                .SetDescription(lv => $"飞刀数量提升LV{lv}") // 设置升级项的描述
+                .SetMaxLevel(10)
+                .SetOnUpgrade(item => // 设置升级项的升级方法
+                {
+                    // 增加飞刀数量
+                    Player.Instance.Abilities.KnifeAbility.KnifeCount += 1;
                 }));
 
             // 添加升级项 拾取范围提升
@@ -140,7 +161,7 @@ namespace ProjectVampire
             foreach (var item in ExpUpdateItems)
             {
                 item.IsUpdated = false;
-                item.CurrentLevel.Value = 0;
+                item.CurrentLevel.Value = 1;
             }
         }
     }
