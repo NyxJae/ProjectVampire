@@ -13,11 +13,15 @@
         float Speed { get; set; }
 
         /// <summary>
+        ///     攻击力
+        /// </summary>
+        float Attack { get; set; }
+
+        /// <summary>
         ///     受伤
         /// </summary>
         /// <param name="damage">伤害值</param>
-        /// <param name="changeDuration">改变持续时间</param>
-        void TakeDamage(float damage, float changeDuration = 0.1f);
+        void TakeDamage(float damage);
 
         /// <summary>
         ///     调整敌人属性

@@ -13,20 +13,26 @@ namespace ProjectVampire
 
         public void Save()
         {
-            // 获取保存系统
             var saveSystem = this.GetSystem<SaveSystem>();
-            // 保存升级项的状态
             foreach (var coinUpdateItem in CoinUpdateItems)
-                saveSystem.Save(coinUpdateItem.Key, coinUpdateItem.IsUpdated);
+            {
+                // 保存升级项的等级和价格
+                saveSystem.Save($"{coinUpdateItem.Key}_Level", coinUpdateItem.lv);
+                saveSystem.Save($"{coinUpdateItem.Key}_Price", coinUpdateItem.Price);
+                saveSystem.Save($"{coinUpdateItem.Key}_IsUpdated", coinUpdateItem.IsUpdated);
+            }
         }
 
         public void Load()
         {
-            // 获取保存系统
             var saveSystem = this.GetSystem<SaveSystem>();
-            // 读取升级项的状态
             foreach (var coinUpdateItem in CoinUpdateItems)
-                coinUpdateItem.IsUpdated = saveSystem.LoadBool(coinUpdateItem.Key);
+            {
+                // 读取升级项的等级和价格
+                coinUpdateItem.lv = saveSystem.LoadInt($"{coinUpdateItem.Key}_Level", 1);
+                coinUpdateItem.Price = saveSystem.LoadInt($"{coinUpdateItem.Key}_Price", 10);
+                coinUpdateItem.IsUpdated = saveSystem.LoadBool($"{coinUpdateItem.Key}_IsUpdated");
+            }
         }
 
         // 链式封装 add操作
@@ -38,37 +44,26 @@ namespace ProjectVampire
 
         protected override void OnInit()
         {
-            // 添加升级项 金币掉落几率LV1
+            // 添加升级项 经验掉落几率
+            var expRateUpgradeLv1 = Add(new CoinUpGradeItem()
+                .SetKey("ExpRateUpgrade") // 设置升级项的key
+                .SetPrice(5) // 设置升级项的初始价格
+                .SetMaxLv(10) // 设置升级项的最大等级
+                .SetDescription((lv, price) => $"经验掉落几率LV{lv}|价格:{price}金币") // 设置升级项的描述
+                .SetOnUpgrade(item => // 设置升级项的升级方法
+                {
+                    // 扣除金币
+                    Global.Coin.Value -= item.Price;
+                    // 增加经验掉落几率
+                    Global.DropExpRate.Value += 0.1f;
+                }));
+
+            // 添加升级项 金币掉落几率
             var coinRateUpgradeLv1 = Add(new CoinUpGradeItem()
-                .SetKey("CoinRateUpgradeLV1") // 设置升级项的key
-                .SetPrice(10) // 设置升级项的价格
-                .SetDescription("升级金币掉落几率LV1") // 设置升级项的描述
-                .SetOnUpgrade(item => // 设置升级项的升级方法
-                {
-                    // 扣除金币
-                    Global.Coin.Value -= item.Price;
-                    // 增加金币掉落几率
-                    Global.DropCoinRate.Value += 0.1f;
-                }));
-            // 添加升级项 金币掉落几率LV2
-            var coinRateUpgradeLv2 = Add(new CoinUpGradeItem()
-                .SetKey("CoinRateUpgradeLV2") // 设置升级项的key
-                .SetPrice(20) // 设置升级项的价格
-                .SetDescription("升级金币掉落几率LV2") // 设置升级项的描述
-                .SetCondition(item => coinRateUpgradeLv1.IsUpdated) // 设置升级项的依赖条件
-                .SetOnUpgrade(item => // 设置升级项的升级方法
-                {
-                    // 扣除金币
-                    Global.Coin.Value -= item.Price;
-                    // 增加金币掉落几率
-                    Global.DropCoinRate.Value += 0.1f;
-                }));
-            // 添加升级项 金币掉落几率LV3
-            var coinRateUpgradeLv3 = Add(new CoinUpGradeItem()
-                .SetKey("CoinRateUpgradeLv3") // 设置升级项的key
-                .SetPrice(30) // 设置升级项的价格
-                .SetDescription("升级金币掉落几率LV3") // 设置升级项的描述
-                .SetCondition(item => coinRateUpgradeLv2.IsUpdated) // 设置升级项的依赖条件
+                .SetKey("CoinRateUpgrade") // 设置升级项的key
+                .SetPrice(10) // 设置升级项的初始价格
+                .SetMaxLv(10) // 设置升级项的最大等级
+                .SetDescription((lv, price) => $"金币掉落几率LV{lv}|价格:{price}金币") // 设置升级项的描述
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
                     // 扣除金币
@@ -77,18 +72,6 @@ namespace ProjectVampire
                     Global.DropCoinRate.Value += 0.1f;
                 }));
 
-            // 添加升级项 经验掉落几率
-            CoinUpdateItems.Add(new CoinUpGradeItem()
-                .SetKey("ExpRateUpgradeLv1") // 设置升级项的key
-                .SetPrice(5) // 设置升级项的价格
-                .SetDescription("升级经验掉落几率Lv1") // 设置升级项的描述
-                .SetOnUpgrade(item => // 设置升级项的升级方法
-                {
-                    // 扣除金币
-                    Global.Coin.Value -= item.Price;
-                    // 增加经验掉落几率
-                    Global.DropExpRate.Value += 0.1f;
-                }));
             // 读取升级项的状态
             Load();
 

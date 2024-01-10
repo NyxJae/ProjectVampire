@@ -5,6 +5,13 @@ namespace ProjectVampire
 {
     public partial class UIController : ViewController
     {
+        private void Awake()
+        {
+            // TODO: 重构初始化数据位置
+            // 初始化数据
+            Global.InitData();
+        }
+
         /// <summary>
         ///     脚本被启用时的回调函数
         /// </summary>
@@ -14,9 +21,6 @@ namespace ProjectVampire
             {
                 UIKit.OpenPanel<UIBeginPanel>();
                 UIKit.ClosePanel<UIGamePanel>();
-                // TODO: 重构初始化数据位置
-                // 初始化数据
-                Global.InitData();
             }
             else if (SceneManager.GetActiveScene().name == "GameScene")
             {

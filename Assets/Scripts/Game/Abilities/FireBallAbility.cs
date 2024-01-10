@@ -20,7 +20,11 @@ namespace ProjectVampire
         public BindableProperty<int> FireBallCount = new(1);
 
         // // 攻击力属性
-        public float Attack { get; set; }
+        public float Attack
+        {
+            get => FireBall.Attack;
+            set => FireBall.Attack = value;
+        }
 
         private void Start()
         {

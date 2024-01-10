@@ -34,7 +34,7 @@ MonoBehaviour:
       enemyPrefab: {fileID: 6079736196447174833, guid: 502e39ce473ed4146bc1f1308d031782, type: 3}
       duration: 30
       spawnInterval: 0.5
-      healthMultiplier: 2
+      healthMultiplier: 5
       speedMultiplier: 2
     - waveName: "\u53F2\u83B1\u59C63"
       waveEnabled: 1

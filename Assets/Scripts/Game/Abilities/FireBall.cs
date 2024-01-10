@@ -25,6 +25,8 @@ namespace ProjectVampire
             {
                 // 发送攻击命令
                 this.SendCommand(new AttackEnemyCommand(Other.gameObject, mAttack));
+                // 发送DeBuff命令
+                this.SendCommand(new DeBuffCommand(Other.gameObject, DeBuffType.Burn));
             });
         }
 

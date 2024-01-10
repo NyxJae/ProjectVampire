@@ -889,9 +889,10 @@ MonoBehaviour:
   GeneratePrefab: 0
   PrefabFolder: Assets/Art/Prefab
   ArchitectureFullTypeName: 
-  mAttack: 2
+  mAttack: 1
   mAttackRate: 1
   mKnifeCount: 1
+  KnifePierceCount: 1
   Knife: {fileID: 1716107766}
 --- !u!114 &346492601
 MonoBehaviour:
@@ -2015,11 +2016,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Namespace: ProjectVampire
   ScriptName: FireBall
-  ScriptsFolder: Assets/Scripts/Game
+  ScriptsFolder: Assets\Scripts\Game\Abilities
   GeneratePrefab: 0
   PrefabFolder: Assets/Art/Prefab
   ArchitectureFullTypeName: 
-  mAttack: 2
+  mAttack: 0
   Sprite: {fileID: 480806924}
   HitBox: {fileID: 1116211181}
 --- !u!1 &964233912

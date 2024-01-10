@@ -8,6 +8,9 @@ namespace ProjectVampire
         // condition, 用于判断是否可以升级
         private Func<CoinUpGradeItem, bool> mCondition;
 
+        // 描述Func
+        private Func<int, int, string> mDescription;
+
         // 升级Action
         private Action<CoinUpGradeItem> mOnUpgrade;
 
@@ -23,22 +26,42 @@ namespace ProjectVampire
         // 升级项的描述
         public string Description { get; private set; }
 
-        // 升级项的价格
-        public int Price { get; private set; }
+        // 升级项的初始价格
+        public int Price { get; set; }
+
+        // 满级
+        public int MaxLv { get; private set; }
+
+        // 当前等级
+        public int lv { get; set; } = 1;
 
         // 升级方法
         public void Upgrade()
         {
-            // 执行外部设置的升级方法
-            mOnUpgrade?.Invoke(this);
-            // 设置升级项状态为已升级
-            IsUpdated = true;
-            // 触发升级事件
-            CoinUpgradeSystem.OnCoinUpgradeSystemChanged.Trigger();
-            // 触发升级项发生更改事件
-            OnCoinUpdateItemChanged.Trigger();
+            // 如果升级项的等级小于最大等级, 则升级
+            if (lv <= MaxLv)
+            {
+                // 等级+1
+                lv++;
+                // 执行外部设置的升级方法
+                mOnUpgrade?.Invoke(this);
+                // 提升价格
+                Price *= 2;
+                // 设置描述
+                Description = mDescription.Invoke(lv, Price);
+                // 触发升级事件
+                CoinUpgradeSystem.OnCoinUpgradeSystemChanged.Trigger();
+                // 触发升级项发生更改事件
+                OnCoinUpdateItemChanged.Trigger();
+            }
+            // 如果升级项的等级等于最大等级, 则不升级
+            else
+            {
+                // 设置为已经升级
+                IsUpdated = true;
+            }
         }
-        
+
 
         // 链式封装 setkey
         /// <summary>
@@ -56,11 +79,10 @@ namespace ProjectVampire
         /// <summary>
         ///     设置升级项的描述
         /// </summary>
-        /// <param name="description"></param>
         /// <returns></returns>
-        public CoinUpGradeItem SetDescription(string description)
+        public CoinUpGradeItem SetDescription(Func<int, int, string> description)
         {
-            Description = description + $"|价格:{Price}金币";
+            Description = description.Invoke(lv, Price);
             return this;
         }
 
@@ -85,6 +107,18 @@ namespace ProjectVampire
         public CoinUpGradeItem SetPrice(int price)
         {
             Price = price;
+            return this;
+        }
+
+        // 链式封装 setmaxlv
+        /// <summary>
+        ///     设置升级项的最大等级
+        /// </summary>
+        /// <param name="maxlv"></param>
+        /// <returns></returns>
+        public CoinUpGradeItem SetMaxLv(int maxlv)
+        {
+            MaxLv = maxlv;
             return this;
         }
 

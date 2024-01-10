@@ -23,10 +23,10 @@ namespace ProjectVampire
         public static BindableProperty<float> Time = new();
 
         // 公开的 血量 属性
-        public static BindableProperty<int> Health = new(10);
+        public static BindableProperty<float> Health = new(10);
 
         // 公开的 最大血量 属性
-        public static BindableProperty<int> MaxHealth = new(10);
+        public static BindableProperty<float> MaxHealth = new(10);
 
         // 公开的 金币 属性
         public static BindableProperty<int> Coin = new();
@@ -88,11 +88,12 @@ namespace ProjectVampire
             DropCoinRate.Register(newValue => { PlayerPrefs.SetFloat("DropCoinRate", newValue); });
             // 最大血量 存储与读取
             if (PlayerPrefs.HasKey("MaxHealth"))
-                MaxHealth.Value = PlayerPrefs.GetInt("MaxHealth");
+                MaxHealth.Value = PlayerPrefs.GetFloat("MaxHealth");
             else
-                PlayerPrefs.SetInt("MaxHealth", 100);
+                PlayerPrefs.SetFloat("MaxHealth", 10);
+
             // 注册最大血量增加事件,并存储最大血量
-            MaxHealth.Register(newValue => { PlayerPrefs.SetInt("MaxHealth", newValue); });
+            MaxHealth.Register(newValue => { PlayerPrefs.SetFloat("MaxHealth", newValue); });
             // 血瓶掉落几率 存储与读取
             if (PlayerPrefs.HasKey("DropHPBottleRate"))
                 DropHPBottleRate.Value = PlayerPrefs.GetFloat("DropHPBottleRate");

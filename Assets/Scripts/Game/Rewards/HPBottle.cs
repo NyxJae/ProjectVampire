@@ -25,13 +25,17 @@ namespace ProjectVampire
         {
             // 播放音效
             AudioKit.PlaySound("Hp");
-            Global.Health.Value += mRecoverHP;
             // 如果血量大于最大血量
-            if (Global.Health.Value > Global.MaxHealth.Value)
-                // 血量等于最大血量
-                Global.Health.Value = Global.MaxHealth.Value;
-            // 销毁自身
-            Destroy(gameObject);
+            if (Global.Health.Value < Global.MaxHealth.Value)
+            {
+                Global.Health.Value += mRecoverHP;
+                // 如果血量大于最大血量
+                if (Global.Health.Value > Global.MaxHealth.Value)
+                    // 血量等于最大血量
+                    Global.Health.Value = Global.MaxHealth.Value;
+                // 销毁自身
+                Destroy(gameObject);
+            }
         }
     }
 }

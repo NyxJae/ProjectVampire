@@ -40,18 +40,20 @@ namespace ProjectVampire
             set => mspeed = value;
         }
 
+        public float Attack { get; set; } = 1f;
+
         /// <summary>
-        ///     受伤处理，改变颜色并减少生命值。
+        ///     受伤处理，改变颜色并减少生命值，处理debuff。
         /// </summary>
         /// <param name="damage">受到的伤害值。</param>
-        /// <param name="changeDuration">颜色改变持续的时间。</param>
-        public void TakeDamage(float damage, float changeDuration = 0.1f)
+        /// <param name="debuff">受到的Debuff类型。</param>
+        public void TakeDamage(float damage)
         {
             Sprite.color = Color.red; // 改变颜色为红色
             Health -= damage; // 减少生命值
             // 显示浮动文字
-            FloatingText.Instance.play(damage.ToString(), transform.position);
-            ActionKit.Delay(changeDuration, () => Sprite.color = Color.white).Start(this); // 延时后恢复颜色
+            FloatingText.Instance.Play(damage.ToString(), transform.position);
+            ActionKit.Delay(0.1f, () => Sprite.color = Color.white).Start(this); // 延时后恢复颜色
             CheckHealth();
         }
 
@@ -60,7 +62,6 @@ namespace ProjectVampire
             Health *= healthMultiplier;
             Speed *= speedMultiplier;
         }
-
 
         /// <summary>
         ///     追逐 player
@@ -88,7 +89,7 @@ namespace ProjectVampire
         /// <summary>
         ///     检测血量
         /// </summary>
-        private void CheckHealth()
+        public void CheckHealth()
         {
             // 如果血量小于等于 0
             if (Health <= 0)

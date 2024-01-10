@@ -132,14 +132,16 @@ namespace ProjectVampire
             set => mspeed = value;
         }
 
+        public float Attack { get; set; } = 2f;
 
-        public void TakeDamage(float damage, float changeDuration = 0.1f)
+
+        public void TakeDamage(float damage)
         {
             Sprite.color = Color.red; // 改变颜色为红色
             Health -= damage; // 减少生命值
             // 显示浮动文字
-            FloatingText.Instance.play(damage.ToString(), transform.position);
-            ActionKit.Delay(changeDuration, () => Sprite.color = Color.white).Start(this); // 延时后恢复颜色
+            FloatingText.Instance.Play(damage.ToString(), transform.position);
+            ActionKit.Delay(0.1f, () => Sprite.color = Color.white).Start(this); // 延时后恢复颜色
             CheckHealth();
         }
 

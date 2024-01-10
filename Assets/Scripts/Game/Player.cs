@@ -47,18 +47,18 @@ namespace ProjectVampire
         private void Start()
         {
             // 给HurtBox被触碰时, 触发的事件添加回调函数(受伤),并设置自动销毁
-            HurtBox.OnTriggerEnter2DEvent(Collider2D =>
+            HurtBox.OnTriggerEnter2DEvent(enemyHitBox =>
                     {
                         // 如果碰撞的对象的父对象没有Enemy标签 则返回
-                        if (!Collider2D.gameObject.transform.parent.CompareTag("Enemy")) return;
-                        Global.Health.Value -= mDamage;
+                        if (enemyHitBox.GetComponentInParent<IEnemy>() == null) return;
+                        Global.Health.Value -= enemyHitBox.GetComponentInParent<IEnemy>().Attack;
                     }
                 )
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
             // 给血量增加事件添加死亡回调函数
             Global.Health.Register(newValue =>
             {
-                HPValue.fillAmount = (float)newValue / Global.MaxHealth.Value;
+                HPValue.fillAmount = newValue / Global.MaxHealth.Value;
                 if (newValue <= 0)
                 {
                     // 播放死亡音效
@@ -70,10 +70,7 @@ namespace ProjectVampire
                 }
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
             // 给血量最大值增加事件添加显示回调函数
-            Global.MaxHealth.RegisterWithInitValue(newValue =>
-                {
-                    HPValue.fillAmount = (float)Global.Health.Value / newValue;
-                })
+            Global.MaxHealth.RegisterWithInitValue(newValue => { HPValue.fillAmount = Global.Health.Value / newValue; })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
             // 给经验值增加事件添加升级回调函数
             Global.Exp.Register(newValue =>
