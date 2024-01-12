@@ -526,8 +526,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u653B\u51FB\u529B\u63D0\u5347LV1"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d25b2580a16e0304b884edde74553104, type: 2}
-  m_sharedMaterial: {fileID: 3033468494798458750, guid: d25b2580a16e0304b884edde74553104, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e07a863e5d3257e4bb159e10b11ab24a, type: 2}
+  m_sharedMaterial: {fileID: -6611576907372532717, guid: e07a863e5d3257e4bb159e10b11ab24a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -557,11 +557,11 @@ MonoBehaviour:
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: -5
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0

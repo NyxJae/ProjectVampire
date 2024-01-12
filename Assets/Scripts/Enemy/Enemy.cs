@@ -7,7 +7,11 @@ namespace ProjectVampire
     public partial class Enemy : ViewController, IEnemy
     {
         [SerializeField] [Tooltip("敌人的血量")] private float mhealth = 100f;
+
         [SerializeField] [Tooltip("敌人的速度")] private float mspeed = 5f;
+
+        // 最后一次受伤的时间
+        private float lastHitTime = -0.1f; // 初始化为-0.1f确保一开始可以受到伤害
 
         /// <summary>
         ///     私有的 player 角色
@@ -49,6 +53,10 @@ namespace ProjectVampire
         /// <param name="debuff">受到的Debuff类型。</param>
         public void TakeDamage(float damage)
         {
+            // 检查是否过了冷却时间
+            if (Time.time - lastHitTime < 0.1f) return;
+            // 更新最后一次受伤的时间
+            lastHitTime = Time.time;
             Sprite.color = Color.red; // 改变颜色为红色
             Health -= damage; // 减少生命值
             // 显示浮动文字

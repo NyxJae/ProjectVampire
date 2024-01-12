@@ -5,6 +5,9 @@ namespace ProjectVampire
 {
     public class DeBuffCommand : AbstractCommand
     {
+        //执行者
+        private readonly GameObject mAbility;
+
         // 被执行的DeBuff
         private readonly DeBuffType mDeBuffType;
 
@@ -12,10 +15,11 @@ namespace ProjectVampire
         private readonly GameObject mEnemy;
 
         //重写构造函数
-        public DeBuffCommand(GameObject enemy, DeBuffType deBuffType)
+        public DeBuffCommand(GameObject enemy, DeBuffType deBuffType, GameObject ability = null)
         {
             mEnemy = enemy.transform.parent.gameObject;
             mDeBuffType = deBuffType;
+            mAbility = ability;
         }
 
         protected override void OnExecute()
@@ -23,6 +27,7 @@ namespace ProjectVampire
             if (!mEnemy.CompareTag("Enemy")) return;
             // 根据debuff类型应用不同的效果
             ViewController enemy = null;
+            Vector3 enemyPos;
             switch (mDeBuffType)
             {
                 case DeBuffType.None:
@@ -41,11 +46,13 @@ namespace ProjectVampire
                     break;
                 case DeBuffType.KnockBack:
                     // 击退效果，向后击退一段距离
-                    enemy = mEnemy.GetComponent<ViewController>();
+                    enemyPos = mEnemy.transform.position;
                     var knockBackDirection =
-                        (enemy.transform.position - Player.Instance.transform.position).normalized;
+                        (enemyPos - Player.Instance.transform.position).normalized;
                     var knockBackDistance = 2f; // 设定一个击退距离
-                    enemy.transform.position += knockBackDirection * knockBackDistance;
+                    enemyPos += knockBackDirection * knockBackDistance; // 计算新的位置
+                    // 移动到吸引的位置
+                    mEnemy.transform.position = enemyPos; // 如果没有Rigidbody2D组件，直接设置transform的位置
                     break;
                 case DeBuffType.Burn:
                     // 灼烧效果
@@ -55,6 +62,14 @@ namespace ProjectVampire
                         .Callback(() => { this.SendCommand(new AttackEnemyCommand(mEnemy, 0.5f)); })
                         .Delay(0.5f)
                         .Start(enemy);
+                    break;
+                case DeBuffType.Attract:
+                    // 吸引效果
+                    ActionKit.Repeat(60)
+                        .Condition(() => mEnemy != null)
+                        .Callback(() => { mEnemy.transform.position = mAbility.transform.position; })
+                        .DelayFrame(1)
+                        .Start(mAbility.GetComponent<ViewController>());
                     break;
             }
         }

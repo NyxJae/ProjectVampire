@@ -10,6 +10,7 @@ namespace ProjectVampire
             // TODO: 重构初始化数据位置
             // 初始化数据
             Global.InitData();
+            Global.ResetProperties();
         }
 
         /// <summary>

@@ -27,7 +27,7 @@ namespace ProjectVampire
                 this.SendCommand(new AttackEnemyCommand(Other.gameObject, mAttack));
                 // 发送DeBuff命令
                 this.SendCommand(new DeBuffCommand(Other.gameObject, DeBuffType.Burn));
-            });
+            }).UnRegisterWhenGameObjectDestroyed(this);
         }
 
         public IArchitecture GetArchitecture()

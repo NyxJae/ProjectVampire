@@ -22,6 +22,9 @@ namespace ProjectVampire
         // 声明状态机
         private readonly FSM<State> mFsm = new();
 
+// 最后一次受伤的时间
+        private float lastHitTime = -0.1f; // 初始化为-0.1f确保一开始可以受到伤害
+
 
         // rigidbody2D 组件
         private Rigidbody2D mRigidbody2D;
@@ -39,8 +42,6 @@ namespace ProjectVampire
             mFsm.State(State.follow)
                 .OnFixedUpdate(() =>
                 {
-                    // log 现在状态
-                    Debug.Log($"当前状态: {State.follow}");
                     // 获取 player 的位置
                     var playerPosition = player.transform.position;
                     // 获取 enemy 的位置
@@ -134,9 +135,12 @@ namespace ProjectVampire
 
         public float Attack { get; set; } = 2f;
 
-
         public void TakeDamage(float damage)
         {
+            // 检查是否过了冷却时间
+            if (Time.time - lastHitTime < 0.1f) return;
+            // 更新最后一次受伤的时间
+            lastHitTime = Time.time;
             Sprite.color = Color.red; // 改变颜色为红色
             Health -= damage; // 减少生命值
             // 显示浮动文字

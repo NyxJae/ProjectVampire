@@ -69,7 +69,7 @@ namespace ProjectVampire
                     "开启随身旋转火球,攻击碰到的敌人"
                 ) // 设置升级项的描述
                 .SetMaxLevel(1)
-                .SetOnUpgrade(item => { Player.Instance.Abilities.FireBall.gameObject.SetActive(true); }));
+                .SetOnUpgrade(item => { Player.Instance.Abilities.FireBallAbility.gameObject.SetActive(true); }));
             // 添加升级项 火球攻击力提升
             var fireBallAtkUpgrade = Add(new ExpUpgradeItem()
                 .SetKey("FireBallATKUpgrade") // 设置升级项的key
@@ -79,7 +79,7 @@ namespace ProjectVampire
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
                     // 增加攻击力
-                    Player.Instance.Abilities.FireBall.Attack *= 1.1f;
+                    Player.Instance.Abilities.FireBallAbility.Attack *= 1.1f;
                 }));
             // 火球数量提升
             var fireBallCountUpgrade = Add(new ExpUpgradeItem()
@@ -90,7 +90,7 @@ namespace ProjectVampire
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
                     // 增加火球数量
-                    Player.Instance.Abilities.FireBall.FireBallCount.Value += 1;
+                    Player.Instance.Abilities.FireBallAbility.FireBallCount.Value += 1;
                 }));
 
             // 添加升级项 飞刀攻击力提升
@@ -134,6 +134,81 @@ namespace ProjectVampire
                     // 增加飞刀穿透敌人数量
                     Player.Instance.Abilities.KnifeAbility.KnifePierceCount += 1;
                 }));
+            // 添加升级项 黑洞能力
+            var BlackHoleAbility = Add(new ExpUpgradeItem()
+                .SetKey("BlackHoleAbility") // 设置升级项的key
+                .SetDescription(_ =>
+                    "开启黑洞能力,吸引敌人,并攻击"
+                ) // 设置升级项的描述
+                .SetMaxLevel(1)
+                .SetOnUpgrade(item => { Player.Instance.Abilities.BlackHoleAbility.gameObject.SetActive(true); }));
+            // 添加升级项 黑洞攻击力提升
+            Add(new ExpUpgradeItem()
+                .SetKey("BlackHoleATKUpgrade") // 设置升级项的key
+                .SetDescription(lv => $"黑洞攻击力提升LV{lv}") // 设置升级项的描述
+                .SetMaxLevel(10)
+                .SetCondition(item => BlackHoleAbility.IsUpdated)
+                .SetOnUpgrade(item => // 设置升级项的升级方法
+                {
+                    // 增加攻击力
+                    Player.Instance.Abilities.BlackHoleAbility.Attack *= 1.1f;
+                }));
+            // 添加升级项 黑洞大小提升
+            Add(new ExpUpgradeItem()
+                .SetKey("BlackHoleSizeUpgrade") // 设置升级项的key
+                .SetDescription(lv => $"黑洞大小提升LV{lv}") // 设置升级项的描述
+                .SetMaxLevel(10)
+                .SetCondition(item => BlackHoleAbility.IsUpdated)
+                .SetOnUpgrade(item => // 设置升级项的升级方法
+                {
+                    // 增加大小
+                    Player.Instance.Abilities.BlackHoleAbility.Size *= 1.1f;
+                }));
+            // 添加升级项 黑洞持续时间提升
+            Add(new ExpUpgradeItem()
+                .SetKey("BlackHoleDurationUpgrade") // 设置升级项的key
+                .SetDescription(lv => $"黑洞持续时间提升LV{lv}") // 设置升级项的描述
+                .SetMaxLevel(10)
+                .SetCondition(item => BlackHoleAbility.IsUpdated)
+                .SetOnUpgrade(item => // 设置升级项的升级方法
+                {
+                    // 增加持续时间
+                    Player.Instance.Abilities.BlackHoleAbility.Duration *= 1.1f;
+                }));
+            // 添加升级项 黑洞冷却时间减少
+            Add(new ExpUpgradeItem()
+                .SetKey("BlackHoleCooldownUpgrade") // 设置升级项的key
+                .SetDescription(lv => $"黑洞冷却时间减少LV{lv}") // 设置升级项的描述
+                .SetMaxLevel(10)
+                .SetCondition(item => BlackHoleAbility.IsUpdated)
+                .SetOnUpgrade(item => // 设置升级项的升级方法
+                {
+                    // 减少冷却时间
+                    Player.Instance.Abilities.BlackHoleAbility.Cooldown *= 0.9f;
+                }));
+            // 添加升级项 黑洞移动速度提升
+            Add(new ExpUpgradeItem()
+                .SetKey("BlackHoleMoveSpeedUpgrade") // 设置升级项的key
+                .SetDescription(lv => $"黑洞移动速度提升LV{lv}") // 设置升级项的描述
+                .SetMaxLevel(10)
+                .SetCondition(item => BlackHoleAbility.IsUpdated)
+                .SetOnUpgrade(item => // 设置升级项的升级方法
+                {
+                    // 增加移动速度
+                    Player.Instance.Abilities.BlackHoleAbility.MoveSpeed *= 1.1f;
+                }));
+            // 添加升级项 黑洞数量提升
+            Add(new ExpUpgradeItem()
+                .SetKey("BlackHoleCountUpgrade") // 设置升级项的key
+                .SetDescription(lv => $"黑洞数量提升LV{lv}") // 设置升级项的描述
+                .SetMaxLevel(5)
+                .SetCondition(item => BlackHoleAbility.IsUpdated)
+                .SetOnUpgrade(item => // 设置升级项的升级方法
+                {
+                    // 增加黑洞数量
+                    Player.Instance.Abilities.BlackHoleAbility.Count += 1;
+                }));
+
 
             // 添加升级项 拾取范围提升
             var pickUpRangeUpgrade = Add(new ExpUpgradeItem()

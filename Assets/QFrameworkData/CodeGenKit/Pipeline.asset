@@ -19,15 +19,15 @@ MonoBehaviour:
     From: 0
     NameToFullName: []
     BindInfos:
-    - TypeName: ProjectVampire.FireBall
-      PathToRoot: FireBall
-      MemberName: FireBall
-    ScriptsFolder: Assets\Scripts\Game\Abilities
-    ClassName: FireBallAbility
+    - TypeName: ProjectVampire.BlackHole
+      PathToRoot: BlackHole
+      MemberName: BlackHole
+    ScriptsFolder: Assets/Scripts/Game/Abilities
+    ClassName: BlackHoleAbility
     Namespace: ProjectVampire
     MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace ProjectVampire\r\n{\r\n\tpublic
-      partial class FireBallAbility : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
+      partial class BlackHoleAbility : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:f18115b8-e5bf-455d-b620-331302957b33\r\nusing UnityEngine;\r\n\r\nnamespace
-      ProjectVampire\r\n{\r\n\tpublic partial class FireBallAbility\r\n\t{\r\n\r\n\t\tpublic
-      ProjectVampire.FireBall FireBall;\r\n\r\n\t}\r\n}\r\n"
+    DesignerCode: "// Generate Id:9d5108b8-fa2a-4767-9dfb-cbe6bbd10238\r\nusing UnityEngine;\r\n\r\nnamespace
+      ProjectVampire\r\n{\r\n\tpublic partial class BlackHoleAbility\r\n\t{\r\n\r\n\t\tpublic
+      ProjectVampire.BlackHole BlackHole;\r\n\r\n\t}\r\n}\r\n"

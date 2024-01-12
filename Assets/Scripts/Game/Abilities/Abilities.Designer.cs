@@ -1,4 +1,4 @@
-// Generate Id:68ce6257-a9a1-44df-9156-bf82c6296225
+// Generate Id:fc9accc9-d357-40cf-bf96-7965d681c172
 using UnityEngine;
 
 namespace ProjectVampire
@@ -10,9 +10,11 @@ namespace ProjectVampire
 
 		public ProjectVampire.LightingSite LightingSite;
 
-		public ProjectVampire.FireBallAbility FireBall;
+		public ProjectVampire.FireBallAbility FireBallAbility;
 
 		public ProjectVampire.KnifeAbility KnifeAbility;
+
+		public ProjectVampire.BlackHoleAbility BlackHoleAbility;
 
 	}
 }
