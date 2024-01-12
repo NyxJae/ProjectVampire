@@ -1,79 +1,64 @@
-using UnityEngine;
 using QFramework;
+using UnityEngine;
 
 namespace ProjectVampire
 {
     public partial class PowerUpManager : ViewController, ISingleton
     {
+        // 增加一个计数器追踪场上的炸弹数量
+        private int bombCount;
+
         // 公开的 获取实例 方法
-        public static PowerUpManager Instance
-        {
-            get { return MonoSingletonProperty<PowerUpManager>.Instance; }
-        }
-        
-
-        /// <summary>
-        /// 公开 掉落奖励方法
-        /// </summary>
-        /// <param name="gameObject"></param>
-        public void DroReward(GameObject gameObject)
-        {
-            // 随机生成坐标偏移量
-            Vector3 offset = new Vector3(Random.Range(-0.5f, 0.5f), 0, Random.Range(-0.5f, 0.5f));
-            // 随机数
-            float random = Random.Range(0f, 1f);
-            // 如果随机数小于掉落经验几率
-            if (random <= Global.DropExpRate.Value)
-            {
-                // 实例化经验球
-                ExpBall.InstantiateWithParent(transform).Position(gameObject.transform.position + offset).Show();
-
-            }
-            // 随机生成坐标偏移量
-            offset = new Vector3(Random.Range(-0.5f, 0.5f), 0, Random.Range(-0.5f, 0.5f));
-            // 随机数
-            random = Random.Range(0f, 1f);
-            // 如果随机数小于掉落金币几率
-            if (random <= Global.DropCoinRate.Value)
-            {
-                // 实例化金币
-                CoinBall.InstantiateWithParent(transform).Position(gameObject.transform.position + offset).Show();
-            }
-            // 随机生成坐标偏移量
-            offset = new Vector3(Random.Range(-0.5f, 0.5f), 0, Random.Range(-0.5f, 0.5f));
-            // 随机数
-            random = Random.Range(0f, 1f);
-            // 如果随机数小于掉落血瓶几率
-            if (random <= Global.DropHPBottleRate.Value)
-            {
-                // 实例化血瓶
-                HPBottle.InstantiateWithParent(transform).Position(gameObject.transform.position + offset).Show();
-            }
-            // 随机生成坐标偏移量
-            offset = new Vector3(Random.Range(-0.5f, 0.5f), 0, Random.Range(-0.5f, 0.5f));
-            // 随机数
-            random = Random.Range(0f, 1f);
-            // 如果随机数小于掉落炸弹几率
-            if (random <= Global.DropBombRate.Value)
-            {
-                // 实例化炸弹
-                Bomb.InstantiateWithParent(transform).Position(gameObject.transform.position + offset).Show();
-            }
-            // 随机生成坐标偏移量
-            offset = new Vector3(Random.Range(-0.5f, 0.5f), 0, Random.Range(-0.5f, 0.5f));
-            // 随机数
-            random = Random.Range(0f, 1f);
-            // 如果随机数小于掉落吸铁石几率
-            if (random <= Global.DropMagnetRate.Value)
-            {
-                // 实例化吸铁石
-                Magnet.InstantiateWithParent(transform).Position(gameObject.transform.position + offset).Show();
-            }
-        }
+        public static PowerUpManager Instance => MonoSingletonProperty<PowerUpManager>.Instance;
 
         public void OnSingletonInit()
         {
-            
+            // Nothing needed here
+        }
+
+        /// <summary>
+        ///     公开 掉落奖励方法
+        /// </summary>
+        /// <param name="gameObject"></param>
+        public void DroReward(GameObject enemy)
+        {
+            // 以下方法抽象为一个新的方法 DropItem
+            DropItem(ExpBall, Global.DropExpRate.Value, enemy);
+            DropItem(CoinBall, Global.DropCoinRate.Value, enemy);
+            DropItem(HPBottle, Global.DropHPBottleRate.Value, enemy);
+            DropItem(Magnet, Global.DropMagnetRate.Value, enemy);
+
+            // 使用bombCount来控制炸弹的生成
+            if (bombCount == 0)
+            {
+                var random = Random.Range(0f, 1f);
+                if (random <= Global.DropBombRate.Value)
+                {
+                    Bomb.InstantiateWithParent(transform).Position(enemy.transform.position + GetRandomOffset()).Show();
+                    bombCount++; // 炸弹数量增加
+                }
+            }
+        }
+
+        // 抽象生成物品的方法来避免代码重复
+        private void DropItem(Transform reward, float dropRate, GameObject enemy)
+        {
+            var random = Random.Range(0f, 1f);
+            if (random <= dropRate)
+                reward.InstantiateWithParent(transform).Position(enemy.transform.position + GetRandomOffset()).Show();
+        }
+
+        // 抽象随机坐标偏移量的生成
+        private Vector3 GetRandomOffset()
+        {
+            return new Vector3(Random.Range(-0.5f, 0.5f), 0, Random.Range(-0.5f, 0.5f));
+        }
+
+        // 公开的方法，用来减少计数器的值
+        public void DecreaseBombCount()
+        {
+            if (bombCount > 0)
+                bombCount--;
         }
     }
 }

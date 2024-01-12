@@ -14,6 +14,18 @@ namespace ProjectVampire
                     // 获取炸弹方法
                     GetBomb();
             }).UnRegisterWhenGameObjectDestroyed(this);
+            ActionKit.Repeat()
+                .Delay(1f)
+                // 与play的距离超过10f
+                .Condition(() => Vector3.Distance(transform.position, Player.Instance.transform.position) > 30f)
+                .Callback(() =>
+                {
+                    // 减少PowerUpManager中炸弹的计数器
+                    PowerUpManager.Instance.DecreaseBombCount();
+                    // 销毁自身
+                    Destroy(gameObject);
+                })
+                .Start(this);
         }
 
         // 公开的 获取炸弹 方法
@@ -31,6 +43,9 @@ namespace ProjectVampire
                 enemy.TakeDamage(99999);
             // 销毁自身
             Destroy(gameObject);
+
+            // 减少PowerUpManager中炸弹的计数器
+            PowerUpManager.Instance.DecreaseBombCount();
         }
     }
 }
