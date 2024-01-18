@@ -21,7 +21,8 @@
         ///     受伤
         /// </summary>
         /// <param name="damage">伤害值</param>
-        void TakeDamage(float damage);
+        /// <param name="isCritical"></param>
+        void TakeDamage(float damage = 1f, bool isCritical = false);
 
         /// <summary>
         ///     调整敌人属性

@@ -9,6 +9,9 @@ namespace ProjectVampire
 
     public partial class UIGamePanel : UIPanel, IController
     {
+        // 屏幕闪烁事件
+        public static EasyEvent screenFlashEvent = new();
+
         public IArchitecture GetArchitecture()
         {
             // 返回全局架构
@@ -55,6 +58,17 @@ namespace ProjectVampire
                 // 时间
                 Global.Time.Value += Time.deltaTime;
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            // 注册屏幕闪烁事件
+            screenFlashEvent.Register(() =>
+            {
+                // 屏幕闪烁
+                ActionKit.Sequence()
+                    .Callback(() => ScreenFlash.Show())
+                    .Lerp(0, 0.5f, 0.1f, value => { ScreenFlash.ColorAlpha(value); })
+                    .Lerp(0.5f, 0, 0.1f, value => { ScreenFlash.ColorAlpha(value); })
+                    .Callback(() => ScreenFlash.Hide())
+                    .Start(this);
+            }).UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 
 
@@ -62,6 +76,8 @@ namespace ProjectVampire
         {
             // 每次打开都隐藏ExpUpgradeRoot
             ExpUpgradeRoot.Hide();
+            // 每次打开都隐藏TreasureChestRoot
+            TreasureChestRoot.Hide();
         }
 
         protected override void OnShow()

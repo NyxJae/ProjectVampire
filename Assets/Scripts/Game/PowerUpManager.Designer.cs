@@ -1,4 +1,4 @@
-// Generate Id:eb4f5b1c-dac4-4c22-bbba-2e4b60d2ad7a
+// Generate Id:a7f6e09d-7562-4018-a773-3dcddfd50319
 using UnityEngine;
 
 namespace ProjectVampire
@@ -30,6 +30,11 @@ namespace ProjectVampire
 		/// 金币
 		/// </summary>
 		public UnityEngine.Transform CoinBall;
+
+		/// <summary>
+		/// 金币
+		/// </summary>
+		public UnityEngine.Transform TreasureChest;
 
 	}
 }

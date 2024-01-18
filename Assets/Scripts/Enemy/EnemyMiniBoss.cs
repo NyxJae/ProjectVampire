@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ProjectVampire
 {
-    public partial class EnemyMiniBoss : ViewController, IEnemy
+    public partial class EnemyMiniBoss : Entity, IEnemy
     {
         [SerializeField] [Tooltip("敌人的血量")] private float mhealth = 100f;
         [SerializeField] [Tooltip("敌人的速度")] private float mspeed = 5f;
@@ -31,6 +31,8 @@ namespace ProjectVampire
 
         // 玩家实例
         private Player player;
+
+        protected override Collider2D HitBoxCollider2D => HitBox;
 
         private void Start()
         {
@@ -135,17 +137,18 @@ namespace ProjectVampire
 
         public float Attack { get; set; } = 2f;
 
-        public void TakeDamage(float damage)
+        /// <summary>
+        ///     受伤处理，改变颜色并减少生命值，处理debuff。
+        /// </summary>
+        /// <param name="damage">受到的伤害值。</param>
+        public void TakeDamage(float damage, bool isCritical = false)
         {
-            // 检查是否过了冷却时间
             if (Time.time - lastHitTime < 0.1f) return;
-            // 更新最后一次受伤的时间
             lastHitTime = Time.time;
-            Sprite.color = Color.red; // 改变颜色为红色
-            Health -= damage; // 减少生命值
-            // 显示浮动文字
-            FloatingText.Instance.Play(damage.ToString(), transform.position);
-            ActionKit.Delay(0.1f, () => Sprite.color = Color.white).Start(this); // 延时后恢复颜色
+            Sprite.color = Color.red; // 暴击时使用黄色
+            Health -= damage;
+            FloatingText.Instance.Play(damage.ToString(), transform.position, isCritical); // 传递暴击信息
+            ActionKit.Delay(0.1f, () => Sprite.color = Color.white).Start(this);
             CheckHealth();
         }
 
@@ -167,6 +170,8 @@ namespace ProjectVampire
                 EnemyGenerator.Instance.enemyCount--;
                 // 掉落奖励
                 PowerUpManager.Instance.DroReward(gameObject);
+                // 迷你Boss被击败，调用掉落宝箱方法
+                PowerUpManager.Instance.DropTreasureChest(gameObject);
                 // 播放死亡特效
                 FxController.Instance.Play(Sprite);
                 // 销毁自身

@@ -175,9 +175,9 @@ MonoBehaviour:
   GeneratePrefab: 0
   PrefabFolder: Assets/Art/Prefab
   ArchitectureFullTypeName: 
-  level: 3
+  count: 1
+  attack: 10
   duration: 20
-  attackPower: 2
   size: 2
   cooldown: 5
   moveSpeed: 5
@@ -1268,7 +1268,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &417455584
 Transform:
   m_ObjectHideFlags: 0
@@ -1308,6 +1308,7 @@ MonoBehaviour:
   attack: 10
   size: 1
   moveSpeed: 1
+  rotationSpeed: 90
   Sprite: {fileID: 164062907}
   HitBox: {fileID: 1707871986}
 --- !u!114 &417455586
@@ -2056,6 +2057,7 @@ MonoBehaviour:
   HPBottle: {fileID: 1955597038}
   Magnet: {fileID: 657090684606156002}
   CoinBall: {fileID: 1316701223}
+  TreasureChest: {fileID: 7908172460468472118}
 --- !u!4 &687065752
 Transform:
   m_ObjectHideFlags: 0
@@ -2073,6 +2075,7 @@ Transform:
   - {fileID: 1955597038}
   - {fileID: 657090684606156002}
   - {fileID: 1316701223}
+  - {fileID: 7908172460468472118}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2403,8 +2406,8 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1347293521
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!4 &1006936944 stripped
 Transform:
@@ -46117,6 +46120,72 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c55be28777034874580af976fb01cab3, type: 3}
+--- !u!1001 &7210383621398790434
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 687065752}
+    m_Modifications:
+    - target: {fileID: 3207093181252822736, guid: f11c41a927b4177478ea9f6c792a600d, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207093181252822736, guid: f11c41a927b4177478ea9f6c792a600d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207093181252822736, guid: f11c41a927b4177478ea9f6c792a600d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207093181252822736, guid: f11c41a927b4177478ea9f6c792a600d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207093181252822736, guid: f11c41a927b4177478ea9f6c792a600d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207093181252822736, guid: f11c41a927b4177478ea9f6c792a600d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207093181252822736, guid: f11c41a927b4177478ea9f6c792a600d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207093181252822736, guid: f11c41a927b4177478ea9f6c792a600d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207093181252822736, guid: f11c41a927b4177478ea9f6c792a600d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207093181252822736, guid: f11c41a927b4177478ea9f6c792a600d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207093181252822736, guid: f11c41a927b4177478ea9f6c792a600d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3673227457817325515, guid: f11c41a927b4177478ea9f6c792a600d, type: 3}
+      propertyPath: m_Name
+      value: TreasureChest
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f11c41a927b4177478ea9f6c792a600d, type: 3}
+--- !u!4 &7908172460468472118 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3207093181252822736, guid: f11c41a927b4177478ea9f6c792a600d, type: 3}
+  m_PrefabInstance: {fileID: 7210383621398790434}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8517364443742548812
 PrefabInstance:
   m_ObjectHideFlags: 0

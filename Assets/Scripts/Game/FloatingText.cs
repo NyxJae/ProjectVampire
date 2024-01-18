@@ -25,15 +25,17 @@ namespace ProjectVampire
         /// </summary>
         /// <param name="text">要显示的文字</param>
         /// <param name="position">应显示的位置</param>
-        public void Play(string text, Vector3 position)
+        /// <param name="isCritical"></param>
+        public void Play(string text, Vector3 position, bool isCritical = false)
         {
-            //TODO:实例化并显示浮动文字,设置父物体,设置文字与位置,并设置向上平滑移动动画与平滑放大动画.最后平滑渐隐,并销毁自身
             // 实例化浮动文字
             Text.InstantiateWithParent(this)
                 .Self(t =>
                 {
                     // 设置文字
                     t.text = text;
+                    // 如果是暴击，则设置颜色为红色，否则为默认颜色（这里假设默认颜色是白色）
+                    t.color = isCritical ? Color.red : Color.white;
                     // 设置动画队列
                     ActionKit.Sequence()
                         .Lerp(0, 1, 1f, p =>

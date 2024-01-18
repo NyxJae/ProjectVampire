@@ -3,8 +3,10 @@ using UnityEngine;
 
 namespace ProjectVampire
 {
-    public partial class Magnet : ViewController
+    public partial class Magnet : Entity
     {
+        protected override Collider2D HitBoxCollider2D => HitBox;
+
         private void Start()
         {
             HitBox.OnTriggerStay2DEvent(other =>

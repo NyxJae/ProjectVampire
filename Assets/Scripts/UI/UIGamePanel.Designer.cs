@@ -5,7 +5,7 @@ using QFramework;
 
 namespace ProjectVampire
 {
-	// Generate Id:83a78f20-2c7d-4814-91bb-ee9d616e7f33
+	// Generate Id:dffd8918-142b-4a9a-bdd3-3d3bd4d9252a
 	public partial class UIGamePanel
 	{
 		public const string Name = "UIGamePanel";
@@ -22,6 +22,10 @@ namespace ProjectVampire
 		public ExpUpgradeRoot ExpUpgradeRoot;
 		[SerializeField]
 		public UnityEngine.UI.Image ExpValue;
+		[SerializeField]
+		public UnityEngine.UI.Image ScreenFlash;
+		[SerializeField]
+		public TreasureChestRoot TreasureChestRoot;
 		
 		private UIGamePanelData mPrivateData = null;
 		
@@ -33,6 +37,8 @@ namespace ProjectVampire
 			TextTime = null;
 			ExpUpgradeRoot = null;
 			ExpValue = null;
+			ScreenFlash = null;
+			TreasureChestRoot = null;
 			
 			mData = null;
 		}

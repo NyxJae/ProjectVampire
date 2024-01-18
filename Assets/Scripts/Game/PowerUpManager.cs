@@ -17,6 +17,16 @@ namespace ProjectVampire
         }
 
         /// <summary>
+        ///     公开 掉落宝箱方法
+        /// </summary>
+        /// <param name="enemy"></param>
+        public void DropTreasureChest(GameObject enemy)
+        {
+            TreasureChest.InstantiateWithParent(transform).Position(enemy.transform.position + GetRandomOffset())
+                .Show(); // 实例化宝箱
+        }
+
+        /// <summary>
         ///     公开 掉落奖励方法
         /// </summary>
         /// <param name="gameObject"></param>
@@ -29,7 +39,7 @@ namespace ProjectVampire
             DropItem(Magnet, Global.DropMagnetRate.Value, enemy);
 
             // 使用bombCount来控制炸弹的生成
-            if (bombCount == 0)
+            if (bombCount < 2)
             {
                 var random = Random.Range(0f, 1f);
                 if (random <= Global.DropBombRate.Value)

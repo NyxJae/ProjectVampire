@@ -220,7 +220,29 @@ namespace ProjectVampire
                     // 增加拾取范围
                     Player.Instance.Abilities.PickAbility.PickRange.radius *= 1.1f;
                 }));
+            // 添加升级项 暴击率提升
+            var criticalRateUpgrade = Add(new ExpUpgradeItem()
+                .SetKey("CriticalRateUpgrade") // 设置升级项的key
+                .SetDescription(lv => $"暴击率提升LV{lv}") // 设置升级项的描述
+                .SetMaxLevel(10) // 最大等级设置为5
+                .SetOnUpgrade(item => // 设置升级项的升级方法
+                {
+                    // 提升暴击率
+                    Global.CriticalRate.Value += 0.09f; //
+                }));
+
+            // 添加升级项 暴击伤害提升
+            var criticalDamageUpgrade = Add(new ExpUpgradeItem()
+                .SetKey("CriticalDamageUpgrade") // 设置升级项的key
+                .SetDescription(lv => $"暴击伤害提升LV{lv}") // 设置升级项的描述
+                .SetMaxLevel(10) // 最大等级设置为5
+                .SetOnUpgrade(item => // 设置升级项的升级方法
+                {
+                    // 提升暴击伤害倍数
+                    Global.CriticalMultiplier.Value += 0.8f; //
+                }));
         }
+
 
         // 随机获取n个未升级的升级项
         /// <summary>

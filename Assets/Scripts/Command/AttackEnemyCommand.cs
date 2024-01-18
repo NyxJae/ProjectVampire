@@ -21,18 +21,19 @@ namespace ProjectVampire
 
         protected override void OnExecute()
         {
-            // 确认碰撞的对象的父对象是否有Enemy标签
-            if (mOther == null) return;
-            if (mAttack <= 0) return;
-            // 使用GetComponentInParent来获取父对象上的Enemy组件
+            if (mOther == null || mAttack <= 0) return;
             var enemy = mOther.GetComponentInParent<IEnemy>();
-            // 如果敌人组件不为空
             if (enemy != null)
             {
-                // 播放攻击音效
+                // 获取当前暴击率和暴击倍数
+                var isCritical = Random.value < Global.CriticalRate.Value;
+                var criticalMultiplier = Global.CriticalMultiplier.Value;
+
                 AudioKit.PlaySound(Sfx.HIT);
-                // 对敌人造成伤害
-                enemy.TakeDamage(mAttack);
+
+                // 计算最终伤害
+                var finalDamage = isCritical ? mAttack * criticalMultiplier : mAttack;
+                enemy.TakeDamage(finalDamage, isCritical); // 传递暴击信息
             }
         }
     }

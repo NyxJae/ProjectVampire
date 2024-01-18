@@ -3,10 +3,12 @@ using UnityEngine;
 
 namespace ProjectVampire
 {
-    public partial class HPBottle : ViewController
+    public partial class HPBottle : Entity
     {
         // 私有的 回复血量 属性
         [SerializeField] private int mRecoverHP = 25;
+
+        protected override Collider2D HitBoxCollider2D => HitBox;
 
         private void Start()
         {

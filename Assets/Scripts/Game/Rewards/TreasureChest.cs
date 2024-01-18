@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ProjectVampire
 {
-    public partial class CoinBall : Entity
+    public partial class TreasureChest : Entity
     {
         protected override Collider2D HitBoxCollider2D => HitBox;
 
@@ -13,21 +13,11 @@ namespace ProjectVampire
             {
                 // 如果碰撞器的父物体的名字为PickAbility
                 if (other.transform.parent.name == "PickAbility")
-                    // 获取 金币 方法
-                    GetCoin();
+                {
+                    TreasureChestRoot.openTreasureChestEvent.Trigger();
+                    Destroy(gameObject);
+                }
             }).UnRegisterWhenGameObjectDestroyed(this);
-        }
-
-        /// <summary>
-        ///     公开 获取金币 方法
-        /// </summary>
-        /// <returns></returns>
-        public void GetCoin()
-        {
-            // 播放音效
-            AudioKit.PlaySound("Coin");
-            Destroy(gameObject);
-            Global.Coin.Value += 1;
         }
     }
 }

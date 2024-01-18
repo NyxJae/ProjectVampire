@@ -853,7 +853,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 822269292027853932, guid: 9d2d943a8c5e552489363787929b38fe, type: 3}
       propertyPath: m_Name
-      value: gamePanel
+      value: UIGamePanel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

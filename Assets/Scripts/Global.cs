@@ -28,6 +28,12 @@ namespace ProjectVampire
         // 公开的 最大血量 属性
         public static BindableProperty<float> MaxHealth = new(10);
 
+        // 公开的 暴击率 属性
+        public static BindableProperty<float> CriticalRate = new(0.1f); // 默认暴击率为 10%
+
+        // 公开的 暴击伤害倍数 属性
+        public static BindableProperty<float> CriticalMultiplier = new(2.0f); // 默认暴击伤害倍数为 200%
+
         // 公开的 金币 属性
         public static BindableProperty<int> Coin = new();
 

@@ -3,8 +3,10 @@ using UnityEngine;
 
 namespace ProjectVampire
 {
-    public partial class Bomb : ViewController
+    public partial class Bomb : Entity
     {
+        protected override Collider2D HitBoxCollider2D => HitBox;
+
         private void Start()
         {
             HitBox.OnTriggerStay2DEvent(other =>
@@ -33,6 +35,7 @@ namespace ProjectVampire
         {
             // 播放音效
             AudioKit.PlaySound("Bomb");
+            UIGamePanel.screenFlashEvent.Trigger();
             // 震动摄像机
             MainCamera.Instance.Shake();
             // 找到所有Enemy,不排序,不包含隐藏的
