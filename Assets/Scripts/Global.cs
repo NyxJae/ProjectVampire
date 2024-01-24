@@ -126,6 +126,7 @@ namespace ProjectVampire
 
         protected override void Init()
         {
+            AudioKit.PlaySoundMode = AudioKit.PlaySoundModes.IgnoreSameSoundInGlobalFrames;
             RegisterSystem(new CoinUpgradeSystem());
             RegisterSystem(new SaveSystem());
             RegisterSystem(new ExpUpgradeSystem());

@@ -13,6 +13,7 @@ namespace ProjectVampire
             {
                 // 如果碰撞器的父物体的名字为PickAbility
                 if (other.transform.parent.name == "PickAbility")
+                    // todo 动画 最开始30帧先远离玩家 然后再向玩家靠近 碰到玩家后爆炸
                     // 获取炸弹方法
                     GetBomb();
             }).UnRegisterWhenGameObjectDestroyed(this);

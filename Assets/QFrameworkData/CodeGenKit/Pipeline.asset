@@ -19,37 +19,15 @@ MonoBehaviour:
     From: 0
     NameToFullName: []
     BindInfos:
-    - TypeName: UnityEngine.Transform
-      PathToRoot: Bomb
-      MemberName: Bomb
-    - TypeName: UnityEngine.Transform
-      PathToRoot: ExpBall
-      MemberName: ExpBall
-    - TypeName: UnityEngine.Transform
-      PathToRoot: HPBottle
-      MemberName: HPBottle
-    - TypeName: UnityEngine.Transform
-      PathToRoot: Magnet
-      MemberName: Magnet
-    - TypeName: UnityEngine.Transform
-      PathToRoot: CoinBall
-      MemberName: CoinBall
-    - TypeName: UnityEngine.Transform
-      PathToRoot: TreasureChest
-      MemberName: TreasureChest
-    ScriptsFolder: Assets\Scripts\Game
-    ClassName: PowerUpManager
+    - TypeName: UnityEngine.Tilemaps.Tilemap
+      PathToRoot: Tilemap
+      MemberName: Tilemap
+    ScriptsFolder: Assets/Scripts/Game
+    ClassName: GridController
     Namespace: ProjectVampire
     MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace ProjectVampire\r\n{\r\n\tpublic
-      partial class PowerUpManager : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
+      partial class GridController : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:a7f6e09d-7562-4018-a773-3dcddfd50319\r\nusing UnityEngine;\r\n\r\nnamespace
-      ProjectVampire\r\n{\r\n\tpublic partial class PowerUpManager\r\n\t{\r\n\r\n\t\t///
-      <summary>\r\n\t\t/// \u70B8\u5F39\r\n\t\t/// </summary>\r\n\t\tpublic UnityEngine.Transform
-      Bomb;\r\n\r\n\t\t/// <summary>\r\n\t\t/// \u7ECF\u9A8C\u7403\r\n\t\t/// </summary>\r\n\t\tpublic
-      UnityEngine.Transform ExpBall;\r\n\r\n\t\t/// <summary>\r\n\t\t/// \u8840\u74F6\r\n\t\t///
-      </summary>\r\n\t\tpublic UnityEngine.Transform HPBottle;\r\n\r\n\t\t/// <summary>\r\n\t\t///
-      \u5438\u7ECF\u9A8C\u77F3\r\n\t\t/// </summary>\r\n\t\tpublic UnityEngine.Transform
-      Magnet;\r\n\r\n\t\t/// <summary>\r\n\t\t/// \u91D1\u5E01\r\n\t\t/// </summary>\r\n\t\tpublic
-      UnityEngine.Transform CoinBall;\r\n\r\n\t\t/// <summary>\r\n\t\t/// \u91D1\u5E01\r\n\t\t///
-      </summary>\r\n\t\tpublic UnityEngine.Transform TreasureChest;\r\n\r\n\t}\r\n}\r\n"
+    DesignerCode: "// Generate Id:4da44233-898f-42d0-a381-50ea57262873\r\nusing UnityEngine;\r\n\r\nnamespace
+      ProjectVampire\r\n{\r\n\tpublic partial class GridController\r\n\t{\r\n\r\n\t\tpublic
+      UnityEngine.Tilemaps.Tilemap Tilemap;\r\n\r\n\t}\r\n}\r\n"
