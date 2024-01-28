@@ -30,14 +30,7 @@ namespace ProjectVampire
                 // 如果奖励物的名字为ExpBall
                 if (reward.name.Contains("ExpBall"))
                     // 注册经验球的移动方法
-                    ActionKit.OnUpdate.Register(() =>
-                    {
-                        // 计算奖励物和玩家的距离
-                        var distance = Vector3.Distance(reward.transform.position, Player.Instance.transform.position);
-                        // 经验球向玩家移动
-                        reward.transform.position = Vector3.MoveTowards(reward.transform.position,
-                            Player.Instance.transform.position, distance * Time.deltaTime);
-                    }).UnRegisterWhenGameObjectDestroyed(reward);
+                    reward.GetComponentInParent<ExpBall>().GetExp();
 
             // 销毁自身
             Destroy(gameObject);

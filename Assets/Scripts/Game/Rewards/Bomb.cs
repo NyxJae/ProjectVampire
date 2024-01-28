@@ -1,22 +1,28 @@
+using DG.Tweening;
 using QFramework;
 using UnityEngine;
+
+// dotween
 
 namespace ProjectVampire
 {
     public partial class Bomb : Entity
     {
+        private readonly float ExplosionDistance = 0.1f; // 设定爆炸距离阈值为0.1单位
+
+        // 计时器
+        private float _Timer;
         protected override Collider2D HitBoxCollider2D => HitBox;
 
         private void Start()
         {
+            HitBox.Show();
             HitBox.OnTriggerStay2DEvent(other =>
             {
-                // 如果碰撞器的父物体的名字为PickAbility
-                if (other.transform.parent.name == "PickAbility")
-                    // todo 动画 最开始30帧先远离玩家 然后再向玩家靠近 碰到玩家后爆炸
-                    // 获取炸弹方法
-                    GetBomb();
+                // 如果碰撞器的父物体的名字为PickAbility 并且没有飞向玩家
+                if (other.transform.parent.name == "PickAbility") GetBomb();
             }).UnRegisterWhenGameObjectDestroyed(this);
+
             ActionKit.Repeat()
                 .Delay(1f)
                 // 与play的距离超过10f
@@ -34,22 +40,45 @@ namespace ProjectVampire
         // 公开的 获取炸弹 方法
         public void GetBomb()
         {
-            // 播放音效
+            HitBox.Hide();
+            var distance = 1f;
+            var dir = (transform.position - Player.Instance.transform.position).normalized;
+            var target = new Vector3(dir.x * distance, dir.y * distance, 0);
+
+            transform.DOMove(transform.position + target, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
+            {
+                var moveDuration = 1f;
+                DOVirtual.Float(0, 1, moveDuration,
+                    value =>
+                    {
+                        // 如果炸弹距离玩家小于等于ExplosionDistance，则直接执行爆炸效果
+                        if (Vector3.Distance(transform.position, Player.Instance.transform.position) <=
+                            ExplosionDistance)
+                        {
+                            PerformBombEffects();
+                            return; // 执行爆炸后立即返回，不再继续移动
+                        }
+
+                        transform.position =
+                            Vector3.Lerp(transform.position, Player.Instance.transform.position, value);
+                    }).SetEase(Ease.OutSine).OnComplete(() =>
+                {
+                    // 当炸弹到达玩家位置时也执行爆炸效果
+                    PerformBombEffects();
+                });
+            });
+        }
+
+        // 炸弹爆炸效果
+        private void PerformBombEffects()
+        {
             AudioKit.PlaySound("Bomb");
             UIGamePanel.screenFlashEvent.Trigger();
-            // 震动摄像机
             MainCamera.Instance.Shake();
-            // 找到所有Enemy,不排序,不包含隐藏的
             var enemies = FindObjectsByType<Enemy>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
-            // 遍历所有敌人
-            foreach (var enemy in enemies)
-                // 减少敌人血量
-                enemy.TakeDamage(99999);
-            // 销毁自身
-            Destroy(gameObject);
-
-            // 减少PowerUpManager中炸弹的计数器
+            foreach (var enemy in enemies) enemy.TakeDamage(99999);
             PowerUpManager.Instance.DecreaseBombCount();
+            Destroy(gameObject);
         }
     }
 }

@@ -84,10 +84,11 @@ namespace ProjectVampire
         }
 
         /// <summary>
-        ///     逐帧更新的回调函数
+        ///     逐帧更新的回调函数，将添加动画逻辑在这里。
         /// </summary>
         private void Update()
         {
+            UpdateAnimation();
         }
 
 
@@ -107,6 +108,21 @@ namespace ProjectVampire
 
         public void OnSingletonInit()
         {
+        }
+
+
+        /// <summary>
+        ///     更新角色动画状态
+        /// </summary>
+        private void UpdateAnimation()
+        {
+            // 设置isWalking参数
+            Sprite.SetBool("isWalking", mMoveInput.sqrMagnitude > 0);
+
+            // 根据角色的移动和方向修改Sprite的scale，实现面向左右的效果
+            if (mMoveInput.x < 0)
+                Sprite.transform.localScale = new Vector3(1, 1, 1);
+            else if (mMoveInput.x > 0) Sprite.transform.localScale = new Vector3(-1, 1, 1);
         }
 
         /// <summary>

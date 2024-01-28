@@ -19,15 +19,26 @@ MonoBehaviour:
     From: 0
     NameToFullName: []
     BindInfos:
-    - TypeName: UnityEngine.Tilemaps.Tilemap
-      PathToRoot: Tilemap
-      MemberName: Tilemap
-    ScriptsFolder: Assets/Scripts/Game
-    ClassName: GridController
+    - TypeName: UnityEngine.Animator
+      PathToRoot: Sprite
+      MemberName: Sprite
+    - TypeName: BoxCollider2D
+      PathToRoot: HurtBox
+      MemberName: HurtBox
+    - TypeName: ProjectVampire.Abilities
+      PathToRoot: Abilities
+      MemberName: Abilities
+    - TypeName: UnityEngine.UI.Image
+      PathToRoot: Canvas/HPValue
+      MemberName: HPValue
+    ScriptsFolder: Assets\Scripts\Game
+    ClassName: Player
     Namespace: ProjectVampire
     MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace ProjectVampire\r\n{\r\n\tpublic
-      partial class GridController : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
+      partial class Player : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:4da44233-898f-42d0-a381-50ea57262873\r\nusing UnityEngine;\r\n\r\nnamespace
-      ProjectVampire\r\n{\r\n\tpublic partial class GridController\r\n\t{\r\n\r\n\t\tpublic
-      UnityEngine.Tilemaps.Tilemap Tilemap;\r\n\r\n\t}\r\n}\r\n"
+    DesignerCode: "// Generate Id:1cf520d2-8596-4063-ba1f-ac02fedf7e6b\r\nusing UnityEngine;\r\n\r\nnamespace
+      ProjectVampire\r\n{\r\n\tpublic partial class Player\r\n\t{\r\n\r\n\t\t///
+      <summary>\r\n\t\t/// \u5916\u89C2\r\n\t\t/// </summary>\r\n\t\tpublic UnityEngine.Animator
+      Sprite;\r\n\r\n\t\tpublic BoxCollider2D HurtBox;\r\n\r\n\t\tpublic ProjectVampire.Abilities
+      Abilities;\r\n\r\n\t\tpublic UnityEngine.UI.Image HPValue;\r\n\r\n\t}\r\n}\r\n"
