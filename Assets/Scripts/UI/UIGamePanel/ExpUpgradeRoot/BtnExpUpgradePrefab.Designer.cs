@@ -8,20 +8,20 @@ using QFramework;
 
 namespace ProjectVampire
 {
-	public partial class ExpUpgradeRoot
+	public partial class BtnExpUpgradePrefab
 	{
-		[SerializeField] public RectTransform GroupExpUpgradeBtns;
-		[SerializeField] public BtnExpUpgradePrefab BtnExpUpgradePrefab;
+		[SerializeField] public TMPro.TextMeshProUGUI Text;
+		[SerializeField] public UnityEngine.UI.Image Icon;
 
 		public void Clear()
 		{
-			GroupExpUpgradeBtns = null;
-			BtnExpUpgradePrefab = null;
+			Text = null;
+			Icon = null;
 		}
 
 		public override string ComponentName
 		{
-			get { return "ExpUpgradeRoot";}
+			get { return "BtnExpUpgradePrefab";}
 		}
 	}
 }

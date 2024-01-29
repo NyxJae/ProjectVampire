@@ -39,7 +39,7 @@ namespace ProjectVampire
             transform.DOMove(transform.position + target, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
             {
                 // 设置移动持续时间
-                var moveDuration = 1f;
+                var moveDuration = 1.5f;
                 // 动画移动经验值
                 DOVirtual.Float(0, 1, moveDuration, value =>
                 {

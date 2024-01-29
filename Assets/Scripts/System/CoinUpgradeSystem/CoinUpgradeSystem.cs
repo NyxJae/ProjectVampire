@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using QAssetBundle;
 using QFramework;
 
 namespace ProjectVampire
@@ -49,6 +50,7 @@ namespace ProjectVampire
                 .SetKey("ExpRateUpgrade") // 设置升级项的key
                 .SetPrice(5) // 设置升级项的初始价格
                 .SetMaxLv(10) // 设置升级项的最大等级
+                .SetIconName(Icons.EXPDROPICON)
                 .SetDescription((lv, price) => $"经验掉落几率LV{lv}|价格:{price}金币") // 设置升级项的描述
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
@@ -63,6 +65,7 @@ namespace ProjectVampire
                 .SetKey("CoinRateUpgrade") // 设置升级项的key
                 .SetPrice(10) // 设置升级项的初始价格
                 .SetMaxLv(10) // 设置升级项的最大等级
+                .SetIconName(Icons.GOLDDROPICON)
                 .SetDescription((lv, price) => $"金币掉落几率LV{lv}|价格:{price}金币") // 设置升级项的描述
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
@@ -72,6 +75,63 @@ namespace ProjectVampire
                     Global.DropCoinRate.Value += 0.1f;
                 }));
 
+            // 添加升级项 血瓶掉落几率
+            var bloodDropRateUpgrade = Add(new CoinUpGradeItem()
+                .SetKey("BloodDropRateUpgrade") // 设置升级项的key
+                .SetPrice(15) // 设置升级项的初始价格
+                .SetMaxLv(10) // 设置升级项的最大等级
+                .SetIconName(Icons.HPBOTTLEDROPICON) // 设置升级项的图标
+                .SetDescription((lv, price) => $"血瓶掉落几率LV{lv}|价格:{price}金币") // 设置升级项的描述
+                .SetOnUpgrade(item => // 设置升级项的升级方法
+                {
+                    // 扣除金币
+                    Global.Coin.Value -= item.Price;
+                    // 增加血瓶掉落几率
+                    Global.DropHPBottleRate.Value += 0.1f;
+                }));
+            // 添加升级项 磁铁掉落几率
+            var magnetDropRateUpgrade = Add(new CoinUpGradeItem()
+                .SetKey("MagnetDropRateUpgrade") // 设置升级项的key
+                .SetPrice(20) // 设置升级项的初始价格
+                .SetMaxLv(10) // 设置升级项的最大等级
+                .SetIconName(Icons.MAGNETICON) // 设置升级项的图标
+                .SetDescription((lv, price) => $"磁铁掉落几率LV{lv}|价格:{price}金币") // 设置升级项的描述
+                .SetOnUpgrade(item => // 设置升级项的升级方法
+                {
+                    // 扣除金币
+                    Global.Coin.Value -= item.Price;
+                    // 增加磁铁掉落几率
+                    Global.DropMagnetRate.Value += 0.1f;
+                }));
+            // 添加升级项 炸弹掉落几率
+            var bombDropRateUpgrade = Add(new CoinUpGradeItem()
+                .SetKey("BombDropRateUpgrade") // 设置升级项的key
+                .SetPrice(25) // 设置升级项的初始价格
+                .SetMaxLv(10) // 设置升级项的最大等级
+                .SetIconName(Icons.BOMBICON) // 设置升级项的图标
+                .SetDescription((lv, price) => $"炸弹掉落几率LV{lv}|价格:{price}金币") // 设置升级项的描述
+                .SetOnUpgrade(item => // 设置升级项的升级方法
+                {
+                    // 扣除金币
+                    Global.Coin.Value -= item.Price;
+                    // 增加炸弹掉落几率
+                    Global.DropBombRate.Value += 0.1f;
+                }));
+
+            // 添加升级项 最大血量
+            var maxHealthUpgrade = Add(new CoinUpGradeItem()
+                .SetKey("MaxHealthUpgrade") // 设置升级项的key
+                .SetPrice(30) // 设置升级项的初始价格
+                .SetMaxLv(10) // 设置升级项的最大等级
+                .SetIconName(Icons.MAXHPBOOSTICON) // 设置升级项的图标
+                .SetDescription((lv, price) => $"最大血量LV{lv}|价格:{price}金币") // 设置升级项的描述
+                .SetOnUpgrade(item => // 设置升级项的升级方法
+                {
+                    // 扣除金币
+                    Global.Coin.Value -= item.Price;
+                    // 增加最大血量
+                    Global.MaxHealth.Value += 10;
+                }));
             // 读取升级项的状态
             Load();
 

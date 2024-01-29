@@ -5,7 +5,7 @@ using QFramework;
 
 namespace ProjectVampire
 {
-	// Generate Id:5912fc91-56e9-43ed-b11c-c6b68e802d1a
+	// Generate Id:207b61ff-c7b0-470d-b6f0-535f33331f1c
 	public partial class UIRewardPanel
 	{
 		public const string Name = "UIRewardPanel";
@@ -13,7 +13,7 @@ namespace ProjectVampire
 		[SerializeField]
 		public RectTransform GroupBtns;
 		[SerializeField]
-		public UnityEngine.UI.Button BtnUpgradePrefab;
+		public BtnUpgradePrefab BtnUpgradePrefab;
 		[SerializeField]
 		public UnityEngine.UI.Button BtnClose;
 		[SerializeField]

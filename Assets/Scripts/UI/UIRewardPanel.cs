@@ -1,6 +1,5 @@
 using System.Linq;
 using QFramework;
-using TMPro;
 using UnityEngine;
 
 namespace ProjectVampire
@@ -13,6 +12,9 @@ namespace ProjectVampire
     {
         // 私有的 升级所需金币数量
         [SerializeField] private int mCoinUp = 5;
+
+        // resloader 用于加载资源
+        private readonly ResLoader _resLoader = ResLoader.Allocate();
 
         public IArchitecture GetArchitecture()
         {
@@ -42,9 +44,10 @@ namespace ProjectVampire
                         // 缓存升级项
                         var itemCatch = coinUpdateItem;
                         // 设置按钮的文本(textMeshPro)
-                        self.GetComponentInChildren<TextMeshProUGUI>().text = itemCatch.Description;
+                        self.Text.text = itemCatch.Description;
+                        self.Icon.sprite = _resLoader.LoadSync<Sprite>(itemCatch.IconName);
                         // 给按钮添加点击事件
-                        self.onClick.AddListener(() =>
+                        self.Button.onClick.AddListener(() =>
                         {
                             itemCatch.Upgrade();
                             AudioKit.PlaySound("AbilityLevelUp");
@@ -55,9 +58,9 @@ namespace ProjectVampire
                         Global.Coin.RegisterWithInitValue(coin =>
                         {
                             if (coin < itemCatch.Price)
-                                selfCatch.interactable = false;
+                                selfCatch.Button.interactable = false;
                             else
-                                selfCatch.interactable = true;
+                                selfCatch.Button.interactable = true;
                         }).UnRegisterWhenGameObjectDestroyed(selfCatch);
                         // 注册更改事件
                         itemCatch.OnCoinUpdateItemChanged.Register(() =>

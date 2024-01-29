@@ -17,6 +17,10 @@ namespace ProjectVampire
         // 创建发生更改事件
         public EasyEvent OnCoinUpdateItemChanged = new();
 
+        // 图标名称
+        public string IconName { get; set; }
+
+
         // 升级项状态
         public bool IsUpdated { get; set; }
 
@@ -72,6 +76,18 @@ namespace ProjectVampire
         public CoinUpGradeItem SetKey(string key)
         {
             Key = key;
+            return this;
+        }
+
+        // 链式封装 seticonname
+        /// <summary>
+        ///     设置升级项的图标名称
+        /// </summary>
+        /// <param name="iconName"></param>
+        /// <returns></returns>
+        public CoinUpGradeItem SetIconName(string iconName)
+        {
+            IconName = iconName;
             return this;
         }
 

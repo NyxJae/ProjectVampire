@@ -5,7 +5,7 @@ using QFramework;
 
 namespace ProjectVampire
 {
-	// Generate Id:dffd8918-142b-4a9a-bdd3-3d3bd4d9252a
+	// Generate Id:8754e4df-647a-4dd6-836f-cd04cc86cb44
 	public partial class UIGamePanel
 	{
 		public const string Name = "UIGamePanel";

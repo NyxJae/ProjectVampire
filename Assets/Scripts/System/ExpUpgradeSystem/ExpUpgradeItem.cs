@@ -20,6 +20,9 @@ namespace ProjectVampire.System.ExpUpgradeSystem
         // 升级项的key
         public string Key { get; private set; }
 
+        // 图标名称
+        public string IconName { get; set; }
+
         // 升级项的描述
         public string Description
         {
@@ -59,6 +62,18 @@ namespace ProjectVampire.System.ExpUpgradeSystem
         public ExpUpgradeItem SetKey(string key)
         {
             Key = key;
+            return this;
+        }
+
+        // 链式封装 seticonname
+        /// <summary>
+        ///     设置升级项的图标名称
+        /// </summary>
+        /// <param name="iconName"></param>
+        /// <returns></returns>
+        public ExpUpgradeItem SetIconName(string iconName)
+        {
+            IconName = iconName;
             return this;
         }
 

@@ -3,13 +3,15 @@
  ****************************************************************************/
 
 using QFramework;
-using TMPro;
 using UnityEngine;
 
 namespace ProjectVampire
 {
     public partial class ExpUpgradeRoot : UIElement, IController
     {
+        // resloader 用于加载资源
+        private readonly ResLoader _ResLoader = ResLoader.Allocate();
+
         private void Awake()
         {
             Hide();
@@ -22,7 +24,7 @@ namespace ProjectVampire
                         // 缓存升级项
                         var itemCatch = expGroupItem;
                         // 给按钮添加点击事件
-                        self.onClick.AddListener(() =>
+                        self.Button.onClick.AddListener(() =>
                         {
                             itemCatch.Upgrade();
                             AudioKit.PlaySound("AbilityLevelUp");
@@ -36,8 +38,9 @@ namespace ProjectVampire
                         itemCatch.IsVisible.Register(newValue =>
                         {
                             // 更新升级项描述(textMeshPro)
-                            selfCatch.GetComponentInChildren<TextMeshProUGUI>().text =
-                                itemCatch.Description;
+                            selfCatch.Text.text = itemCatch.Description;
+                            // 设置icon的image
+                            selfCatch.Icon.sprite = _ResLoader.LoadSync<Sprite>(itemCatch.IconName);
                             // 设置按钮是否可见
                             selfCatch.gameObject.SetActive(newValue);
                         }).UnRegisterWhenGameObjectDestroyed(selfCatch);

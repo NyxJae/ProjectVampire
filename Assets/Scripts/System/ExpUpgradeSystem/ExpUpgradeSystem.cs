@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using ProjectVampire.System.ExpUpgradeSystem;
+using QAssetBundle;
 using QFramework;
 using UnityEngine;
 
@@ -26,6 +27,7 @@ namespace ProjectVampire
                 .SetDescription(_ =>
                     "开启雷电场,攻击身边敌人"
                 ) // 设置升级项的描述
+                .SetIconName(Icons.LIGHTNINGFIELDICON)
                 .SetMaxLevel(1)
                 .SetOnUpgrade(item => { Player.Instance.Abilities.LightingSite.gameObject.SetActive(true); }));
             // 添加升级项 雷电场攻击力提升
@@ -33,6 +35,7 @@ namespace ProjectVampire
                 .SetKey("LightingSiteATKUpgrade") // 设置升级项的key
                 .SetDescription(lv => $"雷电场攻击力提升LV{lv}") // 设置升级项的描述
                 .SetMaxLevel(10)
+                .SetIconName(Icons.LIGHTNINGFIELDICON)
                 .SetCondition(item => lightingSite.IsUpdated)
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
@@ -44,6 +47,7 @@ namespace ProjectVampire
                 .SetKey("LightingSiteRangeUpgrade") // 设置升级项的key
                 .SetDescription(lv => $"雷电场范围提升LV{lv}") // 设置升级项的描述
                 .SetMaxLevel(10)
+                .SetIconName(Icons.LIGHTNINGFIELDICON)
                 .SetCondition(item => lightingSite.IsUpdated)
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
@@ -55,6 +59,7 @@ namespace ProjectVampire
                 .SetKey("LightingSiteFrequencyUpgrade") // 设置升级项的key
                 .SetDescription(lv => $"雷电场频率提升LV{lv}") // 设置升级项的描述
                 .SetMaxLevel(10)
+                .SetIconName(Icons.LIGHTNINGFIELDICON)
                 .SetCondition(item => lightingSite.IsUpdated)
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
@@ -68,6 +73,7 @@ namespace ProjectVampire
                 .SetDescription(_ =>
                     "开启随身旋转火球,攻击碰到的敌人"
                 ) // 设置升级项的描述
+                .SetIconName(Icons.FIREBALLICON)
                 .SetMaxLevel(1)
                 .SetOnUpgrade(item => { Player.Instance.Abilities.FireBallAbility.gameObject.SetActive(true); }));
             // 添加升级项 火球攻击力提升
@@ -75,6 +81,7 @@ namespace ProjectVampire
                 .SetKey("FireBallATKUpgrade") // 设置升级项的key
                 .SetDescription(lv => $"火球攻击力提升LV{lv}") // 设置升级项的描述
                 .SetMaxLevel(10)
+                .SetIconName(Icons.FIREBALLICON)
                 .SetCondition(item => fireBall.IsUpdated)
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
@@ -86,6 +93,7 @@ namespace ProjectVampire
                 .SetKey("FireBallCountUpgrade") // 设置升级项的key
                 .SetDescription(lv => $"火球数量提升LV{lv}") // 设置升级项的描述
                 .SetMaxLevel(8)
+                .SetIconName(Icons.FIREBALLICON)
                 .SetCondition(item => fireBall.IsUpdated)
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
@@ -98,6 +106,7 @@ namespace ProjectVampire
                 .SetKey("KnifeATKUpgrade") // 设置升级项的key
                 .SetDescription(lv => $"飞刀攻击力提升LV{lv}") // 设置升级项的描述
                 .SetMaxLevel(10)
+                .SetIconName(Icons.KNIFEICON)
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
                     // 增加攻击力
@@ -109,6 +118,7 @@ namespace ProjectVampire
                 .SetKey("KnifeRangeUpgrade") // 设置升级项的key
                 .SetDescription(lv => $"飞刀攻击间隔提升LV{lv}") // 设置升级项的描述
                 .SetMaxLevel(10)
+                .SetIconName(Icons.KNIFEICON)
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
                     // 增加攻击间隔
@@ -119,6 +129,7 @@ namespace ProjectVampire
                 .SetKey("KnifeCountUpgrade") // 设置升级项的key
                 .SetDescription(lv => $"飞刀数量提升LV{lv}") // 设置升级项的描述
                 .SetMaxLevel(10)
+                .SetIconName(Icons.KNIFEICON)
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
                     // 增加飞刀数量
@@ -129,6 +140,7 @@ namespace ProjectVampire
                 .SetKey("KnifePierceCountUpgrade") // 设置升级项的key
                 .SetDescription(lv => $"飞刀穿透敌人数量提升LV{lv}") // 设置升级项的描述
                 .SetMaxLevel(5)
+                .SetIconName(Icons.KNIFEICON)
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
                     // 增加飞刀穿透敌人数量
@@ -141,12 +153,14 @@ namespace ProjectVampire
                     "开启黑洞能力,吸引敌人,并攻击"
                 ) // 设置升级项的描述
                 .SetMaxLevel(1)
+                .SetIconName(Icons.BLACKHOLEICON)
                 .SetOnUpgrade(item => { Player.Instance.Abilities.BlackHoleAbility.gameObject.SetActive(true); }));
             // 添加升级项 黑洞攻击力提升
             Add(new ExpUpgradeItem()
                 .SetKey("BlackHoleATKUpgrade") // 设置升级项的key
                 .SetDescription(lv => $"黑洞攻击力提升LV{lv}") // 设置升级项的描述
                 .SetMaxLevel(10)
+                .SetIconName(Icons.BLACKHOLEICON)
                 .SetCondition(item => BlackHoleAbility.IsUpdated)
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
@@ -158,6 +172,7 @@ namespace ProjectVampire
                 .SetKey("BlackHoleSizeUpgrade") // 设置升级项的key
                 .SetDescription(lv => $"黑洞大小提升LV{lv}") // 设置升级项的描述
                 .SetMaxLevel(10)
+                .SetIconName(Icons.BLACKHOLEICON)
                 .SetCondition(item => BlackHoleAbility.IsUpdated)
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
@@ -169,6 +184,7 @@ namespace ProjectVampire
                 .SetKey("BlackHoleDurationUpgrade") // 设置升级项的key
                 .SetDescription(lv => $"黑洞持续时间提升LV{lv}") // 设置升级项的描述
                 .SetMaxLevel(10)
+                .SetIconName(Icons.BLACKHOLEICON)
                 .SetCondition(item => BlackHoleAbility.IsUpdated)
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
@@ -180,6 +196,7 @@ namespace ProjectVampire
                 .SetKey("BlackHoleCooldownUpgrade") // 设置升级项的key
                 .SetDescription(lv => $"黑洞冷却时间减少LV{lv}") // 设置升级项的描述
                 .SetMaxLevel(10)
+                .SetIconName(Icons.BLACKHOLEICON)
                 .SetCondition(item => BlackHoleAbility.IsUpdated)
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
@@ -191,6 +208,7 @@ namespace ProjectVampire
                 .SetKey("BlackHoleMoveSpeedUpgrade") // 设置升级项的key
                 .SetDescription(lv => $"黑洞移动速度提升LV{lv}") // 设置升级项的描述
                 .SetMaxLevel(10)
+                .SetIconName(Icons.BLACKHOLEICON)
                 .SetCondition(item => BlackHoleAbility.IsUpdated)
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
@@ -202,6 +220,7 @@ namespace ProjectVampire
                 .SetKey("BlackHoleCountUpgrade") // 设置升级项的key
                 .SetDescription(lv => $"黑洞数量提升LV{lv}") // 设置升级项的描述
                 .SetMaxLevel(5)
+                .SetIconName(Icons.BLACKHOLEICON)
                 .SetCondition(item => BlackHoleAbility.IsUpdated)
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
@@ -215,6 +234,7 @@ namespace ProjectVampire
                 .SetKey("PickUpRangeUpgrade") // 设置升级项的key
                 .SetDescription(lv => $"拾取范围提升LV{lv}") // 设置升级项的描述
                 .SetMaxLevel(10)
+                .SetIconName(Icons.PICKRANGEICON)
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
                     // 增加拾取范围
@@ -225,6 +245,7 @@ namespace ProjectVampire
                 .SetKey("CriticalRateUpgrade") // 设置升级项的key
                 .SetDescription(lv => $"暴击率提升LV{lv}") // 设置升级项的描述
                 .SetMaxLevel(10) // 最大等级设置为5
+                .SetIconName(Icons.STRIKERATEICON)
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
                     // 提升暴击率
@@ -236,6 +257,7 @@ namespace ProjectVampire
                 .SetKey("CriticalDamageUpgrade") // 设置升级项的key
                 .SetDescription(lv => $"暴击伤害提升LV{lv}") // 设置升级项的描述
                 .SetMaxLevel(10) // 最大等级设置为5
+                .SetIconName(Icons.STRIKERATEICON)
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
                     // 提升暴击伤害倍数

@@ -1,5 +1,98 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &401991993891317868
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3051817981601123925}
+  - component: {fileID: 6629386979523387825}
+  - component: {fileID: 167946722943832606}
+  - component: {fileID: 3121478175149719720}
+  m_Layer: 0
+  m_Name: Icon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3051817981601123925
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401991993891317868}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8158006372892719871}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 10.054308, y: 0}
+  m_SizeDelta: {x: 34.1455, y: 34.146}
+  m_Pivot: {x: 0, y: 0.5}
+--- !u!222 &6629386979523387825
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401991993891317868}
+  m_CullTransparentMesh: 1
+--- !u!114 &167946722943832606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401991993891317868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3121478175149719720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401991993891317868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarkType: 0
+  CustomComponentName: Icon
+  CustomComment: 
+  mComponentName: UnityEngine.UI.Image
 --- !u!1 &897342009852278730
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,6 +690,7 @@ GameObject:
   - component: {fileID: 8762116160828102342}
   - component: {fileID: 7515585436821833996}
   - component: {fileID: 5591578978683427049}
+  - component: {fileID: 2461429614663658737}
   m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
@@ -621,8 +715,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 26.744}
+  m_AnchoredPosition: {x: 17.7901, y: 0.31770325}
+  m_SizeDelta: {x: -53.3701, y: 32.4622}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7515585436821833996
 CanvasRenderer:
@@ -679,7 +773,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26.7
+  m_fontSize: 30.55
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -721,6 +815,22 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2461429614663658737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7017487068194353878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarkType: 0
+  CustomComponentName: Text
+  CustomComment: 
+  mComponentName: TMPro.TextMeshProUGUI
 --- !u!1 &8784705684601745105
 GameObject:
   m_ObjectHideFlags: 0
@@ -733,14 +843,14 @@ GameObject:
   - component: {fileID: 3466641430794343697}
   - component: {fileID: 8776214908599554464}
   - component: {fileID: 614021068159569195}
-  - component: {fileID: 6630408468168032791}
+  - component: {fileID: -5387020924402210865}
   m_Layer: 0
   m_Name: BtnUpgradePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8158006372892719871
 RectTransform:
   m_ObjectHideFlags: 0
@@ -754,12 +864,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8762116160828102342}
+  - {fileID: 3051817981601123925}
   m_Father: {fileID: 7761781191218647436}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 24.103043, y: -192.673}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 351.7939, y: 38.92}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &3466641430794343697
@@ -844,7 +955,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6630408468168032791
+--- !u!114 &-5387020924402210865
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -853,13 +964,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8784705684601745105}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
+  m_Script: {fileID: 11500000, guid: c005517cf770c3942a2ed777a9b74be0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MarkType: 0
-  CustomComponentName: BtnCoinUp
-  CustomComment: 
-  mComponentName: UnityEngine.UI.Button
+  Text: {fileID: 5591578978683427049}
+  Icon: {fileID: 167946722943832606}
 --- !u!1 &9187692592227687807
 GameObject:
   m_ObjectHideFlags: 0
@@ -912,6 +1021,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mCoinUp: 5
   GroupBtns: {fileID: 7761781191218647436}
-  BtnUpgradePrefab: {fileID: 614021068159569195}
+  BtnUpgradePrefab: {fileID: -5387020924402210865}
   BtnClose: {fileID: 1028998121371844818}
   TextCoin: {fileID: 8934938250885612839}
