@@ -3,12 +3,15 @@ using UnityEngine;
 
 namespace ProjectVampire
 {
-    public partial class HPBottle : Entity
+    public partial class HPBottle : Entity, IController
     {
         // 私有的 回复血量 属性
         [SerializeField] private int mRecoverHP = 25;
 
         protected override Collider2D HitBoxCollider2D => HitBox;
+
+        // PlayerModel
+        private PlayerModel PlayerModel => this.GetModel<PlayerModel>();
 
         private void Start()
         {
@@ -21,6 +24,11 @@ namespace ProjectVampire
             }).UnRegisterWhenGameObjectDestroyed(this);
         }
 
+        public IArchitecture GetArchitecture()
+        {
+            return Global.Interface;
+        }
+
 
         // 公开的 获取血瓶 方法
         public void GetHPBottle()
@@ -28,13 +36,13 @@ namespace ProjectVampire
             // 播放音效
             AudioKit.PlaySound("Hp");
             // 如果血量大于最大血量
-            if (Global.Health.Value < Global.MaxHealth.Value)
+            if (PlayerModel.Health.Value < PlayerModel.MaxHealth.Value)
             {
-                Global.Health.Value += mRecoverHP;
+                PlayerModel.Health.Value += mRecoverHP;
                 // 如果血量大于最大血量
-                if (Global.Health.Value > Global.MaxHealth.Value)
+                if (PlayerModel.Health.Value > PlayerModel.MaxHealth.Value)
                     // 血量等于最大血量
-                    Global.Health.Value = Global.MaxHealth.Value;
+                    PlayerModel.Health.Value = PlayerModel.MaxHealth.Value;
                 // 销毁自身
                 Destroy(gameObject);
             }

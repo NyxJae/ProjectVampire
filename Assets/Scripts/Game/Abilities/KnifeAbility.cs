@@ -11,7 +11,6 @@ namespace ProjectVampire
         [SerializeField] private int mKnifeCount = 1; // 可发射的飞刀数量
         public int KnifePierceCount = 1; // 飞刀可穿透敌人数
         private readonly float mSpeed = 10f; // 飞刀速度
-        private float mMaxDistance = 20f; // 飞刀最大飞行距离
         private float mTimer; // 攻击计时器
 
         public float Attack
@@ -64,7 +63,7 @@ namespace ProjectVampire
 
         private void FireKnife(Transform target)
         {
-            Knife.InstantiateWithParent(transform) // 创建飞刀
+            Knife.InstantiateWithParent(null) // 创建飞刀 父物体为null
                 .Position(transform.position) // 设置飞刀位置
                 .Show() // 显示飞刀
                 .Self(self =>

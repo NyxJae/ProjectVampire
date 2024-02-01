@@ -16,11 +16,6 @@ namespace ProjectVampire
         protected override void OnInit(IUIData uiData = null)
         {
             mData = uiData as UIBeginPanelData ?? new UIBeginPanelData();
-            // please add init code here
-        }
-
-        protected override void OnOpen(IUIData uiData = null)
-        {
             // 注册 BtnBegin 的点击事件 
             BtnBegin.onClick.AddListener(() =>
             {
@@ -35,11 +30,17 @@ namespace ProjectVampire
                 // 打开奖励界面
                 UIKit.OpenPanel<UIRewardPanel>();
             });
+            // 注册 BtnAchievement 的点击事件
+            AchievementPanel.Hide();
+            BtnAchievement.onClick.AddListener(() => { AchievementPanel.Show(); });
+        }
+
+        protected override void OnOpen(IUIData uiData = null)
+        {
         }
 
         protected override void OnShow()
         {
-            // 
         }
 
         protected override void OnHide()

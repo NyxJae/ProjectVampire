@@ -3,13 +3,21 @@ using UnityEngine;
 
 namespace ProjectVampire
 {
-    public partial class PowerUpManager : ViewController, ISingleton
+    public partial class PowerUpManager : ViewController, ISingleton, IController
     {
         // 增加一个计数器追踪场上的炸弹数量
         private int bombCount;
 
         // 公开的 获取实例 方法
         public static PowerUpManager Instance => MonoSingletonProperty<PowerUpManager>.Instance;
+
+        // globalModel
+        private GlobalModel GlobalModel => this.GetModel<GlobalModel>();
+
+        public IArchitecture GetArchitecture()
+        {
+            return Global.Interface;
+        }
 
         public void OnSingletonInit()
         {
@@ -33,16 +41,16 @@ namespace ProjectVampire
         public void DroReward(GameObject enemy)
         {
             // 以下方法抽象为一个新的方法 DropItem
-            DropItem(ExpBall, Global.DropExpRate.Value, enemy);
-            DropItem(CoinBall, Global.DropCoinRate.Value, enemy);
-            DropItem(HPBottle, Global.DropHPBottleRate.Value, enemy);
-            DropItem(Magnet, Global.DropMagnetRate.Value, enemy);
+            DropItem(ExpBall, GlobalModel.DropExpRate.Value, enemy);
+            DropItem(CoinBall, GlobalModel.DropCoinRate.Value, enemy);
+            DropItem(HPBottle, GlobalModel.DropHPBottleRate.Value, enemy);
+            DropItem(Magnet, GlobalModel.DropMagnetRate.Value, enemy);
 
             // 使用bombCount来控制炸弹的生成
             if (bombCount < 2)
             {
                 var random = Random.Range(0f, 1f);
-                if (random <= Global.DropBombRate.Value)
+                if (random <= GlobalModel.DropBombRate.Value)
                 {
                     Bomb.InstantiateWithParent(transform).Position(enemy.transform.position + GetRandomOffset()).Show();
                     bombCount++; // 炸弹数量增加

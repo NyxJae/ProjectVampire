@@ -48,20 +48,20 @@ namespace ProjectVampire
             transform.DOMove(transform.position + target, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
             {
                 var moveDuration = 1f;
-                DOVirtual.Float(0, 1, moveDuration,
-                    value =>
+                DOVirtual.Float(0, 1, moveDuration, value =>
+                {
+                    if (this == null) return;
+                    // 如果炸弹距离玩家小于等于ExplosionDistance，则直接执行爆炸效果
+                    if (Vector3.Distance(transform.position, Player.Instance.transform.position) <=
+                        ExplosionDistance)
                     {
-                        // 如果炸弹距离玩家小于等于ExplosionDistance，则直接执行爆炸效果
-                        if (Vector3.Distance(transform.position, Player.Instance.transform.position) <=
-                            ExplosionDistance)
-                        {
-                            PerformBombEffects();
-                            return; // 执行爆炸后立即返回，不再继续移动
-                        }
+                        PerformBombEffects();
+                        return; // 执行爆炸后立即返回，不再继续移动
+                    }
 
-                        transform.position =
-                            Vector3.Lerp(transform.position, Player.Instance.transform.position, value);
-                    }).SetEase(Ease.OutSine).OnComplete(() =>
+                    transform.position =
+                        Vector3.Lerp(transform.position, Player.Instance.transform.position, value);
+                }).SetEase(Ease.OutSine).OnComplete(() =>
                 {
                     // 当炸弹到达玩家位置时也执行爆炸效果
                     PerformBombEffects();

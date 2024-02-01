@@ -12,6 +12,9 @@ namespace ProjectVampire
         // resloader 用于加载资源
         private readonly ResLoader _ResLoader = ResLoader.Allocate();
 
+        // PlayerModel
+        private PlayerModel _PlayerModel => this.GetModel<PlayerModel>();
+
         private void Awake()
         {
             Hide();
@@ -26,7 +29,7 @@ namespace ProjectVampire
                         // 给按钮添加点击事件
                         self.Button.onClick.AddListener(() =>
                         {
-                            itemCatch.Upgrade();
+                            itemCatch.Trigger();
                             AudioKit.PlaySound("AbilityLevelUp");
                             Hide();
                             // 时间恢复
@@ -45,7 +48,7 @@ namespace ProjectVampire
                             selfCatch.gameObject.SetActive(newValue);
                         }).UnRegisterWhenGameObjectDestroyed(selfCatch);
                     });
-            Global.Level.Register(newValue =>
+            _PlayerModel.Level.Register(newValue =>
             {
                 // 显示升级面板
                 Show();

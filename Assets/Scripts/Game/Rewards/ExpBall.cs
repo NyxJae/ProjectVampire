@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ProjectVampire
 {
-    public partial class ExpBall : Entity
+    public partial class ExpBall : Entity, IController
     {
         // 设定爆炸距离阈值为0.1
         private readonly float ExplosionDistance = 0.1f;
@@ -13,6 +13,9 @@ namespace ProjectVampire
         private readonly int mExp = 1;
 
         protected override Collider2D HitBoxCollider2D => HitBox;
+
+        // PlayerModel
+        private PlayerModel PlayerModel => this.GetModel<PlayerModel>();
 
         private void Start()
         {
@@ -23,6 +26,11 @@ namespace ProjectVampire
                 if (other.transform.parent.name == "PickAbility")
                     GetExp();
             }).UnRegisterWhenGameObjectDestroyed(this);
+        }
+
+        public IArchitecture GetArchitecture()
+        {
+            return Global.Interface;
         }
 
         public void GetExp()
@@ -43,6 +51,7 @@ namespace ProjectVampire
                 // 动画移动经验值
                 DOVirtual.Float(0, 1, moveDuration, value =>
                 {
+                    if (this == null) return;
                     // 如果距离小于爆炸距离，则收集经验
                     if (Vector3.Distance(transform.position, Player.Instance.transform.position) <= ExplosionDistance)
                     {
@@ -62,7 +71,7 @@ namespace ProjectVampire
             // 播放经验值收集音效
             AudioKit.PlaySound("Exp");
             // 将经验值加到全局经验值中
-            Global.Exp.Value += mExp;
+            PlayerModel.Exp.Value += mExp;
             // 销毁当前对象
             Destroy(gameObject);
         }

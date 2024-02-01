@@ -10,11 +10,11 @@ namespace ProjectVampire
 
     public partial class UIRewardPanel : UIPanel, IController
     {
-        // 私有的 升级所需金币数量
-        [SerializeField] private int mCoinUp = 5;
-
         // resloader 用于加载资源
         private readonly ResLoader _resLoader = ResLoader.Allocate();
+
+        // saveutility
+        private SaveUtility _saveUtility => this.GetUtility<SaveUtility>();
 
         public IArchitecture GetArchitecture()
         {
@@ -27,7 +27,7 @@ namespace ProjectVampire
             // 隐藏升级按钮
             BtnUpgradePrefab.Hide();
             // 给金币增加事件添加显示回调函数
-            Global.Coin.RegisterWithInitValue(newValue => { TextCoin.text = $"金币:{newValue}"; })
+            this.GetModel<GlobalModel>().Coin.RegisterWithInitValue(newValue => { TextCoin.text = $"金币:{newValue}"; })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
             // 注册 BtnClose 的点击事件
             BtnClose.onClick.AddListener(() =>
@@ -49,13 +49,13 @@ namespace ProjectVampire
                         // 给按钮添加点击事件
                         self.Button.onClick.AddListener(() =>
                         {
-                            itemCatch.Upgrade();
-                            AudioKit.PlaySound("AbilityLevelUp");
+                            var command = new OptionTriggerCommand(itemCatch, _saveUtility);
+                            this.SendCommand(command);
                         });
                         // 缓存self
                         var selfCatch = self;
                         // 给按钮添加金币数量变化事件, 用于判断是否可以升级
-                        Global.Coin.RegisterWithInitValue(coin =>
+                        this.GetModel<GlobalModel>().Coin.RegisterWithInitValue(coin =>
                         {
                             if (coin < itemCatch.Price)
                                 selfCatch.Button.interactable = false;

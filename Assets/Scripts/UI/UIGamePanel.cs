@@ -20,19 +20,24 @@ namespace ProjectVampire
 
         protected override void OnInit(IUIData uiData = null)
         {
+            var playerModel = this.GetModel<PlayerModel>();
+            var globalModel = this.GetModel<GlobalModel>();
             mData = uiData as UIGamePanelData ?? new UIGamePanelData();
             // 给经验值增加事件添加显示回调函数
-            Global.Exp.RegisterWithInitValue(newValue => { ExpValue.fillAmount = newValue / Global.MaxExp.Value; })
+            playerModel.Exp.RegisterWithInitValue(newValue =>
+                {
+                    ExpValue.fillAmount = newValue / playerModel.MaxExp.Value;
+                })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
             // 给等级增加事件添加显示回调函数
-            Global.Level.RegisterWithInitValue(newValue => { TextLevel.text = $"等级:{newValue}"; })
+            playerModel.Level.RegisterWithInitValue(newValue => { TextLevel.text = $"等级:{newValue}"; })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
             // 给金币增加事件添加显示回调函数
-            Global.Coin.RegisterWithInitValue(newValue => { TextCoin.text = $"金币:{newValue}"; })
+            globalModel.Coin.RegisterWithInitValue(newValue => { TextCoin.text = $"金币:{newValue}"; })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
 
             // 给时间增加事件添加显示回调函数
-            Global.Time.Register(newValue =>
+            globalModel.Time.Register(newValue =>
             {
                 // 每30帧执行一次显示时间
                 if (Time.frameCount % 30 == 0)
@@ -47,16 +52,16 @@ namespace ProjectVampire
                 }
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
             // 血量显示
-            Global.Health.RegisterWithInitValue(newValue =>
+            playerModel.Health.RegisterWithInitValue(newValue =>
             {
                 // 显示血量
-                TextHP.text = $"血量:{newValue}/{Global.MaxHealth.Value}";
+                TextHP.text = $"血量:{newValue}/{playerModel.MaxHealth.Value}";
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
 
             ActionKit.OnUpdate.Register(() =>
             {
                 // 时间
-                Global.Time.Value += Time.deltaTime;
+                globalModel.Time.Value += Time.deltaTime;
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
             // 注册屏幕闪烁事件
             screenFlashEvent.Register(() =>

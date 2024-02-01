@@ -4,17 +4,13 @@ using UnityEngine.InputSystem;
 
 namespace ProjectVampire
 {
-    public partial class Player : ViewController, ISingleton
+    public partial class Player : ViewController, ISingleton, IController
     {
         /// <summary>
         ///     私有的 移动速度系数 属性 在 Inspector 中显示
         /// </summary>
         [SerializeField] private float mSpeed = 5f;
 
-        /// <summary>
-        ///     私有的 被击扣血值 属性
-        /// </summary>
-        private readonly int mDamage = 1;
 
         /// <summary>
         ///     平滑时间，决定了移动到目标位置所需的时间，可以根据需要调整这个值
@@ -35,6 +31,12 @@ namespace ProjectVampire
         // 公开的 静态 实例 属性
         public static Player Instance => MonoSingletonProperty<Player>.Instance;
 
+        // globalModel
+        private GlobalModel GlobalModel => this.GetModel<GlobalModel>();
+
+        // playerModel
+        private PlayerModel PlayerModel => this.GetModel<PlayerModel>();
+
         private void Awake()
         {
             // 时间恢复
@@ -51,14 +53,14 @@ namespace ProjectVampire
                     {
                         // 如果碰撞的对象的父对象没有Enemy标签 则返回
                         if (enemyHitBox.GetComponentInParent<IEnemy>() == null) return;
-                        Global.Health.Value -= enemyHitBox.GetComponentInParent<IEnemy>().Attack;
+                        PlayerModel.Health.Value -= enemyHitBox.GetComponentInParent<IEnemy>().Attack;
                     }
                 )
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
             // 给血量增加事件添加死亡回调函数
-            Global.Health.Register(newValue =>
+            PlayerModel.Health.Register(newValue =>
             {
-                HPValue.fillAmount = newValue / Global.MaxHealth.Value;
+                HPValue.fillAmount = newValue / PlayerModel.MaxHealth.Value;
                 if (newValue <= 0)
                 {
                     // 播放死亡音效
@@ -70,16 +72,19 @@ namespace ProjectVampire
                 }
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
             // 给血量最大值增加事件添加显示回调函数
-            Global.MaxHealth.RegisterWithInitValue(newValue => { HPValue.fillAmount = Global.Health.Value / newValue; })
+            PlayerModel.MaxHealth.RegisterWithInitValue(newValue =>
+                {
+                    HPValue.fillAmount = PlayerModel.Health.Value / newValue;
+                })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
             // 给经验值增加事件添加升级回调函数
-            Global.Exp.Register(newValue =>
+            PlayerModel.Exp.Register(newValue =>
             {
-                if (newValue < Global.MaxExp.Value) return;
-                Global.Level.Value += 1;
-                Global.Exp.Value = 0;
+                if (newValue < PlayerModel.MaxExp.Value) return;
+                PlayerModel.Level.Value += 1;
+                PlayerModel.Exp.Value = 0;
                 // 最大经验值增加1.2倍
-                Global.MaxExp.Value *= 1.2f;
+                PlayerModel.MaxExp.Value *= 1.2f;
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 
@@ -106,6 +111,11 @@ namespace ProjectVampire
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
         }
 
+        public IArchitecture GetArchitecture()
+        {
+            return Global.Interface;
+        }
+
         public void OnSingletonInit()
         {
         }
@@ -116,8 +126,10 @@ namespace ProjectVampire
         /// </summary>
         private void UpdateAnimation()
         {
+            // animator 的参数 id
+            var id = Animator.StringToHash("isWalking");
             // 设置isWalking参数
-            Sprite.SetBool("isWalking", mMoveInput.sqrMagnitude > 0);
+            Sprite.SetBool(id, mMoveInput.sqrMagnitude > 0);
 
             // 根据角色的移动和方向修改Sprite的scale，实现面向左右的效果
             if (mMoveInput.x < 0)

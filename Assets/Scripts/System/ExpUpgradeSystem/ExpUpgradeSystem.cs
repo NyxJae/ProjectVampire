@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ProjectVampire.System.ExpUpgradeSystem;
 using QAssetBundle;
 using QFramework;
 using UnityEngine;
@@ -11,6 +10,9 @@ namespace ProjectVampire
     {
         // 升级项列表
         public List<ExpUpgradeItem> ExpUpdateItems { get; } = new();
+
+        // PlayerModel
+        private PlayerModel _PlayerModel => this.GetModel<PlayerModel>();
 
         // 链式封装 add操作
         private ExpUpgradeItem Add(ExpUpgradeItem item)
@@ -249,7 +251,7 @@ namespace ProjectVampire
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
                     // 提升暴击率
-                    Global.CriticalRate.Value += 0.09f; //
+                    _PlayerModel.CriticalRate.Value += 0.09f; //
                 }));
 
             // 添加升级项 暴击伤害提升
@@ -261,7 +263,7 @@ namespace ProjectVampire
                 .SetOnUpgrade(item => // 设置升级项的升级方法
                 {
                     // 提升暴击伤害倍数
-                    Global.CriticalMultiplier.Value += 0.8f; //
+                    _PlayerModel.CriticalMultiplier.Value += 0.8f; //
                 }));
         }
 
@@ -284,14 +286,25 @@ namespace ProjectVampire
             foreach (var item in randomItems) item.IsVisible.Value = true;
         }
 
+        // 随机提供1个未升级的升级项
+        /// <summary>
+        ///     随机提供1个未升级的升级项
+        /// </summary>
+        /// <returns> 未升级的升级项 </returns>
+        public ExpUpgradeItem GetOneRandomUnUpdatedItem()
+        {
+            // 获取可升级的项
+            var unUpdatedItems = ExpUpdateItems.Where(item => item.ConditionCheck()).ToList();
+            // 随机获取1个未升级的项
+            var randomItem = unUpdatedItems.OrderBy(item => Random.Range(0, 100)).Take(1).ToList();
+            // 返回未升级的项
+            return randomItem[0];
+        }
+
         // 重置所有升级项
         public void ResetAll()
         {
-            foreach (var item in ExpUpdateItems)
-            {
-                item.IsUpdated = false;
-                item.CurrentLevel.Value = 1;
-            }
+            foreach (var item in ExpUpdateItems) item.Reset();
         }
     }
 }

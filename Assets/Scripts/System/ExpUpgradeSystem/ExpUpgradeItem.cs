@@ -1,9 +1,9 @@
 ﻿using System;
 using QFramework;
 
-namespace ProjectVampire.System.ExpUpgradeSystem
+namespace ProjectVampire
 {
-    public class ExpUpgradeItem
+    public class ExpUpgradeItem : ISystemItem
     {
         // condition, 用于判断是否可以升级
         private Func<ExpUpgradeItem, bool> mCondition;
@@ -15,7 +15,7 @@ namespace ProjectVampire.System.ExpUpgradeSystem
         private Action<ExpUpgradeItem> mOnUpgrade;
 
         // 升级项状态
-        public bool IsUpdated { get; set; }
+        public bool IsUpdated { get; private set; }
 
         // 升级项的key
         public string Key { get; private set; }
@@ -41,7 +41,7 @@ namespace ProjectVampire.System.ExpUpgradeSystem
 
 
         // 升级方法
-        public void Upgrade()
+        public void Trigger()
         {
             // 执行外部设置的升级方法
             mOnUpgrade?.Invoke(this);
@@ -50,6 +50,11 @@ namespace ProjectVampire.System.ExpUpgradeSystem
             // 如果升级到最大等级, 则设置为已经升级
             if (CurrentLevel.Value > MaxLevel)
                 IsUpdated = true;
+        }
+
+        public void Save(SaveUtility saveUtility)
+        {
+            // 不用保存
         }
 
 
@@ -132,6 +137,13 @@ namespace ProjectVampire.System.ExpUpgradeSystem
                 return !IsUpdated && mCondition.Invoke(this);
             // 如果没有前置依赖条件, 则判断是否已经升级
             return !IsUpdated;
+        }
+
+        // 重置
+        public void Reset()
+        {
+            IsUpdated = false;
+            CurrentLevel.Value = 1;
         }
     }
 }

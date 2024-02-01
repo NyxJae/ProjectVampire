@@ -1,4 +1,5 @@
 using QFramework;
+using UnityEngine.SceneManagement;
 
 namespace ProjectVampire
 {
@@ -24,6 +25,13 @@ namespace ProjectVampire
                 UIKit.ClosePanel<UIEndPanel>();
                 // 发送开始游戏命令
                 this.SendCommand<BeginGameCommand>();
+            });
+            BtnBack.onClick.AddListener(() =>
+            {
+                // 关闭当前界面
+                UIKit.ClosePanel<UIEndPanel>();
+                // 打开 Begin 场景
+                SceneManager.LoadScene(Global.BeginScene);
             });
         }
 

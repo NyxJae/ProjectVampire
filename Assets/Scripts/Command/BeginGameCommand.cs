@@ -8,7 +8,7 @@ namespace ProjectVampire
         protected override void OnExecute()
         {
             // 重置各项属性
-            Global.ResetProperties();
+            this.SendCommand(new ResetModelCommand());
             // 重置经验升级系统
             this.GetSystem<ExpUpgradeSystem>().ResetAll();
             // 重新加载场景

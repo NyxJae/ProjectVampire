@@ -16,17 +16,21 @@ namespace QAssetBundle
         public const string BundleName = "icons";
         public const string BLACKHOLEICON = "BlackHoleIcon";
         public const string BOMBICON = "BombIcon";
+        public const string COINDROPICON = "CoinDropIcon";
+        public const string COINENOUGHICON = "CoinEnoughIcon";
         public const string EXPDROPICON = "ExpDropIcon";
         public const string FIREBALLICON = "FireballIcon";
-        public const string GOLDDROPICON = "GoldDropIcon";
+        public const string FIRSTMEETICON = "FirstMeetIcon";
         public const string HPBOTTLEDROPICON = "HPBottleDropIcon";
         public const string KNIFEICON = "KnifeIcon";
+        public const string LEVELUPENOUGHICON = "LevelUpEnoughIcon";
         public const string LIGHTNINGFIELDICON = "LightningFieldIcon";
         public const string MAGNETICON = "MagnetIcon";
         public const string MAXHPBOOSTICON = "MaxHPBoostIcon";
         public const string PICKRANGEICON = "PickRangeIcon";
         public const string SPEEDICON = "SpeedIcon";
         public const string STRIKERATEICON = "StrikeRateIcon";
+        public const string TIMEENOUGHICON = "TimeEnoughIcon";
     }
     public class Sfx
     {

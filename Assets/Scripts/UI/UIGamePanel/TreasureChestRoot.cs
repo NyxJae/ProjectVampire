@@ -2,8 +2,6 @@
  * 2024.1 DESKTOP-AETQQ8U
  ****************************************************************************/
 
-using System.Linq;
-using ProjectVampire.System.ExpUpgradeSystem;
 using QFramework;
 using UnityEngine;
 
@@ -11,30 +9,35 @@ namespace ProjectVampire
 {
     public partial class TreasureChestRoot : UIElement, IController
     {
-        public static EasyEvent openTreasureChestEvent = new();
+        public static EasyEvent OpenTreasureChestEvent = new();
+
+        // 资源加载器
+        private readonly ResLoader ResLoader = ResLoader.Allocate();
 
         // 升级项
         private ExpUpgradeItem item;
 
+        // GlobalModel
+        private GlobalModel _GlobalModel => this.GetModel<GlobalModel>();
+
         private void Awake()
         {
             Hide();
-            openTreasureChestEvent.Register(() =>
+            OpenTreasureChestEvent.Register(() =>
             {
                 Show();
                 Time.timeScale = 0;
-                this.GetSystem<ExpUpgradeSystem>().RandomUnUpdatedItem(1);
-                item = this.GetSystem<ExpUpgradeSystem>().ExpUpdateItems.Where(item => item.ConditionCheck())
-                    .ToList()[0];
+                item = this.GetSystem<ExpUpgradeSystem>().GetOneRandomUnUpdatedItem();
                 TexTreasureChest.text = item != null ? item.Description : "增加10金币";
+                Icon.sprite = ResLoader.LoadSync<Sprite>(item.IconName);
             }).UnRegisterWhenGameObjectDestroyed(this);
 
             BtnYes.onClick.AddListener(() =>
             {
                 if (item != null)
-                    item.Upgrade();
+                    item.Trigger();
                 else
-                    Global.Coin.Value += 10;
+                    _GlobalModel.Coin.Value += 10;
                 Hide();
                 Time.timeScale = 1;
             });

@@ -14,7 +14,7 @@ namespace ProjectVampire
                 // 如果碰撞器的父物体的名字为PickAbility
                 if (other.transform.parent.name == "PickAbility")
                 {
-                    TreasureChestRoot.openTreasureChestEvent.Trigger();
+                    TreasureChestRoot.OpenTreasureChestEvent.Trigger();
                     Destroy(gameObject);
                 }
             }).UnRegisterWhenGameObjectDestroyed(this);

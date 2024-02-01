@@ -5,7 +5,7 @@ using QFramework;
 
 namespace ProjectVampire
 {
-	// Generate Id:29df6fd0-d808-470a-9105-e0edfec3a466
+	// Generate Id:3462cef7-6f9e-4507-be7a-ad2e6d627934
 	public partial class UIBeginPanel
 	{
 		public const string Name = "UIBeginPanel";
@@ -14,6 +14,10 @@ namespace ProjectVampire
 		public UnityEngine.UI.Button BtnReward;
 		[SerializeField]
 		public UnityEngine.UI.Button BtnBegin;
+		[SerializeField]
+		public UnityEngine.UI.Button BtnAchievement;
+		[SerializeField]
+		public AchievementPanel AchievementPanel;
 		
 		private UIBeginPanelData mPrivateData = null;
 		
@@ -21,6 +25,8 @@ namespace ProjectVampire
 		{
 			BtnReward = null;
 			BtnBegin = null;
+			BtnAchievement = null;
+			AchievementPanel = null;
 			
 			mData = null;
 		}

@@ -19,6 +19,9 @@ namespace ProjectVampire
             mAttack = attack;
         }
 
+        // globalModel
+        private PlayerModel GlobalModel => this.GetModel<PlayerModel>();
+
         protected override void OnExecute()
         {
             if (mOther == null || mAttack <= 0) return;
@@ -26,8 +29,8 @@ namespace ProjectVampire
             if (enemy != null)
             {
                 // 获取当前暴击率和暴击倍数
-                var isCritical = Random.value < Global.CriticalRate.Value;
-                var criticalMultiplier = Global.CriticalMultiplier.Value;
+                var isCritical = Random.value < GlobalModel.CriticalRate.Value;
+                var criticalMultiplier = GlobalModel.CriticalMultiplier.Value;
 
                 AudioKit.PlaySound(Sfx.HIT);
 
