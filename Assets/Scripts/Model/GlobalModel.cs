@@ -8,19 +8,19 @@ namespace ProjectVampire
         public BindableProperty<int> Coin = new();
 
         // 公开的 炸弹掉落几率 属性
-        public BindableProperty<float> DropBombRate = new(0.1f);
+        public BindableProperty<float> DropBombRate = new(Config.DefaultDropBombRate);
 
         // 公开的 金币掉落几率 属性
-        public BindableProperty<float> DropCoinRate = new(0.1f);
+        public BindableProperty<float> DropCoinRate = new(Config.DefaultDropCoinRate);
 
         // 公开的 经验掉落几率 属性
-        public BindableProperty<float> DropExpRate = new(0.5f);
+        public BindableProperty<float> DropExpRate = new(Config.DefaultDropExpRate);
 
         // 公开的 血瓶掉落几率 属性
-        public BindableProperty<float> DropHPBottleRate = new(0.1f);
+        public BindableProperty<float> DropHPBottleRate = new(Config.DefaultDropHPBottleRate);
 
         // 公开的 吸铁石掉落几率 属性
-        public BindableProperty<float> DropMagnetRate = new(0.1f);
+        public BindableProperty<float> DropMagnetRate = new(Config.DefaultDropMagnetRate);
 
         // saveUtility
         private SaveUtility saveUtility;
@@ -59,11 +59,11 @@ namespace ProjectVampire
         public void Load()
         {
             Coin.Value = saveUtility.LoadInt("Coin");
-            DropExpRate.Value = saveUtility.LoadFloat("DropExpRate", 0.5f);
-            DropCoinRate.Value = saveUtility.LoadFloat("DropCoinRate", 0.1f);
-            DropHPBottleRate.Value = saveUtility.LoadFloat("DropHPBottleRate", 0.1f);
-            DropBombRate.Value = saveUtility.LoadFloat("DropBombRate", 0.1f);
-            DropMagnetRate.Value = saveUtility.LoadFloat("DropMagnetRate", 0.1f);
+            DropExpRate.Value = saveUtility.LoadFloat("DropExpRate", Config.DefaultDropExpRate);
+            DropCoinRate.Value = saveUtility.LoadFloat("DropCoinRate", Config.DefaultDropCoinRate);
+            DropHPBottleRate.Value = saveUtility.LoadFloat("DropHPBottleRate", Config.DefaultDropHPBottleRate);
+            DropBombRate.Value = saveUtility.LoadFloat("DropBombRate", Config.DefaultDropBombRate);
+            DropMagnetRate.Value = saveUtility.LoadFloat("DropMagnetRate", Config.DefaultDropMagnetRate);
         }
     }
 }
